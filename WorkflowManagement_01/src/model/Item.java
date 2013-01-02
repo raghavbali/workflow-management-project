@@ -1,9 +1,12 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import utility.DBService;
+import utility.MySqlConnection;
 
 public class Item {
 	
@@ -93,6 +96,32 @@ public class Item {
 								"' WHERE itm_id=" +this.getItemID();
 		System.out.println("update :\n"+updateSQL);
 		return DBService.DDLQueryInDB(updateSQL);
+	}
+	
+	
+	public static int insertInDB(Item newItem){
+		int result;
+		Connection conn=null;
+		PreparedStatement pst = null;
+		int i=1;
+		String insertQuery="INSERT INTO `item_02012013_0`( `item_name`, `item_description`, `current_stage_id`, `remarks`, `file_path`) VALUES (?,?,?,?,?)";
+
+		try {
+			conn= new MySqlConnection().getConnection();
+			pst=conn.prepareStatement(insertQuery);
+			pst.setString(1, newItem.getItemName());
+			pst.setString(2, newItem.getItemDescription());
+			//pst.setInt(3,)
+			pst.setString(4,newItem.getRemarks());
+			pst.setString(5,newItem.getFilePath());
+			
+			result = pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result =0;
+		}
+		return result;
 	}
 
 

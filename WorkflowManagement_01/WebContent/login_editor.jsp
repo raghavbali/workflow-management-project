@@ -10,7 +10,9 @@
 <body>
 	<h2>successful login!</h2>
 	<s:actionmessage/>
+	<s:actionerror/>
 	<s:form action="" method="">
+	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 	<s:submit name="button" value="Stage Assignment"
 			action="assignStageEditorConsole" align="left" />
 		<s:submit name="button" value="Create Item"
