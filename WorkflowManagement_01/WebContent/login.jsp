@@ -13,10 +13,11 @@
 <div id="loginjsp_login">
 <s:actionerror />
 <s:form action="login.action" method = "post">
-	<div id="loginjsp_textfield"><s:textfield name = "username" label="Username" size = "20" value="admin1" /></div>
-	<div id="loginjsp_passowrd"><s:password name = "password" label="Password" size="20" value="pass1"/></div>
-	<div id="loginjsp_submit>"><s:submit name = "button1" method = "execute" value = "Login" align="center" />
+	<s:textfield name = "username" label="Username" size = "20" value="admin1" />
+	<s:password name = "password" label="Password" size="20" value="pass1"/>
+	<s:submit name = "button1" method = "execute" value = "Login" align="center" />
 </s:form>
 </div>
+
 </body>
 </html>
