@@ -48,31 +48,30 @@ public class WorkflowDBService {
 				+ "`stage_description` varchar(100) COLLATE utf8_bin NOT NULL,"
 				+ "`stage_sla` int(5) NOT NULL COMMENT 'values should be in hours',"
 				+ "`stage_seqno` int(5) NOT NULL,"
-				/* + "`stage_lead_id` int(5) NOT NULL," */
+				 + "`stage_lead_id` int(5) NULL," 
 				+ "`w_id` int(5) NOT NULL,"
 				+ "PRIMARY KEY (`stage_id`),"
-				/* + "KEY `stage_lead_id` (`stage_lead_id`)," */
+				 + "KEY `stage_lead_id` (`stage_lead_id`)," 
 				+" UNIQUE KEY `stage_seqno` (`stage_seqno`),"
 				+ "KEY `w_id` (`w_id`)"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1";
 
 		String workflowConstraintsQuery = "ALTER TABLE `" + workflow_table
 				+ "` "
-				/*
-				 * + " ADD CONSTRAINT `" + workflow_table +
-				 * "_ibfk_1` FOREIGN KEY (`stage_lead_id`) REFERENCES " +
-				 * "`personal_information` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,  "
-				 */
+				
+				  + " ADD CONSTRAINT `" + workflow_table +
+				  "_ibfk_1` FOREIGN KEY (`stage_lead_id`) REFERENCES " +
+				  "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
 				+ " ADD CONSTRAINT `" + workflow_table
-				+ "_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `workflow_master`"
+				+ "_ibfk_2` FOREIGN KEY (`w_id`) REFERENCES `workflow_master`"
 				+ " (`w_id`) ON DELETE CASCADE ON UPDATE CASCADE";
 
 		String stageCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ stage_table + "`(`stage_id` int(5) NOT NULL,"
-				+ "`p_id` int(5) NOT NULL,"
+				+ "`user_id` int(5) NOT NULL,"
 				+ "`status` set('A','I') COLLATE utf8_bin NOT NULL,"
-				+ "PRIMARY KEY (`p_id`,`stage_id`),"
-				+ "KEY `stage_id` (`stage_id`,`p_id`)"
+				+ "PRIMARY KEY (`user_id`,`stage_id`),"
+				+ "KEY `stage_id` (`stage_id`,`user_id`)"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
 		String stageConstraintsQuery = "ALTER TABLE `"
@@ -84,7 +83,7 @@ public class WorkflowDBService {
 				+ " (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
 				+ "ADD CONSTRAINT `"
 				+ stage_table
-				+ "_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `personal_information` (`p_id`) "
+				+ "_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `login_credentials` (`user_id`) "
 				+ "ON DELETE CASCADE ON UPDATE CASCADE";
 
 		String itemCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"

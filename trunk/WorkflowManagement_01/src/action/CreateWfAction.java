@@ -47,14 +47,15 @@ public class CreateWfAction extends ActionSupport {
 		int count = 0;
 		Date dNow = new Date();
 		String suffix = null;
-		SimpleDateFormat ft = new SimpleDateFormat("ddMMyyyy");
-		String tableCount = "SELECT count(*) as tbCount FROM information_schema.tables ";
-		String whereClause = "WHERE table_schema ='workflow_mgmt_sys'";
-		String insertQuery = "INSERT INTO `workflow_master`(`workflow_name`,"
-				+ " `workflow_description`, `workflow_domain`, `table_suffix`,`freeze`) "
-				+ " VALUES ( ? , ? , ? , ?, ? )";
-		this.setWf_id(DBService.generate_wid());
+		SimpleDateFormat ft = new SimpleDateFormat("ddMMyyyyhhmmss");
 
+		String insertQuery = "INSERT INTO `workflow_master`(`w_id`,`workflow_name`,"
+				+ " `workflow_description`, `workflow_domain`, `table_suffix`,`freeze`) "
+				+ " VALUES ( ? ,? , ? , ? , ?, ? )";
+		this.setWf_id(DBService.generate_wid());
+/*
+  		String tableCount = "SELECT count(*) as tbCount FROM information_schema.tables ";
+		String whereClause = "WHERE table_schema ='workflow_mgmt_sys'";
 		try {
 			result = DBService.dbExecuteQuery(tableCount, whereClause);
 			while (result.next()) {
@@ -63,9 +64,9 @@ public class CreateWfAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		suffix = "_" + ft.format(dNow).toString() + "_" + (count-3);
-
+*/
+		suffix = "_" + ft.format(dNow).toString();// + "_" + (count-3);
+		values.add(String.valueOf(this.getWf_id()));
 		values.add(objWorkflow.getWorkflowName());
 		values.add(objWorkflow.getWorkflowDescription());
 		values.add(objWorkflow.getWorkflowDomain());
