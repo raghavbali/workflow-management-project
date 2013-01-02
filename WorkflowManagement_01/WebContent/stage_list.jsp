@@ -14,6 +14,7 @@
 	<s:form action="stage_mod.action" method="post">
 	Workflow ID :<s:property value="workflowID" />
 	<s:hidden name="workflowID" value="%{workflowID}"/>
+	<s:hidden name="pageName" value="stage_list_default"/>
 		<table>
 			<tr>
 				<th><h3>Stage ID </h3>
@@ -31,7 +32,7 @@
 			</tr>
 			<s:iterator value="objListWfDetails" var="wfDetail" status="stat" >
 				<tr>
-				<s:hidden name="stageID" id="stageID" value="%{stageID}" />
+				
 					<td><s:property value="stageID" />
 					 </td>
 					<td><s:property value="stageName" />

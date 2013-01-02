@@ -48,6 +48,7 @@
    		 <result name="stageList">stage_list.jsp</result>
    		 <result name="addStage">add_stage.jsp</result>
    		 <result name="editStage">edit_stage.jsp</result>
+   		 <result name="done">stage_list.jsp</result>
 		</action>
 		<!-- Action for handling stage related button clicks -->
         <action name="*Stage" method="{1}" class="action.StageAction">
@@ -112,7 +113,8 @@
 		
         <!-- Action for Item handling -->
         <action name="*ItemConsole" method="{1}" class="action.ItemConsole">
-        	<result name="addToWorkflow">login_editor.jsp</result>
+        	<result name="addSuccess">login_editor.jsp</result>
+        	<result name="addError">add_item.jsp</result>
         </action>
 		
         <!-- EDITOR BLOCK ENDS  -->

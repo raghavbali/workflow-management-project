@@ -19,7 +19,7 @@
 			list="domainList"
 			name="wf_domain"
 			value="%{workflowDomain}" />
-		<s:submit name="wf_create" method="execute" value="Next"
+		<s:submit name="wf_create" method="execute" value="Save"
 			align="center" />
 	</s:form>
 </body>

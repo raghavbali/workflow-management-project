@@ -12,8 +12,9 @@
 	<s:actionerror />
 	<s:actionmessage/>
 	WorkflowID:<s:property value="workflowID" />
-	<s:hidden name="workflowID" value="%{workflowID}"/>
+		<s:hidden name="workflowID" value="%{workflowID}"/>
 	<s:form action="" method="post">
+
 	<s:iterator value="objListWfDetails" >
 		<s:textfield name="stageName" label="Stage Name"  size="30" />
 		<s:textfield name="stageDescription" label="Stage Description"

@@ -19,8 +19,6 @@
 			align="left" />
 		<s:submit name="button" value="Edit User" action="editUserAdminConsole"
 			align="left" />
-		<s:submit name="button" value="Assign Role" action="assignRoleAdminConsole"
-			align="left" />
 		<s:submit name="button" value="Manual Override" action="manualAdminConsole"
 			align="left" />
 	</s:form>
