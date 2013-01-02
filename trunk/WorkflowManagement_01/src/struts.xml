@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation"
+        value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources"
+        value="ApplicationResources" />
+ 
+    <package name="default" extends="struts-default" namespace="/">
+        <!-- Login Action -->
+        <action name="login"
+            class="action.LoginAction">
+            <result name="admin_success">login_admin.jsp</result>
+            <result name="editor_success">login_editor.jsp</result>
+            <result name="author_success">author_author.jsp</result>
+            <result name="publisher_success">login_publisher.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+        
+        <!-- ADMIN BLOCK STARTS  -->
+        
+        <!-- Action for Admin's welcome screen -->
+        <action name="*AdminConsole" method="{1}" class="action.AdminConsole">
+   		 <result name="createWf">create_workflow.jsp</result>
+   		 <result name="editWf">workflow_list.jsp</result>
+   		 <result name="createUser">add_user.jsp</result>
+   		 <result name="editUser">assign_role.jsp</result>
+		 <result name="manual">login_admin.jsp</result>		 
+		</action>
+		<!-- Action for creating a workflow -->
+        <action name="create_wf"
+            class="action.CreateWfAction">
+            <result name="createwf_continue">login_admin.jsp</result>
+            <result name="error">create_workflow.jsp</result>
+        </action>
+        <!-- Action for editing a workflow -->
+        <action name="edit_wf" class="action.EditWfAction">
+		    <result name="displayform">edit_workflow.jsp</result> 
+   		 <result name="success">login_admin.jsp</result>
+   		 <result name="error">edit_workflow.jsp</result>
+		</action>
+		<!-- Action for opening pages : stage_list,add_stage and edit_stage -->
+		<action name="stage_mod" class="action.StageConsole">
+   		 <result name="stageList">stage_list.jsp</result>
+   		 <result name="addStage">add_stage.jsp</result>
+   		 <result name="editStage">edit_stage.jsp</result>
+		</action>
+		<!-- Action for handling stage related button clicks -->
+        <action name="*Stage" method="{1}" class="action.StageAction">
+   		 <result name="success">add_stage.jsp</result>
+   		 <result name="error">add_stage.jsp</result>
+   		 <result name="later">login_admin.jsp</result>
+   		  <result name="updateSuccess">workflow_list.jsp</result>
+   		  <result name="updateError">edit_stage.jsp</result>
+   		 <result name="done">workflow_list.jsp</result>
+		</action>
+		<!-- Action for adding a user -->
+		
+		<action name="add_user"
+            class="action.AddUser">
+            <result name="adduser_continue">add_user.jsp</result>
+            <result name="error">add_user.jsp</result>
+            <result name="back">login_admin.jsp</result>
+        </action>
+        <action name="continue_role_assign"
+            class="action.AssignRole">
+            <result name="seeUserDetails">user_roles.jsp</result>
+        </action>
+        <action name="final_assign_role" method="addRole"
+            class="action.AssignRole">
+            <result name="addrole_continue">user_roles.jsp</result>
+            <result name="error">user_roles.jsp</result>
+        </action>
+        <action name="edit_user_basic"
+            class="action.EditUserBasic">
+            <result name="edit_user_basic_success">edit_user_basic.jsp</result>
+        </action>
+        <action name = "update_user_basic" method="update"
+        	class="action.EditUserBasic">
+        	<result name = "edituser_continue">edit_user_basic.jsp</result>
+        	<result name = "error">edit_user_basic.jsp</result>
+        </action>
+        <action name="edit_user_role"
+        	class="action.EditUserAdv">
+        <result name="edit_user_adv_success">edit_user_adv.jsp</result>
+        </action>
+        <action name = "update_user_adv" method="update"
+        	class="action.EditUserAdv">
+        	<result name = "edituser_continue">edit_user_adv.jsp</result>
+        	<result name = "error">edit_user_adv.jsp</result>
+        </action>
+        
+        <!-- ADMIN BLOCK ENDS  -->
+        
+        <!-- *********************************************************** -->
+        
+         <!-- EDITOR BLOCK STARTS  -->
+        
+        <!-- Action for Admin's welcome screen -->
+        <action name="*EditorConsole" method="{1}" class="action.EditorConsole">
+         <result name="assignStage">stage_assign.jsp</result>
+   		 <result name="createItem">create_item.jsp</result>
+   		 <result name="editItem">item_list.jsp</result>
+   		 <result name="assignRole">assign_role.jsp</result>
+		 <result name="editProfile">login_editor.jsp</result>		
+		 <result name="done">login_editor.jsp</result>		 
+		</action>
+		
+        <!-- EDITOR BLOCK ENDS  -->
+    </package>
+</struts>
