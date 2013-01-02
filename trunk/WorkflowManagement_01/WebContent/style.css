@@ -5,8 +5,13 @@ body{
 
 #loginjsp_login{
 	position: absolute;
-	top:25%; left:70%;
+	top:35%; left:70%;
 	border:1px solid black;
 	width:300px;
 	height:200px;
+}
+
+#loginjsp_textfield{
+	position: relative;
+	top:80px; left:50px;
 }
