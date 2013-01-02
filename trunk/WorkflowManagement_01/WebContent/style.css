@@ -3,15 +3,26 @@
 
 #loginjsp_login{
 	position: absolute;
-	top:35%; left:70%;
+	top:40%; left:70%;
 	border:1px solid black;
 	width:260px;
 	height:110px;
 }
 
-#loginjsp_textfield{
-	position: relative;
-	top:80px; left:50px;
+#loginjsp_menu {
+	position: absolute;
+	top:25%;left:0px;width:100%;
+	border-bottom: thin solid black;
+	border-top: thin solid black;
+	text-decoration:none;
+	padding-bottom: 1%;
+	height:5%;	
+}
+
+#loginjsp_menu li{
+	float:left;
+	list-style: none;
+	width:100px;
 }
 
 #loginjsp_box{

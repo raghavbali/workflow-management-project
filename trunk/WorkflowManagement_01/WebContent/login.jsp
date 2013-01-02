@@ -17,8 +17,15 @@
 	<s:password name = "password" label="Password" size="20" value="pass1"/>
 	<s:submit name = "button1" method = "execute" value = "Login" align="center" />
 </s:form>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a href="#" style="text-decoration:  none;">sign up!!</a>
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <a href="#" style="text-decoration:  none;">sign up!!</a>
 </div>
-<div id="loginjsp_box"></div>
+<div id="loginjsp_box">
+	<div id="loginjsp_menu">
+	<ul>	
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About US</a></li>
+	</ul>
+	</div>
+</div>
 </body>
 </html>
