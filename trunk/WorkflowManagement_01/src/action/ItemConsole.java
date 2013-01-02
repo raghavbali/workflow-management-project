@@ -1,5 +1,7 @@
 package action;
 
+import model.Item;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemConsole extends ActionSupport{
@@ -11,13 +13,21 @@ public class ItemConsole extends ActionSupport{
 	private String remarks;
 	private String filePath;
 	private String tableName;
-	private String workflowID;
+	private int workflowID;
 	
-	/*
+	
 	public String addToWorkflow(){
-		
+		Item insertItem=new Item(this.getItemID(), this.getItemName(), this.getItemDescription(), 1/*initial stage is selected inside the insert method*/, this.getRemarks(), this.getFilePath());
+		if(Item.insertInDB(insertItem, this.getWorkflowID())==1){
+			addActionMessage(getText("Item created Successfully."));
+			return "addSuccess";
+		}
+		else{
+			addActionError(getText("Could not create Item. Try Again"));
+			return "addError";
+		}
 	}
-	*/
+	
 	public int getItemID() {
 		return itemID;
 	}
@@ -61,11 +71,11 @@ public class ItemConsole extends ActionSupport{
 		this.tableName = tableName;
 	}
 
-	public String getWorkflowID() {
+	public int getWorkflowID() {
 		return workflowID;
 	}
 
-	public void setWorkflowID(String workflowID) {
+	public void setWorkflowID(int workflowID) {
 		this.workflowID = workflowID;
 	}
 	

@@ -10,9 +10,10 @@
 <body>
 	<h2>Add Item</h2>
 	<s:actionerror />
+	<s:actionmessage/>
 	Workflow ID :<s:property value="workflowID" />
-	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 	<s:form action=".action" method="post">
+		<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 		<s:textfield name="itemName" id="itemName" label="Item Name" size="50" />
 		<s:textfield name="itemDescription" id="itemDescription" label="Item Description"
 			size="50" />

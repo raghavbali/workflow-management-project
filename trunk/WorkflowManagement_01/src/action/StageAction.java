@@ -87,7 +87,9 @@ public class StageAction extends ActionSupport {
 
 	public String addNow() {
 
-		setParams();
+		//setParams();
+		System.out.println("stageAction values addnow "+this.getWorkflowID());
+		setParamsNoCookie();
 
 		this.objWorkflowDetails = new WorkflowDetails(this.getStageName(),
 				this.getStageDescription(), this.getStageSLA(),
@@ -145,7 +147,7 @@ public class StageAction extends ActionSupport {
 		String whereClause;
 		ResultSet result = null;
 
-		session = ActionContext.getContext().getSession();
+		//session = ActionContext.getContext().getSession();
 
 		selectQuery = "SELECT table_suffix FROM workflow_master ";
 		whereClause = "where w_id = " + this.getWorkflowID();

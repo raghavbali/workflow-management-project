@@ -99,19 +99,58 @@ public class Item {
 	}
 	
 	
-	public static int insertInDB(Item newItem){
+	public static int insertInDB(Item newItem,int w_id){
 		int result;
 		Connection conn=null;
 		PreparedStatement pst = null;
-		int i=1;
-		String insertQuery="INSERT INTO `item_02012013_0`( `item_name`, `item_description`, `current_stage_id`, `remarks`, `file_path`) VALUES (?,?,?,?,?)";
-
+		String tableName="item";
+		String tableSuffix=null;
+		ResultSet resultTableName = null;
+		int stage_id=0;
+		String insertQuery=null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			while (resultTableName.next()) {
+				tableSuffix = resultTableName.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("values="+w_id+"-"+tableSuffix);
+		tableName=tableName+tableSuffix;
+		
+		selectQueryTable = "SELECT min(stage_id) FROM workflow"+tableSuffix;
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			while (resultTableName.next()) {
+				stage_id = resultTableName.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		insertQuery="INSERT INTO `" +
+				tableName +
+				"`( `item_name`, `item_description`, `current_stage_id`, `remarks`, `file_path`) VALUES (?,?,?,?,?)";
+		
+		
+		System.out.println("insert\n"+insertQuery);
 		try {
 			conn= new MySqlConnection().getConnection();
 			pst=conn.prepareStatement(insertQuery);
 			pst.setString(1, newItem.getItemName());
 			pst.setString(2, newItem.getItemDescription());
-			//pst.setInt(3,)
+			pst.setInt(3,stage_id);
 			pst.setString(4,newItem.getRemarks());
 			pst.setString(5,newItem.getFilePath());
 			
