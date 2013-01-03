@@ -29,8 +29,8 @@
 	</ul>
 	</div>
 </div>
-<div id="loginjsp_aboutus" style="text-align: justify;	"><h4 style="text-align: center;">ABOUT THE SITE</h4><br>Workflow management is supposed to track the whereabouts about project that how it is done and many other things. Remaining has to be written by Raghav This project was started sinec 
-yesterday. We had everything in the class. Please donot read whatever i wrote above</div>
+<div id="loginjsp_aboutus" style="text-align: justify;	"><h4 style="text-align: center;"><u>ABOUT THE SITE</u></h4><br><span style="color:rgb(50,0,250)">Workflow management is supposed to track the whereabouts about project that how it is done and many other things. Remaining has to be written by Raghav This project was started sinec 
+yesterday. We had everything in the class. Please do not read whatever i wrote above</span></div>
 </body>
 
 </html>
