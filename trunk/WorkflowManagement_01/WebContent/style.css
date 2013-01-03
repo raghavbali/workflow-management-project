@@ -31,3 +31,9 @@
 	top:5%; left:5%;
 	width: 90%; height: 89%;
 }
+
+#loginjsp_aboutus{
+	position: absolute;
+	border:thin solid black;
+	top:40%;left:20%;width: 350px;height:320px;
+}
