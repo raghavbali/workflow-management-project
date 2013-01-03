@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import com.opensymphony.xwork2.ActionSupport;
 
 import utility.DBService;
+import utility.DBobjects;
 
 import model.User;
 
@@ -28,8 +29,11 @@ public class EditUserBasic extends ActionSupport {
 	public String execute(){
 		String selectQuery = "SELECT * FROM `personal_information`";
 		String whereClause = "WHERE p_id = '" + p_id + "'";
+		DBobjects dbObject;
+		ResultSet result = null;
 		try{
-		ResultSet result = DBService.dbExecuteQuery(selectQuery, whereClause);
+		dbObject= DBService.dbExecuteQuery(selectQuery, whereClause);
+	result=dbObject.getResult();
 		while(result.next()){
 			tmpuser.setP_id(result.getString("p_id"));
 			tmpuser.setPrefix(result.getString("prefix"));
@@ -42,6 +46,7 @@ public class EditUserBasic extends ActionSupport {
 			tmpuser.setPhone(result.getString("phone_no"));
 			tmpuser.setEmail(result.getString("email"));
 		}
+		dbObject.getConn().close();
 		}catch(Exception ex){
 			System.out.println("Excption caught: " + ex);
 		}

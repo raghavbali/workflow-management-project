@@ -4,53 +4,58 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import utility.DBService;
+import utility.DBobjects;
 
 import model.UserRole;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AssignRole extends ActionSupport{
-	
-	String user_id, username, password, p_id, w_id, role, active_flag; 
+public class AssignRole extends ActionSupport {
+
+	String user_id, username, password, p_id, w_id, role, active_flag;
 	String selected_wf, selected_role;
 	ArrayList<UserRole> usrlist;
 	ArrayList<String> wfList, roleList;
 	ResultSet result;
-	
-	public AssignRole(){
+
+	public AssignRole() {
 		wfList = new ArrayList<String>();
 		roleList = new ArrayList<String>();
 		String wfquery = "SELECT workflow_name FROM workflow_master";
-//		String wfwhere = "WHERE freeze = 'N'";
-			
-		try{
-		result = DBService.dbExecuteQuery(wfquery,"");
-		while(result.next()){
-			wfList.add(result.getString("workflow_name"));
-		}
-		}catch(Exception ex){
+		DBobjects dbObject = null;
+		// String wfwhere = "WHERE freeze = 'N'";
+
+		try {
+			dbObject = DBService.dbExecuteQuery(wfquery, "");
+			result = dbObject.getResult();
+			while (result.next()) {
+				wfList.add(result.getString("workflow_name"));
+			}
+			dbObject.getConn().close();
+		} catch (Exception ex) {
 			System.out.println("Exception caught: " + ex);
 		}
-		
+
 		roleList.add("admin");
 		roleList.add("author");
 		roleList.add("publisher");
 		roleList.add("editor");
 	}
-	
-	public String execute(){
-//		System.out.println(p_id);
+
+	public String execute() {
+		// System.out.println(p_id);
 		usrlist = DBService.getUserRoleList(p_id);
 		if (usrlist.size() == 0)
 			addActionError(getText("No roles for selected user."));
 		return "seeUserDetails";
 	}
-	
-	public String addRole(){
+
+	public String addRole() {
 		user_id = String.valueOf(DBService.generate_userid());
 		active_flag = String.valueOf(1);
 		w_id = String.valueOf(getW_idfromDB(selected_wf));
-		UserRole tmpusr = new UserRole(user_id, username, password, p_id, w_id, selected_role, active_flag);
+		UserRole tmpusr = new UserRole(user_id, username, password, p_id, w_id,
+				selected_role, active_flag);
 		String insertQuery = "INSERT INTO `login_credentials`(`user_id`, `username`, `password`, `p_id`, `w_id`, `role`, `active_flag`) VALUES (?,?,?,?,?,?,?)";
 		ArrayList<String> values = new ArrayList<String>();
 		values.add(tmpusr.getUser_id());
@@ -60,31 +65,33 @@ public class AssignRole extends ActionSupport{
 		values.add(tmpusr.getW_id());
 		values.add(tmpusr.getRole());
 		values.add(tmpusr.getActive_flag());
-		
+
 		int result = DBService.insertObjectInDB(insertQuery, values);
 		usrlist = DBService.getUserRoleList(p_id);
-				
-				if (result == 0){
-					addActionError(getText("Some error, please re-chech the field values."));
-					return "error";
-				}
-				else{
-					addActionMessage(getText("User Role added successfully."));
-					return "addrole_continue";
-				}
+
+		if (result == 0) {
+			addActionError(getText("Some error, please re-chech the field values."));
+			return "error";
+		} else {
+			addActionMessage(getText("User Role added successfully."));
+			return "addrole_continue";
+		}
 	}
-	
-	public int getW_idfromDB(String WName){
+
+	public int getW_idfromDB(String WName) {
 		String wfquery = "SELECT w_id FROM workflow_master";
 		String wfwhere = "WHERE workflow_name = '" + WName + "'";
 		int w_id = -1;
-			
-		try{
-		result = DBService.dbExecuteQuery(wfquery,wfwhere);
-		while(result.next()){
-			w_id = result.getInt("w_id");
-		}
-		}catch(Exception ex){
+		DBobjects dbObject = null;
+
+		try {
+			dbObject = DBService.dbExecuteQuery(wfquery, wfwhere);
+			result = dbObject.getResult();
+			while (result.next()) {
+				w_id = result.getInt("w_id");
+			}
+			dbObject.getConn().close();
+		} catch (Exception ex) {
 			System.out.println("Exception caught: " + ex);
 		}
 		return w_id;
@@ -185,5 +192,5 @@ public class AssignRole extends ActionSupport{
 	public void setSelected_role(String selected_role) {
 		this.selected_role = selected_role;
 	}
-	
+
 }

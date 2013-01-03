@@ -44,18 +44,19 @@ public class DBService {
 	
 	
 	
-	public static ResultSet dbExecuteQuery(String strQuery, String whereClause){
+	public static DBobjects dbExecuteQuery(String strQuery, String whereClause){
 		
-		Connection conn = null;
+		//Connection conn = null;
 		PreparedStatement query = null;
-		ResultSet result = null;
+		//ResultSet result = null;
+		DBobjects dbObject=new DBobjects();
 		
 		try{
-			conn = new MySqlConnection().getConnection();
-			query = conn.prepareStatement(strQuery+" "+whereClause);
-			result = query.executeQuery();
+			dbObject.setConn(new MySqlConnection().getConnection());
+			query = dbObject.getConn().prepareStatement(strQuery+" "+whereClause);
+			dbObject.setResult(query.executeQuery());
 			//conn.close();
-			return result;
+			return dbObject;
 		}catch(Exception ex){
 			System.out.println("Exception caught:\n" + ex);
 			return null;

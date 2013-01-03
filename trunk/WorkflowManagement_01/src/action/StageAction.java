@@ -12,6 +12,7 @@ import model.WorkflowDetails;
 import model.WorkflowMaster;
 
 import utility.DBService;
+import utility.DBobjects;
 import utility.WorkflowDBService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -122,6 +123,7 @@ public class StageAction extends ActionSupport {
 		String selectQuery;
 		String whereClause;
 		ResultSet result = null;
+		DBobjects dbObject;
 
 		session = ActionContext.getContext().getSession();
 
@@ -130,11 +132,13 @@ public class StageAction extends ActionSupport {
 				+ Integer.parseInt(session.get("workflowID").toString());
 
 		try {
-			result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
 			while (result.next()) {
 				this.table_suffix = result.getString(1);
 				this.setWorkflowID(result.getInt(2));
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			addActionError(getText("Could not set parameters. Please try again"));
 			e.printStackTrace();
@@ -146,6 +150,7 @@ public class StageAction extends ActionSupport {
 		String selectQuery;
 		String whereClause;
 		ResultSet result = null;
+		DBobjects dbObject;
 
 		//session = ActionContext.getContext().getSession();
 
@@ -153,10 +158,12 @@ public class StageAction extends ActionSupport {
 		whereClause = "where w_id = " + this.getWorkflowID();
 
 		try {
-			result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			 dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			 result=dbObject.getResult();
 			while (result.next()) {
 				this.table_suffix = result.getString(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			addActionError(getText("Could not set parameters. Please try again"));
 			e.printStackTrace();

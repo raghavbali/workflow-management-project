@@ -16,12 +16,16 @@ public class LoginAction extends ActionSupport {
 	private Map<String, Object> session;
 	
 	public String execute(){
-		String role;
-		ArrayList<String> result;
+		String role=null;
+		ArrayList<String> result=null;
 		session = ActionContext.getContext().getSession();
 		
 		result = DBService.db_authenticate(this.username, this.password);
-		role=result.get(0);
+		if(result.size()!=0)
+			role=result.get(0);
+		else
+			role="login_fail";
+		
 		/* get workflow id */
 		if(result.size()==2){
 			this.setWorkflowID(result.get(1));
