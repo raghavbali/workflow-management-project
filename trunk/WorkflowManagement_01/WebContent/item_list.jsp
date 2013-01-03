@@ -12,10 +12,8 @@
 	<s:actionerror />
 	<s:actionmessage />
 	<s:form action=".action" method="post">
-	Workflow ID :<s:property value="workflowID" />
-	Item ID :<s:property value="itemID" />
+	Workflow ID :<s:property value="workflowID"/>
 	<s:hidden name="workflowID" value="%{workflowID}"/>
-	<s:hidden name="itemID" value="%{itemID}"/>
 		<table>
 			<tr>
 				<th><h3>Item ID </h3>
@@ -48,14 +46,14 @@
 					 </td>
 					<td>
 					<a
-						href=".action?stageID=<s:property value = "itemID" />&pageName=stage_list&workflowID=<s:property value = "workflowID" /> ">Modify Item </a>
+						href="editItemEditorConsole.action?itemID=<s:property value = "itemID" />&workflowID=<s:property value = "workflowID" /> ">Modify Item </a>
 					</td>
 				</tr>
 			</s:iterator>
 			</table>
 			<s:submit name="button" value="Add Item"
 			action="createItemEditorConsole" align="left" />
-			<s:submit name="button" value="Create Item"
+			<s:submit name="button" value="Back"
 			action="doneEditorConsole" align="left" />
 			</s:form>
 </body>

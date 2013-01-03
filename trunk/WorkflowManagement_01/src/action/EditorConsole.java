@@ -31,8 +31,13 @@ public class EditorConsole {
 	}
 	
 	public String editItem(){
-		this.setItemList(Item.find(this.getWorkflowID(),""));
+		this.setItemList(Item.find(this.getWorkflowID(),"where item_id="+this.getItemID()));
 		return "editItem";
+	}
+	
+	public String editItems(){
+		this.setItemList(Item.find(this.getWorkflowID(),""));
+		return "editItems";
 	}
 	
 	public String assignRole(){

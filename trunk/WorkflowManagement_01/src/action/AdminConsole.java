@@ -2,12 +2,14 @@ package action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import utility.DBService;
 
 import model.User;
 import model.WorkflowMaster;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminConsole extends ActionSupport{
@@ -19,6 +21,7 @@ public class AdminConsole extends ActionSupport{
 	public List<String> domainList;
 	private ArrayList<User> usrlist;
 	private ArrayList<String> sexList, prefixList;
+	private Map<String, Object> session;
 	
 	public AdminConsole(){
 		domainList = new ArrayList<String>();
@@ -26,6 +29,13 @@ public class AdminConsole extends ActionSupport{
 		domainList.add("Manufacturing");
 		domainList.add("Delivery");
 		domainList.add("E_Gov");
+	}
+	
+	public String logout(){
+		session = ActionContext.getContext().getSession();
+		session.remove("logged-in");
+		addActionMessage(getText("Logged out successfully"));
+		return "logout";
 	}
 	
 	
@@ -121,6 +131,14 @@ public class AdminConsole extends ActionSupport{
 	public void setPrefixList(ArrayList<String> prefixList) {
 		this.prefixList = prefixList;
 	}
+/*
+	public Map<String, Object> getSession() {
+		return session;
+	}
 
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
 
+*/
 }

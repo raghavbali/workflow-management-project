@@ -17,7 +17,7 @@
 			action="assignStageEditorConsole" align="left" />
 		<s:submit name="button" value="Create Item"
 			action="createItemEditorConsole" align="left" />
-		<s:submit name="button" value="Edit Item" action="editItemEditorConsole"
+		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
 			align="left" />
 		<s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
 			align="left" />
