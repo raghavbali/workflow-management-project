@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import utility.DBService;
+import utility.DBobjects;
 import utility.MySqlConnection;
 
 public class Item {
@@ -50,6 +51,7 @@ public class Item {
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
+		DBobjects dbObject;
 		
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
@@ -57,17 +59,20 @@ public class Item {
 		
 		
 		try {
-			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
 			while (resultTableName.next()) {
 				tableName = tableName+resultTableName.getString(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		String selectQuery = "SELECT `item_id`, `item_name`, `item_description`, `current_stage_id`, `remarks`, `file_path` FROM "+tableName;
 
 		try {
-			result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
 			while (result.next()) {
 				Item newItem = new Item();
 				newItem.setItemID(result.getInt("item_id"));
@@ -78,6 +83,7 @@ public class Item {
 				newItem.setFilePath(result.getString("file_path"));
 				objItemList.add(newItem);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -92,17 +98,19 @@ public class Item {
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
-		
+		DBobjects dbObject;
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
 		whereClauseTable = "where w_id = "+w_id;
 		
 		
 		try {
-			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
 			while (resultTableName.next()) {
 				tableName = tableName+resultTableName.getString(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,16 +137,19 @@ public class Item {
 		String insertQuery=null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
+		DBobjects dbObject;
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
 		whereClauseTable = "where w_id = "+w_id;
 		
 		
 		try {
-			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
 			while (resultTableName.next()) {
 				tableSuffix = resultTableName.getString(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,10 +161,12 @@ public class Item {
 		
 		
 		try {
-			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
 			while (resultTableName.next()) {
 				stage_id = resultTableName.getInt(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

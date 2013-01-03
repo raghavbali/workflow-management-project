@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import utility.DBService;
+import utility.DBobjects;
 
 public class WorkflowDetails {
 	
@@ -37,6 +38,7 @@ public class WorkflowDetails {
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
+		DBobjects dbObject;
 		
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
@@ -44,17 +46,20 @@ public class WorkflowDetails {
 		
 		
 		try {
-			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
 			while (resultTableName.next()) {
 				tableName = tableName+resultTableName.getString(1);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		String selectQuery = "SELECT `stage_id`, `stage_name`, `stage_description`, `stage_sla`, `stage_seqno`, `w_id` FROM "+tableName;
 
 		try {
-			result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
 			while (result.next()) {
 				WorkflowDetails newWorkFlowDetails = new WorkflowDetails();
 				newWorkFlowDetails.setStageID(result.getInt("stage_id"));
@@ -66,6 +71,7 @@ public class WorkflowDetails {
 				newWorkFlowDetails.setTableName(tableName);
 				objWfDetails.add(newWorkFlowDetails);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

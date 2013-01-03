@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import model.UserRole;
 
 import utility.DBService;
+import utility.DBobjects;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -21,13 +22,16 @@ public class EditUserAdv extends ActionSupport {
 		roleList = new ArrayList<String>();
 		actstateList = new ArrayList<String>();
 		String wfquery = "SELECT workflow_name FROM workflow_master";
+		DBobjects dbObject;
 //		String wfwhere = "WHERE freeze = 'N'";
 			
 		try{
-		result = DBService.dbExecuteQuery(wfquery,"");
+			dbObject = DBService.dbExecuteQuery(wfquery,"");
+			result=dbObject.getResult();
 		while(result.next()){
 			wfList.add(result.getString("workflow_name"));
 		}
+		dbObject.getConn().close();
 		}catch(Exception ex){
 			System.out.println("Exception caught: " + ex);
 		}
@@ -44,8 +48,12 @@ public class EditUserAdv extends ActionSupport {
 	public String execute(){
 		String selectQuery = "SELECT * FROM `login_credentials`";
 		String whereClause = "WHERE user_id = '" + user_id + "'";
+		ResultSet result = null;
+		DBobjects dbObject;
 		try{
-			ResultSet result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			
+			dbObject=DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
 			while(result.next()){
 				tmpuser.setUser_id(result.getString("user_id"));
 				tmpuser.setUsername(result.getString("username"));
@@ -55,6 +63,7 @@ public class EditUserAdv extends ActionSupport {
 				tmpuser.setRole(result.getString("role"));
 				tmpuser.setActive_flag(result.getString("active_flag"));
 			}
+			dbObject.getConn().close();
 			}catch(Exception ex){
 				System.out.println("Excption caught: " + ex);
 			}
@@ -88,12 +97,14 @@ public class EditUserAdv extends ActionSupport {
 		String wfquery = "SELECT workflow_name FROM workflow_master";
 		String wfwhere = "WHERE w_id = '" + W_id + "'";
 		String WfName = null;
-			
+		DBobjects dbObject;	
 		try{
-		result = DBService.dbExecuteQuery(wfquery,wfwhere);
+			dbObject = DBService.dbExecuteQuery(wfquery,wfwhere);
+			result=dbObject.getResult();
 		while(result.next()){
 			WfName = result.getString("workflow_name");
 		}
+		dbObject.getConn().close();
 		}catch(Exception ex){
 			System.out.println("Exception caught: " + ex);
 		}
@@ -104,12 +115,14 @@ public class EditUserAdv extends ActionSupport {
 		String wfquery = "SELECT w_id FROM workflow_master";
 		String wfwhere = "WHERE workflow_name = '" + WName + "'";
 		int w_id = -1;
-			
+		DBobjects dbObject;		
 		try{
-		result = DBService.dbExecuteQuery(wfquery,wfwhere);
+			dbObject = DBService.dbExecuteQuery(wfquery,wfwhere);
+			result=dbObject.getResult();
 		while(result.next()){
 			w_id = result.getInt("w_id");
 		}
+		dbObject.getConn().close();
 		}catch(Exception ex){
 			System.out.println("Exception caught: " + ex);
 		}

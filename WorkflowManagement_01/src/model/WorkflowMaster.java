@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import utility.DBService;
+import utility.DBobjects;
 
 public class WorkflowMaster {
 
@@ -85,9 +86,11 @@ public class WorkflowMaster {
 		ResultSet result = null;
 		ArrayList<WorkflowMaster> objWfMaster = new ArrayList<WorkflowMaster>();
 		String selectQuery = "SELECT `w_id`, `workflow_name`, `workflow_description`, `workflow_domain`, `table_suffix`,`freeze` FROM workflow_master ";
-
+		DBobjects dbObject;
+		
 		try {
-			result = DBService.dbExecuteQuery(selectQuery, whereClause);
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
 			while (result.next()) {
 				WorkflowMaster newWorkFlow = new WorkflowMaster();
 				newWorkFlow.setWorkflowID(result.getInt("w_id"));
@@ -100,6 +103,7 @@ public class WorkflowMaster {
 				newWorkFlow.setFreeze(result.getString("freeze"));
 				objWfMaster.add(newWorkFlow);
 			}
+			dbObject.getConn().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -112,7 +116,7 @@ public class WorkflowMaster {
 		String updateSQL = "UPDATE workflow_master SET workflow_name='"
 				+ this.getWorkflowName() + "' , workflow_description='"
 				+ this.getWorkflowDescription() + "' ,workflow_domain='"
-				+ this.getWorkflowDomain() + "', freeze= WHERE w_id="
+				+ this.getWorkflowDomain() + "', freeze='"+ this.getFreeze() +"' WHERE w_id="
 				+ this.getWorkflowID();
 		System.out.println("update :\n"+updateSQL);
 		return DBService.DDLQueryInDB(updateSQL);

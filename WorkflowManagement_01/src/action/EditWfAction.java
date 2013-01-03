@@ -36,6 +36,7 @@ public class EditWfAction extends ActionSupport {
 		this.setWorkflowName(masterUpdate.getWorkflowName());
 		this.setWorkflowDescription(masterUpdate.getWorkflowDescription());
 		this.setWorkflowDomain(masterUpdate.getWorkflowDomain());
+		this.setFreeze(masterUpdate.getFreeze());
 		return "displayform";
 	}
 
