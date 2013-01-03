@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
 <div id="loginjsp_login">
 <s:actionerror />
 <s:form action="login.action" method = "post">
@@ -20,6 +19,9 @@
 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <a href="#" style="text-decoration:  none;">sign up!!</a>
 </div>
 <div id="loginjsp_box">
+<div id="loginjsp_heading">
+	WORKFLOW MANAGEMENT
+</div>
 	<div id="loginjsp_menu">
 	<ul>	
 		<li><a href="#">Home</a></li>
@@ -30,4 +32,5 @@
 <div id="loginjsp_aboutus" style="text-align: justify;	"><h4 style="text-align: center;">ABOUT THE SITE</h4><br>Workflow management is supposed to track the whereabouts about project that how it is done and many other things. Remaining has to be written by Raghav This project was started sinec 
 yesterday. We had everything in the class. Please donot read whatever i wrote above</div>
 </body>
+
 </html>
