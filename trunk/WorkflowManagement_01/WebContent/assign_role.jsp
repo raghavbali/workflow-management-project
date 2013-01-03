@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin page - Assign Role</title>
+<title>Assign Role</title>
 </head>
 <body>
 <h2>Assign Role</h2>
+<s:hidden name="pageName" value="%{pageName}"/>
+<s:hidden name="workflowID" />
 	<table>
 	<tr>
 	    <th><h3>P_ID</h3></th>
@@ -23,14 +25,14 @@
 		<td><s:property value="fname"/></td>
 		<td><s:property value="lname"/></td>
 		<td><a href="edit_user_basic?p_id=<s:property value="p_id"/>">Edit</a></td>
-		<td><a href="continue_role_assign?p_id=<s:property value="p_id"/>">User roles</a></td>
+		<td><a href="continue_role_assign?p_id=<s:property value="p_id"/>&pageName=<s:property value="pageName"/>&workflowID=<s:property value="workflowID"/>">User roles</a></td>
 <!-- 	<td><h3><img src="./images/<s:property value="image_url"/>" alt="image text"/> </h3></td>
 		<td><h3> <a href="modify_book?book_id=<s:property value="Id"/>">Modify</a></h3> </td>
 		<td><h3> <a href="buy_book?book_id=<s:property value="Id"/>">Buy</a></h3> </td>			-->
 	</tr>
 	</s:iterator>
 	<tr><td>
-	<h2 align="left"><a href="back_from_assignrole" id="mysubmit">Button1</a></h2>
+<!-- <h2 align="left"><a href="back_from_assignrole" id="mysubmit">Button1</a></h2> -->
 	</td>
 <!-- <td></td><td></td><td></td><td></td><td></td><td></td>
 	<td>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Welcome Edtior</title>
+<title>Welcome Editor</title>
 </head>
 <body>
 	<h2>successful login!</h2>

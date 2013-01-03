@@ -1,6 +1,9 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 import utility.DBService;
 
@@ -8,13 +11,15 @@ import model.Item;
 import model.User;
 import model.WorkflowDetails;
 
-public class EditorConsole {
+public class EditorConsole extends ActionSupport {
 	
 	private List<WorkflowDetails> stageList;
 	private List<User> userList;
 	private List<Item> itemList;
 	private int itemID;
 	private int workflowID;
+	private ArrayList<User> usrlist;
+	private String pageName;
 	
 	public String done(){	
 		return "done";
@@ -41,6 +46,15 @@ public class EditorConsole {
 	}
 	
 	public String assignRole(){
+		pageName = "EditorConsole";
+		usrlist = DBService.getUserList();
+		if(usrlist != null){
+			addActionMessage(getText("Userlist generated."));
+		}
+		
+		else{
+			addActionError(getText("No users found."));
+		}
 		return "assignRole";
 	}
 	
@@ -86,6 +100,22 @@ public class EditorConsole {
 
 	public void setItemID(int itemID) {
 		this.itemID = itemID;
+	}
+
+	public ArrayList<User> getUsrlist() {
+		return usrlist;
+	}
+
+	public void setUsrlist(ArrayList<User> usrlist) {
+		this.usrlist = usrlist;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
 	}
 	
 	

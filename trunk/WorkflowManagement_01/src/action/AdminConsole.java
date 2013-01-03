@@ -22,6 +22,8 @@ public class AdminConsole extends ActionSupport{
 	private ArrayList<User> usrlist;
 	private ArrayList<String> sexList, prefixList;
 	private Map<String, Object> session;
+	private String pageName;
+	private int workflowID;
 	
 	public AdminConsole(){
 		domainList = new ArrayList<String>();
@@ -29,6 +31,7 @@ public class AdminConsole extends ActionSupport{
 		domainList.add("Manufacturing");
 		domainList.add("Delivery");
 		domainList.add("E_Gov");
+		this.setWorkflowID(-1);
 	}
 	
 	public String logout(){
@@ -64,6 +67,7 @@ public class AdminConsole extends ActionSupport{
 	}
 	
 	public String editUser(){
+		pageName = "AdminConsole";
 		usrlist = DBService.getUserList();
 		if(usrlist != null){
 			addActionMessage(getText("Userlist generated."));
@@ -141,4 +145,20 @@ public class AdminConsole extends ActionSupport{
 	}
 
 */
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+	public int getWorkflowID() {
+		return workflowID;
+	}
+
+	public void setWorkflowID(int workflowID) {
+		this.workflowID = workflowID;
+	}
 }

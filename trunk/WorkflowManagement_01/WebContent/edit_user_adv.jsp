@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin page - Edit User Advanced</title>
+<title>Edit User Advanced</title>
 <SCRIPT Language="JavaScript">
 <!--//
 function showAndClearField(frm){
@@ -23,6 +23,8 @@ function showAndClearField(frm){
 		<s:hidden name="user_id"/>
 		<s:hidden name="p_id" value="%{tmpuser.getP_id()}"/>
 		<s:hidden name ="active_flag" value="%{tmpuser.getActive_flag()}"/>
+		<s:hidden name="pageName" value="%{pageName}"/>
+		<s:hidden name="workflowID" />
 		<s:select label="Select Workflow" headerKey="-1"
 			headerValue="Select Workflow"
 			list="wfList"
