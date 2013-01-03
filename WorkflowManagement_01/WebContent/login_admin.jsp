@@ -8,9 +8,11 @@
 <title>Welcome admin</title>
 </head>
 <body>
-	<h2>successful login!</h2>
 	<s:actionmessage/>
+	<s:actionerror/>
+	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
+		<a	href="logoutAdminConsole.action">Logout</a>
 		<s:submit name="button" value="Create Workflow"
 			action="createWfAdminConsole" align="left" />
 		<s:submit name="button" value="Edit Workflow" action="editWorkflowAdminConsole"
@@ -22,5 +24,10 @@
 		<s:submit name="button" value="Manual Override" action="manualAdminConsole"
 			align="left" />
 	</s:form>
+	</s:if>
+	<s:else>
+    	Trespassers will be shot. Survivors will be shot again!!!
+    	<a	href="login.jsp">Login</a>
+	</s:else>
 </body>
 </html>

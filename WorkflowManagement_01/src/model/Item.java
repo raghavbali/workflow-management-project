@@ -87,13 +87,32 @@ public class Item {
 	}
 	
 	
-	public int update(String tableName) {
-		String updateSQL = "UPDATE item"+tableName+" SET item_name='"
+	public int update(int w_id) {
+		String tableName="item";
+		ResultSet resultTableName = null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			resultTableName = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			while (resultTableName.next()) {
+				tableName = tableName+resultTableName.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String updateSQL = "UPDATE "+tableName+" SET item_name='"
 				+ this.getItemName() + "' , item_description='"
 				+ this.getItemDescription() + "' ,current_stage_id="
 				+ this.getCurrentStageID() + " ,remarks='"
 						+ this.getRemarks() + "' ,file_path='" +this.getFilePath()+
-								"' WHERE itm_id=" +this.getItemID();
+								"' WHERE item_id=" +this.getItemID();
 		System.out.println("update :\n"+updateSQL);
 		return DBService.DDLQueryInDB(updateSQL);
 	}

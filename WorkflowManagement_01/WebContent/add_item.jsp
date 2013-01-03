@@ -23,6 +23,8 @@
 			size="50" />
 			<s:submit name="button" value="Add"
 			action="addToWorkflowItemConsole" align="left" id="addToWorkflowItemConsole"/>
+			<s:submit name="button" value="Back"
+			action="doneEditorConsole" align="left" />
 	</s:form>
 </body>
 </html>

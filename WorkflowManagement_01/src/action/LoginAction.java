@@ -1,8 +1,11 @@
 package action;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import utility.DBService;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
@@ -10,14 +13,27 @@ public class LoginAction extends ActionSupport {
 	private String username;
 	private String password;
 	private String workflowID;
+	private Map<String, Object> session;
 	
 	public String execute(){
 		String role;
 		ArrayList<String> result;
+		session = ActionContext.getContext().getSession();
+		
 		result = DBService.db_authenticate(this.username, this.password);
 		role=result.get(0);
+		/* get workflow id */
 		if(result.size()==2){
 			this.setWorkflowID(result.get(1));
+		}
+		
+		/* set session for login status */
+		if(!role.equalsIgnoreCase("login_fail")){
+			session.put("logged-in", "true");
+			addActionMessage(getText("Login Successful"));
+		}
+		else{
+			addActionError(getText("You are not logged-in"));
 		}
 
 		if (role.equals("admin"))

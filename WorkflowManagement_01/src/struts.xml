@@ -29,7 +29,8 @@
    		 <result name="editWf">workflow_list.jsp</result>
    		 <result name="createUser">add_user.jsp</result>
    		 <result name="editUser">assign_role.jsp</result>
-		 <result name="manual">login_admin.jsp</result>		 
+		 <result name="manual">login_admin.jsp</result>	
+		 <result name="logout">login.jsp</result>		 
 		</action>
 		<!-- Action for creating a workflow -->
         <action name="create_wf"
@@ -105,7 +106,8 @@
         <action name="*EditorConsole" method="{1}" class="action.EditorConsole">
          	<result name="assignStage">stage_assign.jsp</result>
    		 	<result name="createItem">add_item.jsp</result>
-   		 	<result name="editItem">item_list.jsp</result>
+   		 	<result name="editItems">item_list.jsp</result>
+   		 	<result name="editItem">edit_item.jsp</result>
    		 	<result name="assignRole">assign_role.jsp</result>
 		 	<result name="editProfile">login_editor.jsp</result>		
 		 	<result name="done">login_editor.jsp</result>		 
@@ -115,6 +117,8 @@
         <action name="*ItemConsole" method="{1}" class="action.ItemConsole">
         	<result name="addSuccess">login_editor.jsp</result>
         	<result name="addError">add_item.jsp</result>
+        	<result name="editSuccess">login_editor.jsp</result>
+        	<result name="editIError">edit_item.jsp</result>
         </action>
 		
         <!-- EDITOR BLOCK ENDS  -->
