@@ -28,6 +28,18 @@ public class ItemConsole extends ActionSupport{
 		}
 	}
 	
+	public String editToWorkflow(){
+		Item updatedItem=new Item(this.getItemID(), this.getItemName(), this.getItemDescription(), this.getCurrentStageID(), this.getRemarks(), this.getFilePath());
+		if(updatedItem.update(this.getWorkflowID())==1){
+			addActionMessage(getText("Item updated Successfully."));
+			return "editSuccess";
+		}
+		else{
+			addActionError(getText("Could not update Item. Try Again"));
+			return "editIError";
+		}
+	}
+	
 	public int getItemID() {
 		return itemID;
 	}

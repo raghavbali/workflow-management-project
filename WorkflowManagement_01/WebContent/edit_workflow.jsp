@@ -22,6 +22,11 @@
 			list="domainList"
 			name="workflowDomain"
 			value="%{workflowDomain}" />
+		<s:select label="Freeze" headerKey="-1"
+			headerValue="Select a value"
+			list="freezeList"
+			name="freeze"
+			value="%{freeze}" />
 		<s:submit name="button" value="Save Changes" align="center" method="saveChanges"/>
 	</s:form>
 </body>
