@@ -15,37 +15,54 @@ public class EditUserAdv extends ActionSupport {
 	String selected_wf, selected_role, selected_actstate;
 	ArrayList<String> wfList, roleList, actstateList;
 	ResultSet result;
+	private String pageName, workflowName;
+	private int workflowID;
 	UserRole tmpuser = new UserRole();
 	
 	public EditUserAdv(){
+		
+	}
+	
+	public void populateLists()
+	{
 		wfList = new ArrayList<String>();
 		roleList = new ArrayList<String>();
 		actstateList = new ArrayList<String>();
-		String wfquery = "SELECT workflow_name FROM workflow_master";
+		String wfquery;
 		DBobjects dbObject;
-//		String wfwhere = "WHERE freeze = 'N'";
-			
-		try{
-			dbObject = DBService.dbExecuteQuery(wfquery,"");
-			result=dbObject.getResult();
-		while(result.next()){
-			wfList.add(result.getString("workflow_name"));
-		}
-		dbObject.getConn().close();
-		}catch(Exception ex){
+		if(pageName.equals("AdminConsole"))
+			wfquery = "SELECT workflow_name FROM workflow_master";
+		else
+			wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
+		// String wfwhere = "WHERE freeze = 'N'";
+
+		try {
+			dbObject = DBService.dbExecuteQuery(wfquery, "");
+			result = dbObject.getResult();
+			while (result.next()) {
+				wfList.add(result.getString("workflow_name"));
+			}
+			dbObject.getConn().close();
+		} catch (Exception ex) {
 			System.out.println("Exception caught: " + ex);
 		}
-		
-		roleList.add("admin");
-		roleList.add("author");
+//		System.out.println(pageName);
+		if(pageName.equals("AdminConsole"))
+		{
+			roleList.add("admin");
+			roleList.add("editor");
+		}
 		roleList.add("publisher");
-		roleList.add("editor");
+		roleList.add("author");
 		
 		actstateList.add("0");
 		actstateList.add("1");
 	}
 	
 	public String execute(){
+		populateLists();
+		if(pageName.equals("EditorConsole"))
+			workflowName = getWfNamefromDB(String.valueOf(workflowID));
 		String selectQuery = "SELECT * FROM `login_credentials`";
 		String whereClause = "WHERE user_id = '" + user_id + "'";
 		ResultSet result = null;
@@ -77,12 +94,16 @@ public class EditUserAdv extends ActionSupport {
 															"', username = '" + tmpuser.getUsername() + 
 															"', password = '" + tmpuser.getPassword() +
 															"', p_id = '" + tmpuser.getP_id() + 
-															"', w_id = '" + tmpuser.getW_id() + 
+															"', w_id = '" + tmpuser.getW_id() +
+															"', role = '" + tmpuser.getRole() +
 															"', active_flag = '" + tmpuser.getActive_flag() + 
 															"' WHERE user_id = '" + tmpuser.getUser_id() + "'";
 		
 		int res = DBService.DDLQueryInDB(updateQuery);
 		tmpuser.setW_id(w_id);
+		populateLists();
+		if(pageName.equals("EditorConsole"))
+			workflowName = getWfNamefromDB(String.valueOf(workflowID));
 		if(res == 0){
 			addActionError(getText("Some error, please re-chech the field values."));
 			return "error";
@@ -239,6 +260,30 @@ public class EditUserAdv extends ActionSupport {
 
 	public void setTmpuser(UserRole tmpuser) {
 		this.tmpuser = tmpuser;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+	public String getWorkflowName() {
+		return workflowName;
+	}
+
+	public void setWorkflowName(String workflowName) {
+		this.workflowName = workflowName;
+	}
+
+	public int getWorkflowID() {
+		return workflowID;
+	}
+
+	public void setWorkflowID(int workflowID) {
+		this.workflowID = workflowID;
 	}
 
 }

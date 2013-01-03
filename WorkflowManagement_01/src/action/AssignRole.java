@@ -17,11 +17,22 @@ public class AssignRole extends ActionSupport {
 	ArrayList<UserRole> usrlist;
 	ArrayList<String> wfList, roleList;
 	ResultSet result;
+	private String pageName, workflowName;
+	private int workflowID;
 
 	public AssignRole() {
+		
+	}
+	
+	public void populateLists()
+	{
 		wfList = new ArrayList<String>();
 		roleList = new ArrayList<String>();
-		String wfquery = "SELECT workflow_name FROM workflow_master";
+		String wfquery;
+		if(pageName.equals("AdminConsole"))
+			wfquery = "SELECT workflow_name FROM workflow_master";
+		else
+			wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
 		DBobjects dbObject = null;
 		// String wfwhere = "WHERE freeze = 'N'";
 
@@ -35,15 +46,22 @@ public class AssignRole extends ActionSupport {
 		} catch (Exception ex) {
 			System.out.println("Exception caught: " + ex);
 		}
-
-		roleList.add("admin");
-		roleList.add("author");
+//		System.out.println(pageName);
+		if(pageName.equals("AdminConsole"))
+		{
+			roleList.add("admin");
+			roleList.add("editor");
+		}
 		roleList.add("publisher");
-		roleList.add("editor");
+		roleList.add("author");
 	}
+
 
 	public String execute() {
 		// System.out.println(p_id);
+		if(pageName.equals("EditorConsole"))
+			workflowName = getWfNamefromDB(String.valueOf(workflowID));
+		populateLists();
 		usrlist = DBService.getUserRoleList(p_id);
 		if (usrlist.size() == 0)
 			addActionError(getText("No roles for selected user."));
@@ -68,6 +86,9 @@ public class AssignRole extends ActionSupport {
 
 		int result = DBService.insertObjectInDB(insertQuery, values);
 		usrlist = DBService.getUserRoleList(p_id);
+		if(pageName.equals("EditorConsole"))
+			workflowName = getWfNamefromDB(String.valueOf(workflowID));
+		populateLists();
 
 		if (result == 0) {
 			addActionError(getText("Some error, please re-chech the field values."));
@@ -76,6 +97,24 @@ public class AssignRole extends ActionSupport {
 			addActionMessage(getText("User Role added successfully."));
 			return "addrole_continue";
 		}
+	}
+	
+	public String getWfNamefromDB(String W_id){
+		String wfquery = "SELECT workflow_name FROM workflow_master";
+		String wfwhere = "WHERE w_id = '" + W_id + "'";
+		String WfName = null;
+		DBobjects dbObject;	
+		try{
+			dbObject = DBService.dbExecuteQuery(wfquery,wfwhere);
+			result=dbObject.getResult();
+		while(result.next()){
+			WfName = result.getString("workflow_name");
+		}
+		dbObject.getConn().close();
+		}catch(Exception ex){
+			System.out.println("Exception caught: " + ex);
+		}
+		return WfName;
 	}
 
 	public int getW_idfromDB(String WName) {
@@ -191,6 +230,30 @@ public class AssignRole extends ActionSupport {
 
 	public void setSelected_role(String selected_role) {
 		this.selected_role = selected_role;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+	public int getWorkflowID() {
+		return workflowID;
+	}
+
+	public void setWorkflowID(int workflowID) {
+		this.workflowID = workflowID;
+	}
+
+	public String getWorkflowName() {
+		return workflowName;
+	}
+
+	public void setWorkflowName(String workflowName) {
+		this.workflowName = workflowName;
 	}
 
 }
