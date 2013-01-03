@@ -13,7 +13,9 @@ public class EditWfAction extends ActionSupport {
 	private String workflowName;
 	private String workflowDescription;
 	private String workflowDomain;
+	private String freeze;
 	private List<String> domainList;
+	private List<String> freezeList;
 	
 	public EditWfAction(){
 		domainList=new ArrayList<String>();
@@ -21,6 +23,10 @@ public class EditWfAction extends ActionSupport {
 		domainList.add("Manufacturing");
 		domainList.add("Delivery");
 		domainList.add("E_Gov");
+		
+		freezeList=new ArrayList<String>();
+		freezeList.add("Y");
+		freezeList.add("N");
 	}
 
 	public String execute() {
@@ -36,7 +42,7 @@ public class EditWfAction extends ActionSupport {
 	public String saveChanges() {
 		WorkflowMaster masterUpdate = new WorkflowMaster(
 				this.getWorkflowName(), this.getWorkflowDescription(),
-				this.getWorkflowDomain(),"N");
+				this.getWorkflowDomain(),this.getFreeze());
 		masterUpdate.setWorkflowID(this.getWorkflowID());
 		if (masterUpdate.update() != 0) {
 			addActionMessage(getText("Workflow Updated Successfully"));
@@ -85,6 +91,22 @@ public class EditWfAction extends ActionSupport {
 
 	public void setDomainList(List<String> domainList) {
 		this.domainList = domainList;
+	}
+
+	public List<String> getFreezeList() {
+		return freezeList;
+	}
+
+	public void setFreezeList(List<String> freezeList) {
+		this.freezeList = freezeList;
+	}
+
+	public String getFreeze() {
+		return freeze;
+	}
+
+	public void setFreeze(String freeze) {
+		this.freeze = freeze;
 	}
 
 }

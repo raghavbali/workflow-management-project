@@ -112,7 +112,7 @@ public class WorkflowMaster {
 		String updateSQL = "UPDATE workflow_master SET workflow_name='"
 				+ this.getWorkflowName() + "' , workflow_description='"
 				+ this.getWorkflowDescription() + "' ,workflow_domain='"
-				+ this.getWorkflowDomain() + "' WHERE w_id="
+				+ this.getWorkflowDomain() + "', freeze= WHERE w_id="
 				+ this.getWorkflowID();
 		System.out.println("update :\n"+updateSQL);
 		return DBService.DDLQueryInDB(updateSQL);
