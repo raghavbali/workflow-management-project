@@ -44,7 +44,9 @@ public class EditWfAction extends ActionSupport {
 		WorkflowMaster masterUpdate = new WorkflowMaster(
 				this.getWorkflowName(), this.getWorkflowDescription(),
 				this.getWorkflowDomain(),this.getFreeze());
+		
 		masterUpdate.setWorkflowID(this.getWorkflowID());
+		
 		if (masterUpdate.update() != 0) {
 			addActionMessage(getText("Workflow Updated Successfully"));
 			return "success";

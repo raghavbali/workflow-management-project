@@ -19,7 +19,7 @@ public class DBService {
 		
 		try{
 			conn = new MySqlConnection().getConnection();
-			query = conn.prepareStatement("select password, role, w_id from login_credentials where username = ? and active_flag = 1");
+			query = conn.prepareStatement("select password, role, w_id,user_id from login_credentials where username = ? and active_flag = 1");
 			query.setString(1, username);
 			result = query.executeQuery();
 
@@ -29,6 +29,7 @@ public class DBService {
 					//returnString = result.getString("role");
 					returnString.add(result.getString("role"));
 					returnString.add(String.valueOf(result.getInt("w_id")));
+					returnString.add(String.valueOf(result.getInt("user_id")));
 				}
 				else{
 					//returnString = "login_fail";
@@ -238,5 +239,32 @@ public class DBService {
 	}
 	return usrlist;
 	}
+	
+	public static String tableSuffix(int w_id){
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		DBobjects dbObject;
+		ResultSet resultTableName=null;
+		String tableName=null;
+		
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				tableName =resultTableName.getString(1);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("tbl name="+tableName);
+		return tableName;
+	}
+	
 	
 }

@@ -69,7 +69,7 @@ public class WorkflowDBService {
 		String stageCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ stage_table + "`(`stage_id` int(5) NOT NULL,"
 				+ "`user_id` int(5) NOT NULL,"
-				+ "`status` set('A','I') COLLATE utf8_bin NOT NULL,"
+				/*+ "`status` set('A','I') COLLATE utf8_bin NOT NULL,"*/
 				+ "PRIMARY KEY (`user_id`,`stage_id`),"
 				+ "KEY `stage_id` (`stage_id`,`user_id`)"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
@@ -102,6 +102,20 @@ public class WorkflowDBService {
 				+ "_ibfk_1` FOREIGN KEY (`current_stage_id`) REFERENCES `"
 				+ workflow_table
 				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+		
+		String leaderCreateTableQuery= "CREATE TABLE IF NOT EXISTS `" +
+				lead_bucket +
+				"` (  `user_id` int(5) NOT NULL, " +
+				" `item_id` int(5) NOT NULL,  " +
+				"`stage_id` int(5) NOT NULL, " +
+				" `assigned_on` date NOT NULL,  " +
+				"`delivery_date` date NOT NULL, " +
+				" `status` enum('I','C','P') " +
+				"COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial',  " +
+				"PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  " +
+				"KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
+		
+		
 
 		try {
 			if (DDLQueryInDB(workflowCreateTableQuery) == 1

@@ -97,7 +97,7 @@ public class CreateWfAction extends ActionSupport {
 		String workflow_table = "workflow" + suffix;
 		String stage_table = "stage" + suffix;
 		String item_table = "item" + suffix;
-		String lead_bucket = "lead_bucket" + suffix;
+		String lead_bucket = "leader_bucket" + suffix;
 		String general_bucket = "general_bucket" + suffix;
 
 		try {

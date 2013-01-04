@@ -21,7 +21,7 @@ public class StageConsole extends ActionSupport{
 	//private Map<String, Object> session;
 	
 	public String execute(){
-		System.out.println("StageConsole execute "+this.getWorkflowID()+"-"+this.getPageName());
+		//System.out.println("StageConsole execute "+this.getWorkflowID()+"-"+this.getPageName());
 		if(this.getPageName().equalsIgnoreCase("workflow_list")){
 		this.objListWfDetails=WorkflowDetails.find(this.getWorkflowID(), "");
 		return "stageList";

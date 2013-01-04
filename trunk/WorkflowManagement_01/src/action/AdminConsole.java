@@ -37,6 +37,7 @@ public class AdminConsole extends ActionSupport{
 	public String logout(){
 		session = ActionContext.getContext().getSession();
 		session.remove("logged-in");
+		session.clear();
 		addActionMessage(getText("Logged out successfully"));
 		return "logout";
 	}
@@ -47,7 +48,15 @@ public class AdminConsole extends ActionSupport{
 	}
 	
 	public String editWorkflow(){
-		this.objListWfMaster=WorkflowMaster.find("");
+		String whereClause=null;
+		
+		session = ActionContext.getContext().getSession();
+		if(session.get("tableSuffix").toString().equalsIgnoreCase("_00000000000000"))
+			this.objListWfMaster=WorkflowMaster.find(" WHERE w.w_id<>1");
+		else{
+			whereClause=",login_credentials l WHERE w.w_id=l.w_id and l.user_id="+Integer.parseInt(session.get("userID").toString());
+			this.objListWfMaster=WorkflowMaster.find(whereClause);
+		}
 		if(this.objListWfMaster!=null)
 			addActionMessage(getText("Workflow list generated."));
 		else

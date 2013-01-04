@@ -2,7 +2,9 @@ package action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import utility.DBService;
@@ -20,6 +22,7 @@ public class EditorConsole extends ActionSupport {
 	private int workflowID;
 	private ArrayList<User> usrlist;
 	private String pageName;
+	private Map<String, Object> session;
 	
 	public String done(){	
 		return "done";
@@ -36,12 +39,14 @@ public class EditorConsole extends ActionSupport {
 	}
 	
 	public String editItem(){
-		this.setItemList(Item.find(this.getWorkflowID(),"where item_id="+this.getItemID()));
+		session = ActionContext.getContext().getSession();
+		this.setItemList(Item.find("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/,"where item_id="+this.getItemID()));
 		return "editItem";
 	}
 	
 	public String editItems(){
-		this.setItemList(Item.find(this.getWorkflowID(),""));
+		session = ActionContext.getContext().getSession();
+		this.setItemList(Item.find("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/,""));
 		return "editItems";
 	}
 	
