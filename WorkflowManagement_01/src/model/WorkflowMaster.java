@@ -85,7 +85,7 @@ public class WorkflowMaster {
 	public static ArrayList<WorkflowMaster> find(String whereClause) {
 		ResultSet result = null;
 		ArrayList<WorkflowMaster> objWfMaster = new ArrayList<WorkflowMaster>();
-		String selectQuery = "SELECT `w_id`, `workflow_name`, `workflow_description`, `workflow_domain`, `table_suffix`,`freeze` FROM workflow_master ";
+		String selectQuery = "SELECT  w.`w_id`, w.`workflow_name`, w.`workflow_description`, w.`workflow_domain`, w.`table_suffix`,w.`freeze` FROM workflow_master w";
 		DBobjects dbObject;
 		
 		try {

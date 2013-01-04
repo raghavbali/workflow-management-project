@@ -51,7 +51,16 @@ public class StageAction extends ActionSupport {
 	}
 	
 	public void loadWorkflowList(){
-		this.objListWfMaster = WorkflowMaster.find("");
+		String whereClause=null;
+		
+		session = ActionContext.getContext().getSession();
+		
+		if(session.get("tableSuffix").toString().equalsIgnoreCase("_00000000000000"))
+			this.objListWfMaster = WorkflowMaster.find(" WHERE w.w_id<>1");
+		else{
+			whereClause=",login_credentials l WHERE w.w_id=l.w_id and l.user_id="+Integer.parseInt(session.get("userID").toString());
+			this.objListWfMaster=WorkflowMaster.find(whereClause);
+		}
 		if (this.objListWfMaster != null)
 			addActionMessage(getText("Workflow list generated."));
 		else
@@ -64,8 +73,9 @@ public class StageAction extends ActionSupport {
 	}
 
 	public String execute() {
+		/*
 		session = ActionContext.getContext().getSession();
-		session.put("workflow", this.workflow);
+		session.put("workflow", this.workflow);*/
 		return "success";
 	}
 

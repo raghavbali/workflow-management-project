@@ -12,7 +12,7 @@ public class LoginAction extends ActionSupport {
 
 	private String username;
 	private String password;
-	private String workflowID;
+	private int workflowID;
 	private Map<String, Object> session;
 	
 	public String execute(){
@@ -27,14 +27,19 @@ public class LoginAction extends ActionSupport {
 			role="login_fail";
 		
 		/* get workflow id */
-		if(result.size()==2){
-			this.setWorkflowID(result.get(1));
-		}
 		
+		if(result.size()>1){
+			this.setWorkflowID(Integer.parseInt(result.get(1)));
+		}
 		/* set session for login status */
 		if(!role.equalsIgnoreCase("login_fail")){
 			session.put("logged-in", "true");
 			addActionMessage(getText("Login Successful"));
+			
+			/* set wid,user_id and table suffix */
+			session.put("tableSuffix", DBService.tableSuffix(this.getWorkflowID()));
+			session.put("workflowID", String.valueOf(this.getWorkflowID()));
+			session.put("userID",result.get(2) );
 		}
 		else{
 			addActionError(getText("You are not logged-in"));
@@ -77,11 +82,11 @@ public class LoginAction extends ActionSupport {
 		this.password = password;
 	}
 
-	public String getWorkflowID() {
+	public int getWorkflowID() {
 		return workflowID;
 	}
 
-	public void setWorkflowID(String workflowID) {
+	public void setWorkflowID(int workflowID) {
 		this.workflowID = workflowID;
 	}
 }

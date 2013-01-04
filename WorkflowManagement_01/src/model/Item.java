@@ -44,14 +44,16 @@ public class Item {
 		this.filePath = filePath;
 	}
 	
-	public static ArrayList<Item> find(int w_id, String whereClause) {
+	public static ArrayList<Item> find(String tableName/*int w_id*/, String whereClause) {
 		ResultSet result = null;
 		ArrayList<Item> objItemList = new ArrayList<Item>();
-		String tableName="item";
+		DBobjects dbObject=null;
+		
+		/*String tableName="item";
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
-		DBobjects dbObject;
+		
 		
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
@@ -68,6 +70,7 @@ public class Item {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
 		String selectQuery = "SELECT `item_id`, `item_name`, `item_description`, `current_stage_id`, `remarks`, `file_path` FROM "+tableName;
 
 		try {
@@ -98,7 +101,7 @@ public class Item {
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
-		DBobjects dbObject;
+		DBobjects dbObject=null;
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
 		whereClauseTable = "where w_id = "+w_id;
@@ -137,7 +140,7 @@ public class Item {
 		String insertQuery=null;
 		String selectQueryTable=null;
 		String whereClauseTable=null;
-		DBobjects dbObject;
+		DBobjects dbObject=null;
 		
 		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
 		whereClauseTable = "where w_id = "+w_id;
