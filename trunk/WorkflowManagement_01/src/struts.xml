@@ -102,7 +102,7 @@
         
          <!-- EDITOR BLOCK STARTS  -->
         
-        <!-- Action for Admin's welcome screen -->
+        <!-- Action for Editor's welcome screen -->
         <action name="*EditorConsole" method="{1}" class="action.EditorConsole">
          	<result name="assignStage">stage_assign.jsp</result>
    		 	<result name="createItem">add_item.jsp</result>
@@ -111,6 +111,10 @@
    		 	<result name="assignRole">assign_role.jsp</result>
 		 	<result name="editProfile">login_editor.jsp</result>		
 		 	<result name="done">login_editor.jsp</result>		 
+		</action>
+		
+		<action name="assign_users" class="action.EditorStageAssign">
+		<result name="assign_stage_continue">stage_assign.jsp</result>
 		</action>
 		
         <!-- Action for Item handling -->

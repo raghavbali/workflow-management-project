@@ -13,10 +13,10 @@
 	<s:actionerror/>
 	<s:form action="" method="">
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
-	<s:submit name="button" value="Stage Assignment"
-			action="assignStageEditorConsole" align="left" />
-		<s:submit name="button" value="Create Item"
-			action="createItemEditorConsole" align="left" />
+	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
+			align="left" />
+		<s:submit name="button" value="Create Item" action="createItemEditorConsole"
+			align="left" />
 		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
 			align="left" />
 		<s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
