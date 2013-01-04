@@ -117,7 +117,4 @@ public class EditorConsole extends ActionSupport {
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
 	}
-	
-	
-
 }

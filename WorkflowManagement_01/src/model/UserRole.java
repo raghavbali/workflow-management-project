@@ -1,5 +1,11 @@
 package model;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import utility.DBService;
+import utility.DBobjects;
+
 public class UserRole {
 	String user_id, username, password, p_id, w_id, role, active_flag;
 	
@@ -16,6 +22,36 @@ public class UserRole {
 		this.w_id = w_id;
 		this.role = role;
 		this.active_flag = active_flag;
+	}
+	
+	public static ArrayList<UserRole> find(String whereClause) {
+		ResultSet result = null;
+		ArrayList<UserRole> userRole = new ArrayList<UserRole>();
+		DBobjects dbObject;
+		
+		String selectQuery = "SELECT `user_id`, `username`, `password`, `p_id`, `w_id`, `role`, `active_flag` FROM `login_credentials` ";
+
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
+			while (result.next()) {
+				UserRole newUserRole = new UserRole();
+				newUserRole.setUser_id(result.getString("user_id"));
+				newUserRole.setUsername(result.getString("username"));
+				newUserRole.setPassword(result.getString("password"));
+				newUserRole.setP_id(result.getString("p_id"));
+				newUserRole.setW_id(result.getString("w_id"));
+				newUserRole.setRole(result.getString("role"));
+				newUserRole.setActive_flag(result.getString("active_flag"));
+				userRole.add(newUserRole);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return userRole;
+
 	}
 
 	public String getUser_id() {
