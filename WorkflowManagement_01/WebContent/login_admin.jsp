@@ -17,30 +17,52 @@
 </script>
 
 <title>Welcome admin</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="menu">
+	<ul>	
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About US</a></li>
+		<li><a href="logoutAdminConsole.action">Logout</a></li>
+	</ul>
+	    </div>
+	    <div id="buttons_menu">
+	<ul>
 	<s:actionmessage />
 	<s:actionerror />
 	<s:if test="%{#session['logged-in']=='true'}">
 		<s:form action="" method="">
-			<a href="logoutAdminConsole.action">Logout</a>
+					
 			<s:if test="%{#session.tableSuffix=='_00000000000000'}">
-				<s:submit name="button" value="Create Workflow"
-					action="createWfAdminConsole" align="left" />
+		
+		<li>		<s:submit name="button" value="Create Workflow"
+					action="createWfAdminConsole" align="left" /></li>
 			</s:if>
+			<br/>
+			<li>
 			<s:submit name="button" value="Edit Workflow"
-				action="editWorkflowAdminConsole" align="left" />
-			<s:submit name="button" value="Add User"
-				action="createUserAdminConsole" align="left" />
-			<s:submit name="button" value="Edit User"
-				action="editUserAdminConsole" align="left" />
-			<s:submit name="button" value="Manual Override"
-				action="manualAdminConsole" align="left" />
+				action="editWorkflowAdminConsole" align="left" /></li>
+		<li>	<s:submit name="button" value="Add User"
+				action="createUserAdminConsole" align="left" /></li>
+		<li>	<s:submit name="button" value="Edit User"
+				action="editUserAdminConsole" align="left" /></li>
+		<li>	<s:submit name="button" value="Manual Override"
+				action="manualAdminConsole" align="left" /></li>
+				
 		</s:form>
 	</s:if>
 	<s:else>
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
+	</ul>
+	 </div>
+	</div>
+	
 </body>
 </html>
