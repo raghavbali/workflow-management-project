@@ -17,7 +17,7 @@
             <result name="admin_success">login_admin.jsp</result>
             <result name="editor_success">login_editor.jsp</result>
             <result name="author_success">login_author.jsp</result>
-            <result name="publisher_success">login_publisher.jsp</result>
+            <result name="publisher_success" type="redirectAction">publisherAction</result>
             <result name="error">login.jsp</result>
         </action>
         
@@ -128,5 +128,14 @@
         </action>
 		
         <!-- EDITOR BLOCK ENDS  -->
+         <!-- *********************************************************** -->
+        
+         <!-- PUBLISHER BLOCK STARTS  -->
+         <action name="publisherAction" class="action.BucketAction">
+            <result name="displaySuccess">login_publisher.jsp</result>
+            <result name="displayError">login_publisher.jsp</result>
+		</action>
+        
+        
     </package>
 </struts>

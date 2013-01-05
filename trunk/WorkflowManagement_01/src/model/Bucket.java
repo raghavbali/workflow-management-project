@@ -123,6 +123,35 @@ public class Bucket {
 			}
 		}
 	}
+	
+	
+	public static ArrayList<Bucket> find(String tableName, String whereClause) {
+		ResultSet result = null;
+		ArrayList<Bucket> objBucketView = new ArrayList<Bucket>();
+		DBobjects dbObject=null;
+		
+		String selectQuery = "SELECT `user_id`, `item_id`, `stage_id`, `assigned_on`, `delivery_date`, `status` FROM "+tableName;
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
+			while (result.next()) {
+				Bucket newItem = new Bucket();
+				newItem.setUserID(result.getInt("user_id"));
+				newItem.setItemID(result.getInt("item_id"));
+				newItem.setStageID(result.getInt("stage_id"));
+				newItem.setAssignedDate(result.getString("assigned_on"));
+				newItem.setDeliveryDate(result.getString("delivery_date"));
+				newItem.setStatus(result.getString("status"));
+				objBucketView.add(newItem);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return objBucketView;
+	}
 
 	public int getUserID() {
 		return userID;
