@@ -11,7 +11,7 @@
 	<h2>Item Details</h2>
 	<s:actionerror />
 	<s:actionmessage />
-	<s:form action=".action" method="post">
+	<s:form action="*EditorConsole.action" method="post">
 	Workflow ID :<s:property value="workflowID"/>
 	<s:hidden name="workflowID" value="%{workflowID}"/>
 		<table>
@@ -28,12 +28,11 @@
 				</th>
 				<th><h3>Edit Item </h3>
 				</th>
-				<th><h3>Delete Item </h3>
+				<th><h3>Push Item </h3>
 				</th>
 			</tr>
 			<s:iterator value="itemList" var="itemList" status="stat" id="itemList">
 				<tr>
-				<s:hidden name="itemID" id="itemID" value="%{itemID}" />
 					<td><s:property value="itemID" />
 					 </td>
 					<td><s:property value="itemName" />
@@ -47,6 +46,10 @@
 					<td>
 					<a
 						href="editItemEditorConsole.action?itemID=<s:property value = "itemID" />&workflowID=<s:property value = "workflowID" /> ">Modify Item </a>
+					</td>
+					<td>
+					<a
+						href="pushItemEditorConsole.action?itemID=<s:property value = "itemID" />">Push Item </a>
 					</td>
 				</tr>
 			</s:iterator>

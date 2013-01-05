@@ -48,20 +48,22 @@ public class WorkflowDBService {
 				+ "`stage_description` varchar(100) COLLATE utf8_bin NOT NULL,"
 				+ "`stage_sla` int(5) NOT NULL COMMENT 'values should be in hours',"
 				+ "`stage_seqno` int(5) NOT NULL,"
-				 + "`stage_lead_id` int(5) NULL," 
+				+ "`stage_lead_id` int(5) NULL,"
 				+ "`w_id` int(5) NOT NULL,"
 				+ "PRIMARY KEY (`stage_id`),"
-				 + "KEY `stage_lead_id` (`stage_lead_id`)," 
-				+" UNIQUE KEY `stage_seqno` (`stage_seqno`),"
+				+ "KEY `stage_lead_id` (`stage_lead_id`),"
+				+ " UNIQUE KEY `stage_seqno` (`stage_seqno`),"
 				+ "KEY `w_id` (`w_id`)"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1";
 
-		String workflowConstraintsQuery = "ALTER TABLE `" + workflow_table
+		String workflowConstraintsQuery = "ALTER TABLE `"
+				+ workflow_table
 				+ "` "
-				
-				  + " ADD CONSTRAINT `" + workflow_table +
-				  "_ibfk_1` FOREIGN KEY (`stage_lead_id`) REFERENCES " +
-				  "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
+
+				+ " ADD CONSTRAINT `"
+				+ workflow_table
+				+ "_ibfk_1` FOREIGN KEY (`stage_lead_id`) REFERENCES "
+				+ "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
 				+ " ADD CONSTRAINT `" + workflow_table
 				+ "_ibfk_2` FOREIGN KEY (`w_id`) REFERENCES `workflow_master`"
 				+ " (`w_id`) ON DELETE CASCADE ON UPDATE CASCADE";
@@ -69,7 +71,7 @@ public class WorkflowDBService {
 		String stageCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ stage_table + "`(`stage_id` int(5) NOT NULL,"
 				+ "`user_id` int(5) NOT NULL,"
-				/*+ "`status` set('A','I') COLLATE utf8_bin NOT NULL,"*/
+				/* + "`status` set('A','I') COLLATE utf8_bin NOT NULL," */
 				+ "PRIMARY KEY (`user_id`,`stage_id`),"
 				+ "KEY `stage_id` (`stage_id`,`user_id`)"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
@@ -102,21 +104,61 @@ public class WorkflowDBService {
 				+ "_ibfk_1` FOREIGN KEY (`current_stage_id`) REFERENCES `"
 				+ workflow_table
 				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
-		
-		String leaderCreateTableQuery= "CREATE TABLE IF NOT EXISTS `" +
-				lead_bucket +
-				"` (  `user_id` int(5) NOT NULL, " +
-				" `item_id` int(5) NOT NULL,  " +
-				"`stage_id` int(5) NOT NULL, " +
-				" `assigned_on` date NOT NULL,  " +
-				"`delivery_date` date NOT NULL, " +
-				" `status` enum('I','C','P') " +
-				"COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial',  " +
-				"PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  " +
-				"KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
-		
-		
 
+		String leaderCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
+				+ lead_bucket
+				+ "` (  `user_id` int(5) NOT NULL, "
+				+ " `item_id` int(5) NOT NULL,  "
+				+ "`stage_id` int(5) NOT NULL, "
+				+ " `assigned_on` date NOT NULL,  "
+				+ "`delivery_date` date NOT NULL, "
+				+ " `status` enum('I','C','P','A') "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
+				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  "
+				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
+
+		String leaderConstraintsQuery = "ALTER TABLE `"
+				+ lead_bucket
+				+ "`  ADD CONSTRAINT `"
+				+ lead_bucket
+				+ "_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES "
+				+ "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,  "
+				+ "ADD CONSTRAINT `" + lead_bucket
+				+ "_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES " + "`"
+				+ item_table
+				+ "` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
+				+ " ADD CONSTRAINT `" + lead_bucket
+				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES " + "`"
+				+ workflow_table
+				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+/*
+		String generalCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
+				+ general_bucket
+				+ "` (  `user_id` int(5) NOT NULL, "
+				+ " `item_id` int(5) NOT NULL,  "
+				+ "`stage_id` int(5) NOT NULL, "
+				+ " `assigned_on` date NOT NULL,  "
+				+ "`delivery_date` date NOT NULL, "
+				+ " `status` enum('I','C','P','A') "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
+				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  "
+				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
+
+		String generalConstraintsQuery = "ALTER TABLE `"
+				+ lead_bucket
+				+ "`  ADD CONSTRAINT `"
+				+ general_bucket
+				+ "_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES "
+				+ "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,  "
+				+ "ADD CONSTRAINT `" + general_bucket
+				+ "_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES " + "`"
+				+ item_table
+				+ "` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
+				+ " ADD CONSTRAINT `" + general_bucket
+				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES " + "`"
+				+ workflow_table
+				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+*/
 		try {
 			if (DDLQueryInDB(workflowCreateTableQuery) == 1
 					&& DDLQueryInDB(workflowConstraintsQuery) == 1) {
@@ -127,10 +169,18 @@ public class WorkflowDBService {
 					if (DDLQueryInDB(itemCreateTableQuery) == 1
 							&& DDLQueryInDB(itemConstraintsQuery) == 1) {
 						System.out.println("item created");
-						return 1;
+						if (DDLQueryInDB(leaderCreateTableQuery) == 1
+								&& DDLQueryInDB(leaderConstraintsQuery) == 1) {
+							System.out.println("leader bucket created");/*
+							if (DDLQueryInDB(generalCreateTableQuery) == 1
+									&& DDLQueryInDB(generalConstraintsQuery) == 1) {
+								System.out.println("general bucket created");*/
+								return 1;
+							}
+						}
 					}
 				}
-			}
+			//}
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
