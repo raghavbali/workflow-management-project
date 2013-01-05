@@ -12,7 +12,7 @@ body{
 	z-index: 1;
 }
 
-#loginjsp_menu {
+#menu {
 	position: absolute;
 	top:25%;left:0px;width:100%;
 	border-bottom: thin solid black;
@@ -22,21 +22,21 @@ body{
 	height:5%;	
 }
 
-#loginjsp_menu ul li{
+#menu ul li{
 	float:left;
 	list-style: none;
 	width:150px;
 }
 
-#loginjsp_menu ul li a{
+#menu ul li a{
 	text-decoration: none;
 }
 
-#loginjsp_menu ul li a:hover{
+#menu ul li a:hover{
 	color:red;
 }
 
-#loginjsp_box{
+#box{
 	position: absolute;
 	border:1px solid black;
 	top:5%; left:5%;
@@ -50,9 +50,23 @@ body{
 	top:40%;left:20%;width: 350px;height:320px;
 }
 
-#loginjsp_heading{
+#heading{
 	position: absolute;
 	top:5%;left:15%;
 	font-size: 60px;
-	
+	/*border:thin  gray;*/
+	position: absolute;
+	top:0px;left:0px;width:100%;height:25%;
+	text-align: center;
+	line-height: 200%;
+	border-bottom: thin solid black;
+}
+#buttons_menu{
+	position:absolute;
+	top:40%;left:3%;border:thin solid black;
+	width:20%; height:40%;	
+}
+
+#buttons_menu ul{
+	list-style-type:  none;
 }
