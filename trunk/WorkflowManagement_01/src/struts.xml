@@ -115,7 +115,11 @@
 		</action>
 		
 		<action name="assign_users" class="action.EditorStageAssign">
-		<result name="assign_stage_continue">stage_assign.jsp</result>
+			<result name="assign_stage_continue">stage_assign.jsp</result>
+		</action>
+		<action name="final_assign_users" class="action.EditorStageAssign"
+				method="assignUsers">
+			<result name="assign_stage_continue">stage_assign.jsp</result>
 		</action>
 		
         <!-- Action for Item handling -->
