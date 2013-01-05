@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Create Workflow</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div><br><br><br><br><br><br><br><br>
+	<div id="admin_console">
 	<h2>Admin Console</h2>
 	<s:actionerror />
 	<s:form action="create_wf.action" method="post">
@@ -24,5 +30,7 @@
 		<s:submit name="button" value="Back"
 				action="backToAdminConsole" align="left" />
 	</s:form>
+	</div>
+	</div>
 </body>
 </html>
