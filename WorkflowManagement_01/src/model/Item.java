@@ -198,6 +198,26 @@ public class Item {
 		}
 		return result;
 	}
+	
+	public String itemName(int itemID,String tableName,String whereClause){
+		ResultSet result = null;
+		DBobjects dbObject=null;
+		String itemName=null;
+		String selectQuery = "SELECT `item_name` FROM "+tableName;
+
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
+			result=dbObject.getResult();
+			while (result.next()) {
+				itemName=result.getString("item_name");
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return itemName;		
+	}
 
 
 	public int getItemID() {
