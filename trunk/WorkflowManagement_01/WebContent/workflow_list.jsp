@@ -40,7 +40,6 @@ function submitForm(workflowID){
 			</tr>
 			<s:iterator value="objListWfMaster">
 				<tr>
-				<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 					<td><s:property value="workflowID" />
 					 </td>
 					<td><s:property value="workflowName" />
@@ -57,6 +56,8 @@ function submitForm(workflowID){
 				</tr>
 			</s:iterator>
 			</table>
+			<s:submit name="button" value="Back"
+				action="backToAdminConsole" align="left" />
 			</s:form>
 </body>
 </html>

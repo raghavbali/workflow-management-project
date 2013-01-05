@@ -21,6 +21,8 @@
 			value="%{workflowDomain}" />
 		<s:submit name="wf_create" method="execute" value="Save"
 			align="center" />
+		<s:submit name="button" value="Back"
+				action="backToAdminConsole" align="left" />
 	</s:form>
 </body>
 </html>

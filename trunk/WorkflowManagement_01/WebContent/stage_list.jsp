@@ -51,7 +51,7 @@
 			</s:iterator>
 			</table>
 			<s:submit name="button" value="Add Stage" align="left" method="addStage"/>
-			<s:submit name="button"  value="Done"
+			<s:submit name="button"  value="Back"
 			action="doneStage" align="center" />
 			</s:form>
 </body>

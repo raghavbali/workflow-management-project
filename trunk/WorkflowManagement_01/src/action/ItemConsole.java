@@ -1,7 +1,12 @@
 package action;
 
-import model.Item;
+import java.util.List;
+import java.util.Map;
 
+import model.Item;
+import model.WorkflowDetails;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemConsole extends ActionSupport{
@@ -14,12 +19,15 @@ public class ItemConsole extends ActionSupport{
 	private String filePath;
 	private String tableName;
 	private int workflowID;
+	private Map<String, Object> session;
+	private List<Item> itemList;
 	
 	
 	public String addToWorkflow(){
 		Item insertItem=new Item(this.getItemID(), this.getItemName(), this.getItemDescription(), 1/*initial stage is selected inside the insert method*/, this.getRemarks(), this.getFilePath());
 		if(Item.insertInDB(insertItem, this.getWorkflowID())==1){
 			addActionMessage(getText("Item created Successfully."));
+			loadList();
 			return "addSuccess";
 		}
 		else{
@@ -30,14 +38,29 @@ public class ItemConsole extends ActionSupport{
 	
 	public String editToWorkflow(){
 		Item updatedItem=new Item(this.getItemID(), this.getItemName(), this.getItemDescription(), this.getCurrentStageID(), this.getRemarks(), this.getFilePath());
-		if(updatedItem.update(this.getWorkflowID())==1){
+		
+		session = ActionContext.getContext().getSession();
+		
+		if(updatedItem.update("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/)==1){
 			addActionMessage(getText("Item updated Successfully."));
+			loadList();
 			return "editSuccess";
 		}
 		else{
 			addActionError(getText("Could not update Item. Try Again"));
 			return "editIError";
 		}
+	}
+	
+	public String backToWorkflow(){
+		loadList();
+		return "back";
+	}
+	
+	public void loadList(){
+		session = ActionContext.getContext().getSession();
+		this.setItemList(Item.find("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/,""));
+		//return "editItems";
 	}
 	
 	public int getItemID() {
@@ -89,6 +112,14 @@ public class ItemConsole extends ActionSupport{
 
 	public void setWorkflowID(int workflowID) {
 		this.workflowID = workflowID;
+	}
+
+	public List<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
 	}
 	
 

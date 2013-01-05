@@ -42,6 +42,10 @@ public class AdminConsole extends ActionSupport{
 		return "logout";
 	}
 	
+	public String backTo(){
+		return "back";
+	}
+	
 	
 	public String createWf(){
 		return "createWf";

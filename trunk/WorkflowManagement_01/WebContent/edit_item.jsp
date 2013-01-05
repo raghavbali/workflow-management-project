@@ -29,7 +29,9 @@
 				size="50" />
 		</s:iterator>
 		<s:submit name="button" value="Save" action="editToWorkflowItemConsole"
-			align="left" id="editToWorkflowItemConsole" />
+			align="left" id="button" />
+		<s:submit name="button" value="Back" action="backToWorkflowItemConsole"
+			align="left" id="button" />
 	</s:form>
 </body>
 </html>

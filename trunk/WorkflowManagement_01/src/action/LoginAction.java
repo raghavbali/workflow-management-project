@@ -65,7 +65,8 @@ public class LoginAction extends ActionSupport {
 		else
 			return "error";
 	}
-
+	
+	
 	public String getUsername() {
 		return username;
 	}

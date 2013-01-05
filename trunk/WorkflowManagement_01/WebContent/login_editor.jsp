@@ -5,13 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+
+<script language="JavaScript">
+	var x = window.history.length;
+	if (window.history[x] != window.location) {
+		window.history.forward();
+	}
+</script>
 <title>Welcome Editor</title>
 </head>
 <body>
-	<h2>successful login!</h2>
 	<s:actionmessage/>
 	<s:actionerror/>
+	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
+	<a href="logoutAdminConsole.action">Logout</a>
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
 			align="left" />
@@ -24,5 +36,10 @@
 		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
 			align="left" />
 	</s:form>
+	</s:if>
+	<s:else>
+    	Trespassers will be shot. Survivors will be shot again!!!
+    	<a href="login.jsp">Login</a>
+	</s:else>
 </body>
 </html>

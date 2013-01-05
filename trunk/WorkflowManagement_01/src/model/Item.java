@@ -96,7 +96,8 @@ public class Item {
 	}
 	
 	
-	public int update(int w_id) {
+	public int update(String tableName) {
+		/*
 		String tableName="item";
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
@@ -117,7 +118,7 @@ public class Item {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		String updateSQL = "UPDATE "+tableName+" SET item_name='"
 				+ this.getItemName() + "' , item_description='"
 				+ this.getItemDescription() + "' ,current_stage_id="
@@ -159,8 +160,8 @@ public class Item {
 		System.out.println("values="+w_id+"-"+tableSuffix);
 		tableName=tableName+tableSuffix;
 		
-		selectQueryTable = "SELECT min(stage_id) FROM workflow"+tableSuffix;
-		whereClauseTable = "where w_id = "+w_id;
+		selectQueryTable = "SELECT stage_id FROM workflow"+tableSuffix;
+		whereClauseTable = "where w_id = "+w_id+" HAVING MIN(stage_seqno)";
 		
 		
 		try {

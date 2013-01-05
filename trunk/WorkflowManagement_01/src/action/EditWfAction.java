@@ -2,9 +2,11 @@ package action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.WorkflowMaster;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class EditWfAction extends ActionSupport {
@@ -16,15 +18,17 @@ public class EditWfAction extends ActionSupport {
 	private String freeze;
 	private List<String> domainList;
 	private List<String> freezeList;
-	
-	public EditWfAction(){
-		domainList=new ArrayList<String>();
+	private ArrayList<WorkflowMaster> objListWfMaster;
+	private Map<String, Object> session;
+
+	public EditWfAction() {
+		domainList = new ArrayList<String>();
 		domainList.add("IT_Project");
 		domainList.add("Manufacturing");
 		domainList.add("Delivery");
 		domainList.add("E_Gov");
-		
-		freezeList=new ArrayList<String>();
+
+		freezeList = new ArrayList<String>();
 		freezeList.add("Y");
 		freezeList.add("N");
 	}
@@ -39,19 +43,46 @@ public class EditWfAction extends ActionSupport {
 		this.setFreeze(masterUpdate.getFreeze());
 		return "displayform";
 	}
+	
+	public String back(){
+		return loadList();
+	}
 
 	public String saveChanges() {
 		WorkflowMaster masterUpdate = new WorkflowMaster(
 				this.getWorkflowName(), this.getWorkflowDescription(),
-				this.getWorkflowDomain(),this.getFreeze());
-		
+				this.getWorkflowDomain(), this.getFreeze());
+
 		masterUpdate.setWorkflowID(this.getWorkflowID());
-		
+
 		if (masterUpdate.update() != 0) {
 			addActionMessage(getText("Workflow Updated Successfully"));
-			return "success";
+			return loadList();
 		} else {
 			addActionError(getText("Could not update workflow. Contact System Admin"));
+			return loadList();
+		}
+	}
+
+	public String loadList() {
+		String whereClause = null;
+
+		session = ActionContext.getContext().getSession();
+		if (session.get("tableSuffix").toString()
+				.equalsIgnoreCase("_00000000000000")){
+			this.objListWfMaster = WorkflowMaster.find(" WHERE w.w_id<>1");
+		}
+		else {
+			whereClause = ",login_credentials l WHERE w.w_id=l.w_id and l.user_id="
+					+ Integer.parseInt(session.get("userID").toString());
+			this.objListWfMaster = WorkflowMaster.find(whereClause);
+		}
+		if (this.objListWfMaster != null){
+			addActionMessage(getText("Workflow list generated."));
+			return "success";
+		}
+		else{
+			addActionError(getText("No workflows Available."));
 			return "error";
 		}
 	}
@@ -110,6 +141,14 @@ public class EditWfAction extends ActionSupport {
 
 	public void setFreeze(String freeze) {
 		this.freeze = freeze;
+	}
+
+	public ArrayList<WorkflowMaster> getObjListWfMaster() {
+		return objListWfMaster;
+	}
+
+	public void setObjListWfMaster(ArrayList<WorkflowMaster> objListWfMaster) {
+		this.objListWfMaster = objListWfMaster;
 	}
 
 }

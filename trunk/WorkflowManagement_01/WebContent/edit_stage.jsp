@@ -25,7 +25,7 @@
 			 size="5" />
 		<s:submit name="button" value="Update Stage"
 			action="updateNowStage" align="center" />
-		<s:submit name="button"  value="Done"
+		<s:submit name="button"  value="Back"
 			action="doneStage" align="center" />
 			</s:iterator>
 	</s:form>

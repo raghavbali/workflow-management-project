@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import utility.DBService;
 
+import model.Bucket;
 import model.Item;
 import model.User;
 import model.WorkflowDetails;
@@ -38,15 +39,38 @@ public class EditorConsole extends ActionSupport {
 		return "createItem";
 	}
 	
+	public String pushItem(){
+		session = ActionContext.getContext().getSession();
+		String pushResult=null;
+		Bucket leaderBucket=new Bucket();
+		
+		leaderBucket.setItemID(this.getItemID());
+		pushResult=leaderBucket.push(String.valueOf(session.get("tableSuffix")).toString(), Integer.parseInt((session.get("workflowID")).toString()));
+		
+		if(pushResult.equalsIgnoreCase("presentAlready")){
+			addActionError(getText("Hey, its already there.\nPeople are working on it"));
+		}
+		else if(pushResult.equalsIgnoreCase("success")){
+			addActionMessage(getText("Item pushed successfully"));
+		}
+		else{
+			addActionError(getText("Could not push item. Something went wrong"));
+		}
+		
+		return editItems();
+	}
+	
 	public String editItem(){
 		session = ActionContext.getContext().getSession();
 		this.setItemList(Item.find("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/,"where item_id="+this.getItemID()));
+		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
 		return "editItem";
 	}
 	
 	public String editItems(){
 		session = ActionContext.getContext().getSession();
 		this.setItemList(Item.find("item"+String.valueOf(session.get("tableSuffix")).toString()/*this.getWorkflowID()*/,""));
+		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
 		return "editItems";
 	}
 	

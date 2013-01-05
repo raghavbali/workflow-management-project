@@ -28,6 +28,7 @@
 			name="freeze"
 			value="%{freeze}" />
 		<s:submit name="button" value="Save Changes" align="center" method="saveChanges"/>
+		<s:submit name="button" value="Back" method="back" align="left" />
 	</s:form>
 </body>
 </html>
