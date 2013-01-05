@@ -1,47 +1,59 @@
 package action;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 import model.StageDetails;
 import model.UserDetails;
-import model.UserRole;
 import model.WorkflowDetails;
 
-public class EditorStageAssign {
+public class EditorStageAssign extends ActionSupport {
 	private int stageID, workflowID;
 	private ArrayList<UserDetails> usrlist = new ArrayList<UserDetails>();
 	private List<WorkflowDetails> stageList;
 	private List<String> checkboxes = null;
-	
+	private String pageName;
+		
 	public String execute(){
 		this.setStageList(WorkflowDetails.find(this.getWorkflowID(), ""));
 		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author', 'publisher')");
+		checkboxes = StageDetails.find(stageID, workflowID, "");
+//		System.out.println(checkboxes.get(0));
 //		System.out.println(usrlist.get(0).getUser_role().getUser_id());
+		pageName = "assignUsers";
 		return "assign_stage_continue";
 	}
 	
 	public String assignUsers(){
-		int iSize;
+		int iSize, res=0;
 		this.setStageList(WorkflowDetails.find(this.getWorkflowID(), ""));
 		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author', 'publisher')");
 //		usrlist = UserRole.find("WHERE w_id='" + workflowID + "' AND role IN ('author', 'publisher')");
-		if(checkboxes == null)
+		if(checkboxes == null){
 			iSize = 0;
+			res = StageDetails.assign(workflowID, stageID, "", 0);
+		}
 		else
 			iSize = checkboxes.size();
 		System.out.println(iSize);
         for (int i = 0; i < iSize; i++) {
             System.out.println("checked item #" + i + " -> " + checkboxes.get(i));
-            StageDetails.insert(workflowID, stageID, checkboxes.get(i));
+            res = StageDetails.assign(workflowID, stageID, checkboxes.get(i), i);
+            if(res == 0)
+            	break;
          }
+        if(res == 0)
+        	addActionError(getText("Some error, please re-chech the field values."));
+        else
+        	addActionMessage(getText("Assignment successful"));
         
         this.setCheckboxes(this.getCheckboxes());
+        pageName = "assignUsers";
 		return "assign_stage_continue";
 	}
-
+	
 	public int getStageID() {
 		return stageID;
 	}
@@ -80,6 +92,14 @@ public class EditorStageAssign {
 
 	public void setUsrlist(ArrayList<UserDetails> usrlist) {
 		this.usrlist = usrlist;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
 	}
 
 }

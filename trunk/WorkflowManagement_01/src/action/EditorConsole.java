@@ -31,6 +31,7 @@ public class EditorConsole extends ActionSupport {
 	
 	public String assignStage(){
 		this.setStageList(WorkflowDetails.find(this.getWorkflowID(), ""));
+		pageName = "showStage";
 		return "assignStage";
 	}
 	

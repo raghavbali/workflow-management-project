@@ -11,6 +11,8 @@
 <h3> Available stages: </h3>
 <s:actionerror />
 <s:hidden name="workflowID" value="%{workflowID}"/>
+<s:hidden name="pageName" value="%{pageName}"/>
+<s:set name="pageName" value="%{pageName}"/>
 <table>
 	<tr>
 	    <th><h3>Stage_ID</h3></th>
@@ -34,16 +36,17 @@
 	</tr>
 	</s:iterator>
 </table>
+<s:if test="%{#pageName=='assignUsers'}">
 <h2>Assign Stage ${stageID}: </h2>
 	<s:form action="final_assign_users.action" method="post">
 		<s:hidden name="stageID" value="%{stageID}" />
-		<s:hidden name="workflowID" value="%{workflowID}" />
+		<s:hidden name="workflowID" value="%{workflowID}" />		
 	<table>
 	<s:iterator value = "usrlist">
 	<tr>
-	<td><s:checkbox name="checkboxes" label="Name: %{getUser().getFname()} --> p_id: %{getUser().getP_id()}; user_id: %{getUser_role().getUser_id()}" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id()}" /></td>
+	<td><s:checkbox name="checkboxes" label="Name: %{getUser().getFname()} --> p_id: %{getUser().getP_id()}; user_id: %{getUser_role().getUser_id()}" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
 	</tr>
-	</s:iterator>
+		</s:iterator>
 	<tr>
 		<s:actionerror />
 		<s:actionmessage/>
@@ -54,5 +57,6 @@
 	</table>
 
 	</s:form>
+</s:if>
 </body>
 </html>
