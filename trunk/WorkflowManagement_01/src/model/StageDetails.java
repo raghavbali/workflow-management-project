@@ -22,7 +22,7 @@ public class StageDetails {
 		this.userID = userID;
 	}
 	
-	public static ArrayList<String> find(int stageID, int w_id, String whereClause) {
+	public static ArrayList<String> find(int stageID, int w_id, String role, String whereClause) {
 		ResultSet result = null;
 		ArrayList<String> stageDetails = new ArrayList<String>();
 		String tableName="stage";
@@ -46,7 +46,7 @@ public class StageDetails {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String selectQuery = "SELECT `user_id` FROM "+tableName+ " WHERE stage_id = '" + stageID + "'";
+		String selectQuery = "SELECT `user_id` FROM "+tableName+ " WHERE stage_id = '" + stageID + "' AND user_id IN (select user_id from login_credentials where role = '" + role + "')";
 
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
@@ -84,7 +84,7 @@ public class StageDetails {
 		this.userID = userID;
 	}
 
-	public static int assign(int workflowID, int stageID, String user_id, int delete_flag) {
+	public static int assign(int workflowID, int stageID, String user_id, String role, int delete_flag) {
 		
 		int result = 0;
 		Connection conn=null;
@@ -116,7 +116,7 @@ public class StageDetails {
 
 			try {
 				conn= new MySqlConnection().getConnection();
-				pst=conn.prepareStatement("DELETE FROM " + tableName + " WHERE stage_id = '" + stageID + "'");
+				pst=conn.prepareStatement("DELETE FROM " + tableName + " WHERE stage_id = '" + stageID + "' AND user_id IN (select user_id from login_credentials where role = '" + role + "')");
 				
 				result = pst.executeUpdate();
 				conn.close();
@@ -143,7 +143,5 @@ public class StageDetails {
 		}
 		return result;
 	}
-	
-	
 
 }
