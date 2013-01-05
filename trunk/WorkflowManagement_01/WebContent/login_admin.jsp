@@ -62,7 +62,21 @@
 	</s:else>
 	</ul>
 	 </div>
-	</div>
-	
+	 <div style="position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
+	 <h2 style="text-align: center;"><u>About Menu</u></h2><br>
+	 <ul>
+	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Edit Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Add User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Edit User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Manual Override : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 </ul>	 
+	 </div>
+	</div>	
 </body>
 </html>
