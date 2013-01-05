@@ -131,7 +131,7 @@ public class WorkflowDBService {
 				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES " + "`"
 				+ workflow_table
 				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
-/*
+
 		String generalCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ general_bucket
 				+ "` (  `user_id` int(5) NOT NULL, "
@@ -141,7 +141,8 @@ public class WorkflowDBService {
 				+ "`delivery_date` date NOT NULL, "
 				+ " `status` enum('I','C','P','A') "
 				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
-				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  "
+				+"`stage_lead_id` int(5) NOT NULL, "
+				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`) "
 				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
 		String generalConstraintsQuery = "ALTER TABLE `"
@@ -157,8 +158,13 @@ public class WorkflowDBService {
 				+ " ADD CONSTRAINT `" + general_bucket
 				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES " + "`"
 				+ workflow_table
-				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE";
-*/
+				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE," +
+				" ADD CONSTRAINT `" +
+				general_bucket +
+				"_ibfk_4` FOREIGN KEY (`stage_lead_id`) REFERENCES `" +
+				workflow_table +
+				"` (`stage_lead_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+
 		try {
 			if (DDLQueryInDB(workflowCreateTableQuery) == 1
 					&& DDLQueryInDB(workflowConstraintsQuery) == 1) {
@@ -171,16 +177,16 @@ public class WorkflowDBService {
 						System.out.println("item created");
 						if (DDLQueryInDB(leaderCreateTableQuery) == 1
 								&& DDLQueryInDB(leaderConstraintsQuery) == 1) {
-							System.out.println("leader bucket created");/*
+							System.out.println("leader bucket created");
 							if (DDLQueryInDB(generalCreateTableQuery) == 1
 									&& DDLQueryInDB(generalConstraintsQuery) == 1) {
-								System.out.println("general bucket created");*/
+								System.out.println("general bucket created");
 								return 1;
 							}
 						}
 					}
 				}
-			//}
+			}
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
