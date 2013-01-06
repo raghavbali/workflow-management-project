@@ -117,8 +117,12 @@
 		<action name="assign_users" class="action.EditorStageAssign">
 			<result name="assign_stage_continue">stage_assign.jsp</result>
 		</action>
-		<action name="final_assign_users" class="action.EditorStageAssign"
-				method="assignUsers">
+		<action name="final_assign_authors" class="action.EditorStageAssign"
+				method="assignAuthors">
+			<result name="assign_stage_continue">stage_assign.jsp</result>
+		</action>
+		<action name="final_assign_publishers" class="action.EditorStageAssign"
+				method="assignPublishers">
 			<result name="assign_stage_continue">stage_assign.jsp</result>
 		</action>
 		
