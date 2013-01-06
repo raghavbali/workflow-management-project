@@ -81,7 +81,7 @@ public class AdminConsole extends ActionSupport{
 	
 	public String editUser(){
 		pageName = "AdminConsole";
-		usrlist = DBService.getUserList();
+		usrlist = DBService.getUserList("");
 		if(usrlist != null){
 			addActionMessage(getText("Userlist generated."));
 //			return "assignrole_continue";

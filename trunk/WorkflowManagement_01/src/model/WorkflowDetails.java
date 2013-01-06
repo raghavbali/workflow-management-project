@@ -13,6 +13,7 @@ public class WorkflowDetails {
 	private String stageDescription;
 	private int stageSLA;
 	private int stageSequenceNo;
+	private int stageLeadID;
 	private int wfId;
 	private String tableName;
 	
@@ -55,8 +56,9 @@ public class WorkflowDetails {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String selectQuery = "SELECT `stage_id`, `stage_name`, `stage_description`, `stage_sla`, `stage_seqno`, `w_id` FROM "+tableName;
-
+//		String selectQuery = "SELECT `stage_id`, `stage_name`, `stage_description`, `stage_sla`, `stage_seqno`, `w_id` FROM "+tableName;
+		String selectQuery = "SELECT `stage_id`, `stage_name`, `stage_description`, `stage_sla`, `stage_seqno`, `stage_lead_id`, `w_id` FROM "+tableName;
+		
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
 			result=dbObject.getResult();
@@ -67,6 +69,7 @@ public class WorkflowDetails {
 				newWorkFlowDetails.setStageDescription(result.getString("stage_description"));
 				newWorkFlowDetails.setStageSLA(result.getInt("stage_sla"));
 				newWorkFlowDetails.setStageSequenceNo(result.getInt("stage_seqno"));
+				newWorkFlowDetails.setStageLeadID(result.getInt("stage_lead_id"));
 				newWorkFlowDetails.setWfId(result.getInt("w_id"));
 				newWorkFlowDetails.setTableName(tableName);
 				objWfDetails.add(newWorkFlowDetails);
@@ -92,6 +95,31 @@ public class WorkflowDetails {
 		return DBService.DDLQueryInDB(updateSQL);
 	}
 	
+	public static void updateLead(int w_id, int lead_id, int stage_id){
+		String tableName="workflow";
+		ResultSet resultTableName = null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		DBobjects dbObject;
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				tableName = tableName+resultTableName.getString(1);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String updateQuery = "UPDATE " + tableName + " SET stage_lead_id = '" + lead_id + "' WHERE stage_id = '" + stage_id + "'" ;
+		DBService.DDLQueryInDB(updateQuery);
+	}
 	
 	public int getStageID() {
 		return stageID;
@@ -137,6 +165,14 @@ public class WorkflowDetails {
 
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
+	}
+
+	public int getStageLeadID() {
+		return stageLeadID;
+	}
+
+	public void setStageLeadID(int stageLeadID) {
+		this.stageLeadID = stageLeadID;
 	}
 	
 }

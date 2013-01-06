@@ -172,7 +172,7 @@ public class DBService {
 		return user_id;
 	}
 	
-	public static ArrayList<User> getUserList(){
+	public static ArrayList<User> getUserList(String whereClause){
 		Connection conn = null;
 		PreparedStatement query = null;
 		ResultSet result = null;
@@ -181,7 +181,7 @@ public class DBService {
 		User usr;
 		try{
 			conn = new MySqlConnection().getConnection();
-			query = conn.prepareStatement("SELECT * FROM `personal_information`");
+			query = conn.prepareStatement("SELECT * FROM `personal_information`" + whereClause);
 			result = query.executeQuery();
 			while(result.next()){
 				usr = new User();

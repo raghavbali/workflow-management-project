@@ -77,7 +77,7 @@ public class EditorConsole extends ActionSupport {
 	
 	public String assignRole(){
 		pageName = "EditorConsole";
-		usrlist = DBService.getUserList();
+		usrlist = DBService.getUserList(" WHERE p_id IN(SELECT p_id FROM login_credentials WHERE role IN('author', 'publisher'))");
 		if(usrlist != null){
 			addActionMessage(getText("Userlist generated."));
 		}
