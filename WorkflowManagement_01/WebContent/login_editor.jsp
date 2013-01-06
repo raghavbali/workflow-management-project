@@ -17,29 +17,48 @@
 	}
 </script>
 <title>Welcome Editor</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<div id="menu">
+	<ul>	
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About US</a></li>
+		<li><a href="logoutAdminConsole.action">Logout</a></li>
+	</ul>
+</div>
+	
 	<s:actionmessage/>
 	<s:actionerror/>
+	<div id="buttons_menu">
+	<ul>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
-	<a href="logoutAdminConsole.action">Logout</a>
+	
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
 			align="left" />
-		<s:submit name="button" value="Create Item" action="createItemEditorConsole"
-			align="left" />
-		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
-			align="left" />
-		<s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
-			align="left" />
-		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
-			align="left" />
+	<li>	<s:submit name="button" value="Create Item" action="createItemEditorConsole"
+			align="left" /></li>
+		<li><s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
+			align="left" /></li>
+		<li><s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
+			align="left" /></li>
+		<li><s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
+			align="left" /></li>
+			
 	</s:form>
 	</s:if>
 	<s:else>
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
+	</ul>
+	</div>
+	</div>
 </body>
 </html>

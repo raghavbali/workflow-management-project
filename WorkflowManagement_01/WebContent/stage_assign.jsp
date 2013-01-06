@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Assign users to stage</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="assign_role">
 <h3> Available stages: </h3>
 <s:actionerror />
 <s:hidden name="workflowID" value="%{workflowID}"/>
@@ -72,5 +78,7 @@
 	</s:form>
 	
 </s:if>
+</div>
+</div>
 </body>
 </html>
