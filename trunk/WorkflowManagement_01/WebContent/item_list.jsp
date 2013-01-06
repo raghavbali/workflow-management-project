@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Select Item</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="item_list">
 	<h2>Item Details</h2>
 	<s:actionerror />
 	<s:actionmessage />
@@ -59,5 +65,7 @@
 			<s:submit name="button" value="Back"
 			action="doneEditorConsole" align="left" />
 			</s:form>
+			</div>
+			</div>
 </body>
 </html>

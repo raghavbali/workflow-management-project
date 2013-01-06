@@ -18,18 +18,30 @@
 	}
 </script>
 <title>Welcome author</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="menu">
+	<ul>	
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About US</a></li>
+		<li><a href="logoutAdminConsole.action">Logout</a></li>
+	</ul>
 	<s:actionmessage/>
 	<s:actionerror/>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
-	<a href="logoutAdminConsole.action">Logout</a>
 	</s:form>
 	</s:if>
 	<s:else>
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
+	</div>
+	</div>
 </body>
 </html>

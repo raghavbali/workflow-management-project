@@ -11,7 +11,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
-
+<link rel="stylesheet" type="text/css" href="style.css">
 <script language="JavaScript">
 	var x = window.history.length;
 	if (window.history[x] != window.location) {
@@ -21,11 +21,22 @@
 <title>Welcome publisher</title>
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="menu">
+	<ul>	
+		<li><a href="#">Home</a></li>
+		<li><a href="#">About US</a></li>
+		<li><a href="logoutAdminConsole.action">Logout</a></li>
+	</ul>
+	</div>
+	<div id="login_publisher">
 <s:actionmessage/>
 	<s:actionerror/>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
-	<a href="logoutAdminConsole.action">Logout</a>
 	<table border="1">
 			<tr>
 				<th><h3>Sno </h3>
@@ -87,5 +98,7 @@
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
+	</div>
+	</div>
 </body>
 </html>

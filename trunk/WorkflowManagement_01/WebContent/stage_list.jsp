@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Select Stage</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="stage_list">
 	<h2>Stage Details</h2>
 	<s:actionerror />
 	<s:actionmessage />
@@ -54,5 +60,7 @@
 			<s:submit name="button"  value="Back"
 			action="doneStage" align="center" />
 			</s:form>
+			</div>
+			</div>
 </body>
 </html>

@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Workflow Details</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+	<div id="heading">
+	WORKFLOW MANAGEMENT
+	</div>
+	<div id="add_stage">
 	<h2>Add Details</h2>
 	<s:actionerror />
 	<s:actionmessage/>
@@ -26,5 +32,7 @@
 		<s:submit name="button"  value="Done"
 			action="addLaterStage" align="center" />
 	</s:form>
+	</div>
+	</div>
 </body>
 </html>
