@@ -142,21 +142,21 @@ public class WorkflowDBService {
 				+ " `status` enum('I','C','P','A') "
 				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
 				+"`stage_lead_id` int(5) NOT NULL, "
-				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`) "
+				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`), "
 				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
 		String generalConstraintsQuery = "ALTER TABLE `"
-				+ lead_bucket
+				+ general_bucket
 				+ "`  ADD CONSTRAINT `"
 				+ general_bucket
 				+ "_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES "
 				+ "`login_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,  "
 				+ "ADD CONSTRAINT `" + general_bucket
-				+ "_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES " + "`"
+				+ "_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `"
 				+ item_table
 				+ "` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE, "
 				+ " ADD CONSTRAINT `" + general_bucket
-				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES " + "`"
+				+ "_ibfk_3` FOREIGN KEY (`stage_id`) REFERENCES `"
 				+ workflow_table
 				+ "` (`stage_id`) ON DELETE CASCADE ON UPDATE CASCADE," +
 				" ADD CONSTRAINT `" +
