@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin page - Edit User Basic</title>
 <SCRIPT Language="JavaScript">
@@ -16,8 +17,14 @@ function showAndClearField(frm){
 }
 //-->
 </SCRIPT>
+
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<div id="edit_user_basic">
 <h2>Edit User Basic</h2>
 	<s:form action="update_user_basic.action" method="post">
 		<s:hidden name="p_id"/>
@@ -40,5 +47,7 @@ function showAndClearField(frm){
 		<s:actionerror />
 		<s:actionmessage/>
 	</s:form>
+	</div>
+	</div>
 </body>
 </html>

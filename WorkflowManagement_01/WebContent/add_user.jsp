@@ -16,11 +16,15 @@ function showAndClearField(frm){
 }
 //-->
 </SCRIPT>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h2>Add User</h2>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<h2 style="text-align: center;"><br><br><br><br><br>Add User</h2>
 	<s:form action="add_user.action" method="post">
-
 		<s:select label="Select prefix" headerKey="-1"
 			headerValue="Select prefix"
 			list="prefixList"
@@ -41,5 +45,6 @@ function showAndClearField(frm){
 		<s:actionerror />
 		<s:actionmessage/>
 	</s:form>
+	</div>
 </body>
 </html>

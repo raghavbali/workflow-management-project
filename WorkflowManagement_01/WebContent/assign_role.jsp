@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Assign Role</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<div id="assign_role">
 <h2>Assign Role</h2>
 <s:hidden name="pageName" value="%{pageName}"/>
 <s:hidden name="workflowID" />
@@ -40,5 +46,7 @@
 	</td>		-->
 	</tr>
 	</table>
+	</div>
+	</div>
 </body>
 </html>

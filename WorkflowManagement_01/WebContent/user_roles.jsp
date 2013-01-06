@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User Roles</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<div id="user_roles">
 <h3> User details for User with p_id = ${p_id} </h3>
 <s:actionerror />
 <s:hidden name="pageName" value="%{pageName}"/>
@@ -64,5 +70,7 @@
 		<s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" />
 
 	</s:form>
+	</div>
+	</div>
 </body>
 </html>
