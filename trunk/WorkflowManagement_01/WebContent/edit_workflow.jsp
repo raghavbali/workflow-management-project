@@ -6,8 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Select Workflow</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">jhjkkhhh
+	WORKFLOW MANAGEMENT
+</div>	
 	<h2>Edit Workflow</h2>
 	<s:actionerror />
 	<s:actionmessage />
@@ -26,9 +31,10 @@
 			headerValue="Select a value"
 			list="freezeList"
 			name="freeze"
-			value="%{freeze}" />
+			value="%{freeze}" />hjhhkjhk
 		<s:submit name="button" value="Save Changes" align="center" method="saveChanges"/>
 		<s:submit name="button" value="Back" method="back" align="left" />
 	</s:form>
+	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Edit User Advanced</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 <SCRIPT Language="JavaScript">
 <!--//
 function showAndClearField(frm){
@@ -16,8 +17,14 @@ function showAndClearField(frm){
 }
 //-->
 </SCRIPT>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="box">
+<div id="heading">
+	WORKFLOW MANAGEMENT
+</div>
+<div id="edit_user_adv">
 <h2>Edit User Advanced</h2>
 	<s:form action="update_user_adv.action" method="post">
 		<s:hidden name="user_id"/>
@@ -43,5 +50,7 @@ function showAndClearField(frm){
 		<s:actionmessage/>
 		<s:submit name = "commandButton" id="mysubmit" value="Edit role" align="center" />
 	</s:form>
+	</div>
+	</div>
 </body>
 </html>

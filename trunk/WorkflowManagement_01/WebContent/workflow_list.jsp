@@ -14,11 +14,13 @@ function submitForm(workflowID){
 	   document.workflowMod.submit(); //finally submit the form
 	}
 </script>
+<link rel="stylesheet" type="text/css" href="style.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Select Workflow</title>
 </head>
 <body>
+	<div id="box">
 	<h2>Add Details</h2>
 	<s:actionerror />
 	<s:actionmessage />
@@ -59,5 +61,6 @@ function submitForm(workflowID){
 			<s:submit name="button" value="Back"
 				action="backToAdminConsole" align="left" />
 			</s:form>
+			</div>
 </body>
 </html>
