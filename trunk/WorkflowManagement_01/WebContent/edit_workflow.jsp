@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-<div id="heading">jhjkkhhh
-	WORKFLOW MANAGEMENT
-</div>	
+<%@include file="master.html" %>
 	<h2>Edit Workflow</h2>
 	<s:actionerror />
 	<s:actionmessage />
@@ -30,7 +27,7 @@
 			headerValue="Select a value"
 			list="freezeList"
 			name="freeze"
-			value="%{freeze}" />hjhhkjhk
+			value="%{freeze}" />
 		<s:submit name="button" value="Save Changes" align="center" method="saveChanges"/>
 		<s:submit name="button" value="Back" method="back" align="left" />
 	</s:form>

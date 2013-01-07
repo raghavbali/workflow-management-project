@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-<div id="heading">
-	WORKFLOW MANAGEMENT
-</div>
+<%@include file="master.html" %>
 <div id="user_roles">
 <h3> User details for User with p_id = ${p_id} </h3>
 <s:actionerror />

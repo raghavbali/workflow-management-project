@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-<div id="heading">
-	WORKFLOW MANAGEMENT
-</div>
+<%@include file="master.html" %>
 <div id="assign_role">
 <h2>Assign Role</h2>
 <s:hidden name="pageName" value="%{pageName}"/>

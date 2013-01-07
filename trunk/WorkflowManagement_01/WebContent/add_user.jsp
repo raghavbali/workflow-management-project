@@ -19,10 +19,7 @@ function showAndClearField(frm){
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-<div id="heading">
-	WORKFLOW MANAGEMENT
-</div>
+<%@include file="master.html" %>
 <h2 style="text-align: center;"><br><br><br><br><br>Add User</h2>
 	<s:form action="add_user.action" method="post">
 		<s:select label="Select prefix" headerKey="-1"
