@@ -144,6 +144,15 @@
             <result name="displayError">login_publisher.jsp</result>
 		</action>
 		
+		<action name="authorsList" class="action.LeaderBucketAction"
+				method = "delegateList">
+				<result name="showDelegateList">login_publisher.jsp</result>
+		</action>
+		<action name="delegate_authors" class="action.LeaderBucketAction"
+				method = "delegateAuthors">
+				<result name="delegateAuthors">login_publisher.jsp</result>
+		</action>
+		
          
          <!-- PUBLISHER BLOCK ENDS  -->
          <!-- *********************************************************** -->

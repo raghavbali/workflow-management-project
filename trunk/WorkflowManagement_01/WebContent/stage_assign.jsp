@@ -45,22 +45,7 @@
 <s:if test="%{#pageName=='assignUsers'}">
 <br>
 <h3>Assign Stage ${stageID}: </h3>
-<h4>Available authors: </h4>
-	<s:form action="final_assign_authors.action" method="post">
-		<s:hidden name="stageID" value="%{stageID}" />
-		<s:hidden name="workflowID" value="%{workflowID}" />		
-	<table>
-	<s:iterator value = "usrlist">
-	<tr>
-	<td><s:checkbox name="checkboxes" label="%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
-	</tr>
-		</s:iterator>
-	<tr>
-		<s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" />
-	</tr>
-	</table>
 
-	</s:form>
 <h4>Available publishers: </h4>
 	<s:form action="final_assign_publishers.action" method="post">
 		<s:hidden name="stageID" value="%{stageID}" />
@@ -77,6 +62,23 @@
 	<s:actionmessage/>
 	</s:form>
 	
+<h4>Available authors: </h4>
+	<s:form action="final_assign_authors.action" method="post">
+		<s:hidden name="stageID" value="%{stageID}" />
+		<s:hidden name="workflowID" value="%{workflowID}" />		
+	<table>
+	<s:iterator value = "usrlist">
+	<tr>
+	<td><s:checkbox name="checkboxes" label="%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	</tr>
+		</s:iterator>
+	<tr>
+		<s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" />
+	</tr>
+	</table>
+
+	</s:form>
+
 </s:if>
 </div>
 </div>

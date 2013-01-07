@@ -33,10 +33,16 @@
 	</ul>
 	</div>
 	<div id="login_publisher">
-<s:actionmessage/>
+	<s:actionmessage/>
 	<s:actionerror/>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
+	<s:hidden name = "workflowID" value="%{workflowID}"/>
+	<s:hidden name = "itemID" value="%{itemID}"/>
+	<s:hidden name = "stageID" value="%{stageID}"/>
+	<s:hidden name="pageName" value="%{pageName}"/>
+	<s:set name="pageName" value="%{pageName}"/>
+
 	<table border="1">
 			<tr>
 				<th><h3>Sno </h3>
@@ -80,18 +86,17 @@
 					 </td>
 					 <td><s:property value="lastUpdated" />
 					 </td>
-					  </td>
 					 <td><s:property value="status" />
 					 </td>
 					 <td><s:property value="daysLeft" />
 					 </td>
 					<td><a
-						href="edit_wf.action?workflowID=<s:property value = "workflowID" />">Delegate </a></td>
+						href="authorsList.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Delegate </a></td>
 					<td><a
 						href="stage_mod.action?workflowID=<s:property value = "workflowID" />&pageName=workflow_list ">Move to Next Stage </a>
 					</td>
 					<td><a
-						href="stage_mod.action?workflowID=<s:property value = "workflowID" />&pageName=workflow_list ">MOve to Previous Stage </a>
+						href="stage_mod.action?workflowID=<s:property value = "workflowID" />&pageName=workflow_list ">Move to Previous Stage </a>
 					</td>
 				</tr>
 			</s:iterator>
@@ -102,6 +107,26 @@
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
+	<s:if test="%{#pageName=='delegateAuthors'}">
+	<h4>Available authors for item ${itemID}: </h4>
+	<s:form action="delegate_authors.action" method="post">
+		<s:hidden name="stageID" value="%{stageID}" />
+		<s:hidden name="workflowID" value="%{workflowID}" />	
+		<s:hidden name = "itemID" value="%{itemID}"/>
+			
+	<table>
+	<s:iterator value = "usrlist">
+	<tr>
+	<td><s:checkbox name="checkboxes" label="%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	</tr>
+		</s:iterator>
+	<tr>
+		<s:submit name = "commandButton" id="mysubmit" value="Delegate" align="center" />
+	</tr>
+	</table>
+
+	</s:form>
+	</s:if>
 	</div>
 	</div>
 </body>
