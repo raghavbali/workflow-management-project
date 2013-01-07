@@ -46,6 +46,7 @@
 					<th><h3>Delivery Date</h3></th>
 					<th><h3>Status</h3></th>
 					<th><h3>Days Left</h3></th>
+					<th><h3>Last Updated</h3></th>
 					<th><h3>Update Item</h3></th>
 				</tr>
 				<s:iterator value="objBucketView" status="Sno">
@@ -59,20 +60,24 @@
 						</td>
 						<td><s:property value="status" /></td>
 						<td><s:property value="daysLeft" /></td>
+						<td><s:property value="lastUpdated" /></td>
 						<td><a
-							href="authorAction.action?itemID=<s:property value = "itemID" />&status=<s:property value="status"/>">Update
+							href="authorAction.action?itemID=<s:property value = "itemID" />&status=<s:property value="status"/>&stageID=<s:property value="stageID"/>">Update
 								Item </a></td>
 					</tr>
 				</s:iterator>
 			</table>
 			<s:if test="%{remarks !=null}">
-						Remarks: <s:property value="remarks" /><br>
-						<s:textarea name="remarks" id="remarks" value=""/>
-						<s:select label="Status" headerKey="-1"
-						headerValue="Status"
+						Remarks: <s:text name="remarks.split('<br/>|<\r\n>')"  /><br/>
+						<s:textarea name="remarksNew" id="remarksNew" value=""/>
+						<s:select label="Status" 
 						list="statusOptions"
 						name="status"
 						value="%{status}" />
+			<s:hidden id="remarks" name="remarks"/>
+			<s:hidden id="itemID" name="itemID"/>
+			<s:hidden id="userID" name="userID"/>
+			<s:hidden id="stageID" name="stageID"/>
 			<s:submit name="update_author_item" method="updateItem" value="Update" align="left"/>
 			</s:if>
 		</s:form>
