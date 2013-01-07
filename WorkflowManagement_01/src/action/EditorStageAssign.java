@@ -64,39 +64,6 @@ public class EditorStageAssign extends ActionSupport {
 		return "assign_stage_continue";
 	}
 	
-//	public String assignPublishers(){
-//		int iSize, res=0;
-//		this.setStageList(WorkflowDetails.find(this.getWorkflowID(), ""));
-//		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author')");
-//		usrlist1 = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('publisher')");
-//		usrlist2 = populatePublisherList(usrlist1);
-//		selectedPublisher = getStagePublisher(usrlist1, checkboxes1);
-////		usrlist = UserRole.find("WHERE w_id='" + workflowID + "' AND role IN ('author', 'publisher')");
-//		if(checkboxes1 == null || (checkboxes1.size() == 1 && checkboxes1.get(0).equals("false"))){
-//			iSize = 0;
-//			res = StageDetails.assign(workflowID, stageID, "", "publisher", 0);
-//		}
-//		else
-//			iSize = checkboxes1.size();
-//		System.out.println(iSize);
-//        for (int i = 0; i < iSize; i++) {
-//            System.out.println("checked item #" + i + " -> " + checkboxes1.get(i));
-//            res = StageDetails.assign(workflowID, stageID, checkboxes1.get(i), "publisher", i);
-//            if(res == 0)
-//            	break;
-//         }
-//        if(res == 0)
-//        	addActionError(getText("Some error, please re-chech the field values."));
-//        else
-//        	addActionMessage(getText("Assignment successful"));
-//        
-// //       this.setCheckboxes1(this.getCheckboxes1());
-//        checkboxes = StageDetails.find(stageID, workflowID, "author", "");
-//		checkboxes1 = StageDetails.find(stageID, workflowID, "publisher", "");
-//        pageName = "assignUsers";
-//		return "assign_stage_continue";
-//	}
-	
 	public String assignPublishers(){
 		int res=0;
 		this.setStageList(WorkflowDetails.find(this.getWorkflowID(), ""));
@@ -107,9 +74,10 @@ public class EditorStageAssign extends ActionSupport {
 		res = StageDetails.assign(workflowID, stageID, lead_id, "publisher", 0);
         if(res == 0)
         	addActionError(getText("Some error, please re-chech the field values."));
-        else
+        else{
         	addActionMessage(getText("Assignment successful"));
-        WorkflowDetails.updateLead(workflowID, Integer.parseInt(lead_id), stageID);
+        	WorkflowDetails.updateLead(workflowID, Integer.parseInt(lead_id), stageID);
+        }
         checkboxes = StageDetails.find(stageID, workflowID, "author", "");
 		checkboxes1 = StageDetails.find(stageID, workflowID, "publisher", "");
 		usrlist2 = populatePublisherList(usrlist1);

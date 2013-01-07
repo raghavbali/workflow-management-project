@@ -2,15 +2,18 @@ package action;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import model.AuthorBucket;
+import model.Bucket;
+import model.UserDetails;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import utility.DBService;
 import utility.DBobjects;
-
-import model.Bucket;
 
 public class LeaderBucketAction extends ActionSupport{
 
@@ -28,6 +31,9 @@ public class LeaderBucketAction extends ActionSupport{
 	int workflowID;
 	private Map<String, Object> session;
 	private ArrayList<LeaderBucketAction> objBucketView;
+	private ArrayList<UserDetails> usrlist;
+	private List<String> checkboxes;
+	private String pageName;
 
 	public LeaderBucketAction() {
 
@@ -60,7 +66,83 @@ public class LeaderBucketAction extends ActionSupport{
 	}
 	
 	public String execute(){
+		pageName = "displayList";
 		return this.displayList();
+	}
+	
+	public String delegateList(){
+		session = ActionContext.getContext().getSession();
+		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
+		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author')");
+		checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "");
+		this.displayList();
+		session.put("itemID", this.getItemID());
+		session.put("stageID", this.getStageID());
+		session.put("bucketView", this.objBucketView);
+		pageName = "delegateAuthors";
+		return "showDelegateList";
+	}
+	
+	public String delegateAuthors(){
+		int iSize, res = 0;
+		session = ActionContext.getContext().getSession();
+		ArrayList<String> params = new ArrayList<String>();
+		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author')");
+//		this.displayList();
+		this.objBucketView = (ArrayList<LeaderBucketAction>) session.get("bucketView");
+		for(int i=0; i<objBucketView.size(); i++){
+			if(objBucketView.get(i).getItemID() == itemID)
+				this.setUserID(objBucketView.get(i).getUserID());
+				this.setStageID(objBucketView.get(i).getStageID());
+				this.setAssignedDate(objBucketView.get(i).getAssignedDate());
+				this.setDeliveryDate(objBucketView.get(i).getDeliveryDate());
+				this.setLastUpdated(objBucketView.get(i).getLastUpdated());
+		}
+		if(checkboxes == null || (checkboxes.size() == 1 && checkboxes.get(0).equals("false"))){
+			iSize = 0;
+			params.add("");
+			params.add(String.valueOf(itemID));
+			params.add(String.valueOf(stageID));
+			params.add("");
+			params.add("");
+			params.add("");
+			params.add("");
+			params.add("");
+			res = AuthorBucket.assign(workflowID, params, 0);
+		}
+		else
+			iSize = checkboxes.size();
+		System.out.println(iSize);
+        for (int i = 0; i < iSize; i++) {
+            System.out.println("checked item #" + i + " -> " + checkboxes.get(i));
+            params = new ArrayList<String>();
+            params.add(checkboxes.get(i));
+			params.add(String.valueOf(itemID));
+			params.add(String.valueOf(stageID));
+			params.add(assignedDate);
+			params.add(deliveryDate);
+			params.add("I");
+			params.add(lastUpdated);
+			params.add(String.valueOf(userID));
+			res = AuthorBucket.assign(workflowID, params, i);
+			if(res == 0)
+            	break;
+         }
+        checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "");
+        System.out.println("size:" + checkboxes.size());
+        if(res == 0)
+        	addActionError(getText("Some error, please re-chech the field values."));
+        else
+        {
+        	addActionMessage(getText("Assignment successful"));
+        	if(checkboxes.size() > 0)
+        		Bucket.updateStatus(workflowID, stageID, itemID, "A");
+        	else
+        		Bucket.updateStatus(workflowID, stageID, itemID, "I");
+        }
+        this.displayList();
+    	pageName = "delegateAuthors";
+		return "delegateAuthors";
 	}
 
 	public String displayList() {
@@ -111,7 +193,7 @@ public class LeaderBucketAction extends ActionSupport{
 		}
 		return bucketView;
 	}
-
+	
 	public int getUserID() {
 		return userID;
 	}
@@ -214,5 +296,29 @@ public class LeaderBucketAction extends ActionSupport{
 
 	public void setObjBucketView(ArrayList<LeaderBucketAction> objBucketView) {
 		this.objBucketView = objBucketView;
+	}
+
+	public ArrayList<UserDetails> getUsrlist() {
+		return usrlist;
+	}
+
+	public void setUsrlist(ArrayList<UserDetails> usrlist) {
+		this.usrlist = usrlist;
+	}
+
+	public List<String> getCheckboxes() {
+		return checkboxes;
+	}
+
+	public void setCheckboxes(List<String> checkboxes) {
+		this.checkboxes = checkboxes;
+	}
+
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
 	}
 }

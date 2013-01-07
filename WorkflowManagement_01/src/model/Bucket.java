@@ -158,6 +158,32 @@ public class Bucket {
 		return objBucketView;
 	}
 	
+	public static void updateStatus(int w_id, int stage_id, int item_id, String status){
+		String tableName="leader_bucket";
+		ResultSet resultTableName = null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		DBobjects dbObject;
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				tableName = tableName+resultTableName.getString(1);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String updateQuery = "UPDATE " + tableName + " SET status = '" + status + "' WHERE stage_id = '" + stage_id + "' AND item_id = '" + item_id + "'" ;
+		DBService.DDLQueryInDB(updateQuery);
+	}
+	
 
 	public int getUserID() {
 		return userID;

@@ -3,8 +3,6 @@ package action;
 import java.util.ArrayList;
 import java.util.Map;
 
-import model.Bucket;
-
 import utility.DBService;
 
 import com.opensymphony.xwork2.ActionContext;
