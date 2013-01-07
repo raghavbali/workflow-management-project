@@ -110,7 +110,7 @@ public class AuthorBucketAction extends ActionSupport {
 
 		session = ActionContext.getContext().getSession();
 		try {
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 			Date dNow = new Date();
 
 			/* Update Remarks */
