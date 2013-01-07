@@ -8,6 +8,7 @@
 <title>WFMS: Workflow Details</title>
 </head>
 <body>
+<%@include file="master.html" %>
 	<h2>Edit Details</h2>
 	<s:actionerror />
 	<s:actionmessage/>

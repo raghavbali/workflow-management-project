@@ -21,10 +21,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-	<div id="heading">
-	WORKFLOW MANAGEMENT
-	</div>
+<%@include file="master.html" %>
 	<div id="menu">
 	<ul>	
 		<li><a href="#">Home</a></li>

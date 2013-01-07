@@ -20,10 +20,7 @@ function showAndClearField(frm){
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-<div id="heading">
-	WORKFLOW MANAGEMENT
-</div>
+<%@include file="master.html" %>
 <div id="edit_user_adv">
 <h2>Edit User Advanced</h2>
 	<s:form action="update_user_adv.action" method="post">

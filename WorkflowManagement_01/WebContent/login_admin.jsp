@@ -20,17 +20,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div id="box">
-	<div id="heading">
-	WORKFLOW MANAGEMENT
-	</div>
-	<div id="menu">
-	<ul>	
-		<li><a href="#">Home</a></li>
-		<li><a href="#">About US</a></li>
-		<li><a href="logoutAdminConsole.action">Logout</a></li>
-	</ul>
-	    </div>
+	<%@include file="master.html" %>
 	    <div id="buttons_menu">
 	<ul>
 	<s:actionmessage />

@@ -20,24 +20,25 @@ function submitForm(workflowID){
 <title>WFMS: Select Workflow</title>
 </head>
 <body>
-	<div id="box">
-	<h2>Add Details</h2>
+<%@include file="master.html" %>
+<div id="workflow_list">
+	<h2>&nbsp &nbsp Add Details</h2>
 	<s:actionerror />
 	<s:actionmessage />
 	<s:form action="stage_mod.action" method="post" name="workflowMod" >
-		<table>
+		<table  >
 			<tr>
-				<th><h3>Workflow_ID </h3>
+				<th><h4>Workflow ID </h4>
 				</th>
-				<th><h3>Workflow Name </h3>
+				<th><h4>Workflow Name </h4>
 				</th>
-				<th><h3>Workflow Description </h3>
+				<th><h4>Workflow Description </h4>
 				</th>
-				<th><h3>Workflow Domain </h3>
+				<th><h4>Workflow Domain </h4>
 				</th>
-				<th><h3>Workflow Modifications </h3>
+				<th><h4>Workflow Modifications </h4>
 				</th>
-				<th><h3>Stage Modifications </h3>
+				<th><h4>Stage Modifications </h4>
 				</th>
 			</tr>
 			<s:iterator value="objListWfMaster">
@@ -59,8 +60,9 @@ function submitForm(workflowID){
 			</s:iterator>
 			</table>
 			<s:submit name="button" value="Back"
-				action="backToAdminConsole" align="left" />
+				action="backToAdminConsole" align="left" theme="simple" />
 			</s:form>
+			</div>
 			</div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <title>WFMS: Add Item</title>
 </head>
 <body>
+<%@include file="master.html" %>
 	<h2>Add Item</h2>
 	<s:actionerror />
 	<s:actionmessage />

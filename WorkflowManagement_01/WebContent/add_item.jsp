@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="box">
-	<div id="heading">
-	WORKFLOW MANAGEMENT
-	</div>
+<%@include file="master.html" %>
 	<div id="add_item">
 	<h2>Add Item</h2>
 	<s:actionerror />
