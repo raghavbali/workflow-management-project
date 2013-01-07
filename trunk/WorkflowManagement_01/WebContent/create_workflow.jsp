@@ -20,8 +20,7 @@
 		<s:textfield name="wf_name" label="Workflow Name" size="50" />
 		<s:textfield name="wf_description" label="Workflow Description"
 			size="100" />
-		<s:select label="Select a domain" headerKey="-1"
-			headerValue="Domains"
+		<s:select label="Select a domain" headerKey="1"
 			list="domainList"
 			name="wf_domain"
 			value="%{workflowDomain}" />

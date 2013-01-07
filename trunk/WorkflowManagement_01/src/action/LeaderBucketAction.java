@@ -21,6 +21,7 @@ public class LeaderBucketAction extends ActionSupport{
 	String stageName;
 	String assignedDate;
 	String deliveryDate;
+	String lastUpdated;
 	String status;
 	String leaf;
 	int daysLeft;
@@ -33,18 +34,19 @@ public class LeaderBucketAction extends ActionSupport{
 	}
 
 	public LeaderBucketAction(int userID, int itemID, int stageID,
-			String assignedDate, String deliveryDate, String status) {
+			String assignedDate, String deliveryDate, String status,String lastUpdated) {
 		this.userID = userID;
 		this.itemID = itemID;
 		this.stageID = stageID;
 		this.assignedDate = assignedDate;
 		this.deliveryDate = deliveryDate;
 		this.status = status;
+		this.lastUpdated=lastUpdated;
 	}
 
 	public LeaderBucketAction(int userID, int itemID, String itemName, int stageID,
 			String stageName, String assignedDate, String deliveryDate,
-			String status, int daysLeft) {
+			String status,String lastUpdated, int daysLeft) {
 		this.userID = userID;
 		this.itemID = itemID;
 		this.itemName = itemName;
@@ -54,6 +56,7 @@ public class LeaderBucketAction extends ActionSupport{
 		this.deliveryDate = deliveryDate;
 		this.status = status;
 		this.daysLeft = daysLeft;
+		this.lastUpdated=lastUpdated;
 	}
 	
 	public String execute(){
@@ -62,7 +65,7 @@ public class LeaderBucketAction extends ActionSupport{
 
 	public String displayList() {
 		session = ActionContext.getContext().getSession();
-		
+		this.setUserID(Integer.parseInt(session.get("userID").toString()));
 		this.setObjBucketView(this.find(String.valueOf(session.get("tableSuffix")).toString()));
 		if(this.getObjBucketView()!=null){
 			addActionMessage(getText("Mailbox ready"));
@@ -80,10 +83,10 @@ public class LeaderBucketAction extends ActionSupport{
 		ArrayList<LeaderBucketAction> bucketView = new ArrayList<LeaderBucketAction>();
 		DBobjects dbObject = null;
 
-		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,l.assigned_on) as daysLeft ";
+		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,l.assigned_on) as daysLeft,l.`last_updated` as lastUpdated ";
 		String fromClause = " FROM `item" + tableSuffix + "` i, `workflow"
 				+ tableSuffix + "` w, `leader_bucket" + tableSuffix + "` l ";
-		String whereClause = " WHERE i.current_stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id";
+		String whereClause = " WHERE i.current_stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID();
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery+fromClause, whereClause);
 			result = dbObject.getResult();
@@ -98,7 +101,7 @@ public class LeaderBucketAction extends ActionSupport{
 				newItem.setItemName(result.getString("item_name"));
 				newItem.setStageName(result.getString("stage_name"));
 				newItem.setDaysLeft(result.getInt("daysLeft"));
-				
+				newItem.setLastUpdated(result.getString("lastUpdated"));
 				bucketView.add(newItem);
 			}
 			dbObject.getConn().close();
@@ -175,6 +178,14 @@ public class LeaderBucketAction extends ActionSupport{
 
 	public int getDaysLeft() {
 		return daysLeft;
+	}
+
+	public String getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(String lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	public void setDaysLeft(int daysLeft) {

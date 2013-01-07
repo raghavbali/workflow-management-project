@@ -16,7 +16,7 @@
             class="action.LoginAction">
             <result name="admin_success">login_admin.jsp</result>
             <result name="editor_success">login_editor.jsp</result>
-            <result name="author_success">login_author.jsp</result>
+            <result name="author_success" type="redirectAction">authorAction</result>
             <result name="publisher_success" type="redirectAction">publisherAction</result>
             <result name="error">login.jsp</result>
         </action>
@@ -139,11 +139,32 @@
          <!-- *********************************************************** -->
         
          <!-- PUBLISHER BLOCK STARTS  -->
-         <action name="publisherAction" class="action.BucketAction">
+         <action name="publisherAction" class="action.LeaderBucketAction">
             <result name="displaySuccess">login_publisher.jsp</result>
             <result name="displayError">login_publisher.jsp</result>
 		</action>
+		
+         
+         <!-- PUBLISHER BLOCK ENDS  -->
+         <!-- *********************************************************** -->
         
+         <!-- AUTHOR BLOCK STARTS  -->
+         <action name="authorAction" class="action.AuthorBucketAction">
+            <result name="displaySuccess">login_author.jsp</result>
+            <result name="displayError">login_author.jsp</result>
+		</action>
+<!-- 		
+         <action name="updateStatus" class="action.AuthorBucketAction">
+            <result name="displaySuccess">login_author.jsp</result>
+            <result name="displayError">login_author.jsp</result>
+		</action>
+        
+   -->
+          <action name="update_author_item"
+            class="action.AuthorBucketAction">
+            <result name="displaySuccess">login_author.jsp</result>
+            <result name="displayError">login_author.jsp</result>
+        </action>
         
     </package>
 </struts>

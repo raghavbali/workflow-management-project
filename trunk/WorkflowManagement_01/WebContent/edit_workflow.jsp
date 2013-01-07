@@ -22,8 +22,7 @@
 			value="%{workflowName}" onfocus="true"/>
 		<s:textfield name="workflowDescription" label="Workflow Description"
 			value="%{workflowDescription}" />
-		<s:select label="Select a domain" headerKey="-1"
-			headerValue="Domains"
+		<s:select label="Select a domain" headerKey="1"
 			list="domainList"
 			name="workflowDomain"
 			value="%{workflowDomain}" />

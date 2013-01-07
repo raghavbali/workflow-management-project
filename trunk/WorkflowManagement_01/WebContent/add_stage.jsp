@@ -29,7 +29,7 @@
 			 size="5" />
 		<s:submit name="button" value="Add Stage"
 			action="addNowStage" align="center" />
-		<s:submit name="button"  value="Done"
+		<s:submit name="button"  value="Back"
 			action="addLaterStage" align="center" />
 	</s:form>
 	</div>

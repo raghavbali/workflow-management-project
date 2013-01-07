@@ -51,6 +51,8 @@
 				</th>
 				<th><h3>Delivery Date </h3>
 				</th>
+				<th><h3>Last Updated </h3>
+				</th>
 				<th><h3>Status </h3>
 				</th>
 				<th><h3>Days Left </h3>
@@ -75,6 +77,8 @@
 					<td><s:property value="assignedDate" />
 					 </td>
 					 <td><s:property value="deliveryDate" />
+					 </td>
+					 <td><s:property value="lastUpdated" />
 					 </td>
 					  </td>
 					 <td><s:property value="status" />

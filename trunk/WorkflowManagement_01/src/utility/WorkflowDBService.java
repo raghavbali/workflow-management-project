@@ -113,7 +113,7 @@ public class WorkflowDBService {
 				+ " `assigned_on` date NOT NULL,  "
 				+ "`delivery_date` date NOT NULL, "
 				+ " `status` enum('I','C','P','A') "
-				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned', `last_updated` date NOT NULL, "
 				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  "
 				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
@@ -140,7 +140,7 @@ public class WorkflowDBService {
 				+ " `assigned_on` date NOT NULL,  "
 				+ "`delivery_date` date NOT NULL, "
 				+ " `status` enum('I','C','P','A') "
-				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned',  "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned', `last_updated` date NOT NULL, "
 				+"`stage_lead_id` int(5) NOT NULL, "
 				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`), "
 				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
