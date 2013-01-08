@@ -184,6 +184,197 @@ public class Bucket {
 		DBService.DDLQueryInDB(updateQuery);
 	}
 	
+	public static String checkStatus(int w_id, int stage_id, int item_id){
+		String tableName="leader_bucket";
+		ResultSet resultTableName = null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		DBobjects dbObject;
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				tableName = tableName+resultTableName.getString(1);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String query = "SELECT `status` FROM " + tableName + " WHERE stage_id = '" + stage_id + "' AND item_id = '" + item_id + "'";
+		String status = "";
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(query, "");
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				status = resultTableName.getString("status");
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(status);
+		return status;
+	}
+	
+	public String moveItem(int w_id, int stage_id, int item_id, int flag){
+		int oldStageLead = 0, seq_no = 0, stageSLA = 0, insertResult;
+		String query;
+		String tableName="", wftable = "workflow", leadtable = "leader_bucket", itemtable = "item";
+		ArrayList<String> values = new ArrayList<String>();
+		ResultSet resultTableName = null;
+		String selectQueryTable=null;
+		String whereClauseTable=null;
+		DBobjects dbObject;
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+		Date dNow = new Date();
+		
+		selectQueryTable = "SELECT table_suffix FROM workflow_master ";
+		whereClauseTable = "where w_id = "+w_id;
+		
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable, whereClauseTable);
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				tableName = tableName+resultTableName.getString(1);
+				wftable = wftable + tableName;
+				leadtable = leadtable + tableName;
+				itemtable = itemtable + tableName;
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		query = "SELECT `stage_seqno`, `stage_lead_id` FROM " + wftable + " WHERE stage_id = '" + stage_id + "'";
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(query, "");
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				seq_no = resultTableName.getInt("stage_seqno");
+				oldStageLead = resultTableName.getInt("stage_lead_id");
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(updateSeqNo(seq_no, flag, wftable).equals("error"))
+			return "error";
+		else{
+			if(flag == 1)
+				seq_no = seq_no + 1;
+			else
+				seq_no = seq_no -1;
+		}
+		query = "SELECT `stage_id` FROM " + wftable + " WHERE stage_seqno = '" + seq_no + "'";
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(query, "");
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				this.setStageID(resultTableName.getInt("stage_id"));
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		query = "SELECT `stage_lead_id`, `stage_sla` FROM " + wftable + " WHERE stage_id = '" + this.getStageID() + "'";
+		
+		try {
+			dbObject = DBService.dbExecuteQuery(query, "");
+			resultTableName=dbObject.getResult();
+			while (resultTableName.next()) {
+				this.setUserID(resultTableName.getInt("stage_lead_id"));
+				stageSLA = resultTableName.getInt("stage_sla");
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/* set to and from dates */
+		this.setAssignedDate(ft.format(dNow).toString());
+		this.setLastUpdated(ft.format(dNow).toString());
+		dNow.setDate(dNow.getDate() + stageSLA);
+		this.setDeliveryDate(ft.format(dNow).toString());
+		
+		this.setItemID(item_id);
+		
+		query = "INSERT INTO " + leadtable + " (`user_id`, `item_id`, `stage_id`, `assigned_on`, `delivery_date`, `status`,`last_updated`)"
+				+ " VALUES (?,?,?,?,?,?,?)";
+		/* add values for insertion */
+		values.add(String.valueOf(this.getUserID()));
+		values.add(String.valueOf(this.getItemID()));
+		values.add(String.valueOf(this.getStageID()));
+		values.add(this.getAssignedDate());
+		values.add(this.getDeliveryDate());
+		values.add("I");// all items begin at Incomplete stage
+		values.add(this.getLastUpdated());
+		
+		insertResult = DBService.insertObjectInDB(query, values);
+		
+		if(insertResult != 0){
+			query = "UPDATE " + leadtable + " SET last_updated = '" + this.getAssignedDate() + "', status = 'F' WHERE user_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
+			DBService.DDLQueryInDB(query);
+			
+			query = "UPDATE " + itemtable + " SET current_stage_id = '" + this.getStageID() + "' WHERE item_id = '" + item_id + "'";
+			DBService.DDLQueryInDB(query);
+		}
+		
+		if (insertResult == 0) {
+			return "error";
+		} else {
+			return "success";
+		}
+		
+	}
+	
+
+	private String updateSeqNo(int n, int flag, String tableName) {
+		String query = "";
+		int tempSeqNo = 0;
+		ResultSet resultTableName = null;
+		DBobjects dbObject;
+		if(flag == 1){
+			query = "SELECT MAX(stage_seqno) as seq_no from " + tableName;
+			try {
+				dbObject = DBService.dbExecuteQuery(query, "");
+				resultTableName=dbObject.getResult();
+				while (resultTableName.next()) {
+					tempSeqNo = resultTableName.getInt("seq_no");
+				}
+				dbObject.getConn().close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(n == tempSeqNo)
+				return "error";
+			else{
+				return "success";
+			}
+		}
+		else if(flag == -1){
+			if(n == 1)
+				return "error";
+			else{
+				return "success";
+			}
+		}
+		else
+			return "error";
+		
+	}
 
 	public int getUserID() {
 		return userID;

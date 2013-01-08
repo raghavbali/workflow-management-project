@@ -90,10 +90,10 @@
 					<td><a
 						href="authorsList.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Delegate </a></td>
 					<td><a
-						href="stage_mod.action?workflowID=<s:property value = "workflowID" />&pageName=workflow_list ">Move to Next Stage </a>
+						href="forwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Move to Next Stage </a>
 					</td>
 					<td><a
-						href="stage_mod.action?workflowID=<s:property value = "workflowID" />&pageName=workflow_list ">Move to Previous Stage </a>
+						href="backwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Move to Previous Stage </a>
 					</td>
 				</tr>
 			</s:iterator>
