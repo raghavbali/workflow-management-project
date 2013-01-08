@@ -33,13 +33,13 @@
 	<s:actionmessage/>
 	<s:actionerror/>
 	<s:if test="%{#session['logged-in']=='true'}">
-	<s:form action="" method="">
+	<s:form action="updateLeaderList.action" method="post">
 	<s:hidden name = "workflowID" value="%{workflowID}"/>
 	<s:hidden name = "itemID" value="%{itemID}"/>
 	<s:hidden name = "stageID" value="%{stageID}"/>
 	<s:hidden name="pageName" value="%{pageName}"/>
 	<s:set name="pageName" value="%{pageName}"/>
-
+	
 	<table border="1">
 			<tr>
 				<th><h3>Sno </h3>
@@ -98,6 +98,7 @@
 				</tr>
 			</s:iterator>
 			</table>
+			<s:submit name = "commandButton" id="mysubmit" value="Update" align="center" />
 	</s:form>
 	</s:if>
 	<s:else>

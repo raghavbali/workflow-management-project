@@ -56,7 +56,7 @@ public class AuthorBucket extends Bucket {
 		return objBucketView;
 	}
 	
-	public static ArrayList<String> find(int stageID, int itemID, int w_id, String whereClause) {
+	public static ArrayList<String> find(int stageID, int itemID, int w_id, String selectCol, String whereClause) {
 		ResultSet result = null;
 		ArrayList<String> stageDetails = new ArrayList<String>();
 		String tableName="general_bucket";
@@ -80,13 +80,13 @@ public class AuthorBucket extends Bucket {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String selectQuery = "SELECT `user_id` FROM "+tableName+ " WHERE stage_id = '" + stageID + "' AND item_id = '" + itemID + "'";
+		String selectQuery = "SELECT `" + selectCol + "` FROM "+tableName+ " WHERE stage_id = '" + stageID + "' AND item_id = '" + itemID + "'";
 
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery, whereClause);
 			result=dbObject.getResult();
 			while (result.next()) {
-				String str = result.getString("user_id");
+				String str = result.getString(selectCol);
 				stageDetails.add(str);
 			}
 			dbObject.getConn().close();
@@ -97,7 +97,7 @@ public class AuthorBucket extends Bucket {
 		return stageDetails;
 
 	}
-
+	
 	public int update(String tableName) {
 
 		String updateSQL = null;
