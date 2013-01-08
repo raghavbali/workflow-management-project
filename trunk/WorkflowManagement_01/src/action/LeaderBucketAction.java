@@ -67,7 +67,9 @@ public class LeaderBucketAction extends ActionSupport{
 	
 	public String execute(){
 		pageName = "displayList";
-		return this.displayList();
+		String str = this.displayList();
+		session.put("bucketView", this.objBucketView);
+		return str;
 	}
 	
 	public String delegateList(){
@@ -79,7 +81,7 @@ public class LeaderBucketAction extends ActionSupport{
 		this.displayList();
 		session.put("itemID", this.getItemID());
 		session.put("stageID", this.getStageID());
-		session.put("bucketView", this.objBucketView);
+//		session.put("bucketView", this.objBucketView);
 		pageName = "delegateAuthors";
 		return "showDelegateList";
 	}
@@ -149,27 +151,31 @@ public class LeaderBucketAction extends ActionSupport{
 	public String updateLeaderList(){
 		String temp = "", finalStatus = "";
 		session = ActionContext.getContext().getSession();
-		this.displayList();
+		this.objBucketView = (ArrayList<LeaderBucketAction>) session.get("bucketView");
 		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
-		this.setStageID(objBucketView.get(0).getStageID());
 		int maxItems = this.objBucketView.size();
+		if(maxItems > 0)
+			this.setStageID(objBucketView.get(0).getStageID());
 		for(int tempItemID=0; tempItemID < maxItems; tempItemID++){
-			System.out.println(stageID + " " + (tempItemID+1) + " " + workflowID);
+//			System.out.println(stageID + " " + (tempItemID+1) + " " + workflowID);
 			statusList = AuthorBucket.find(stageID, tempItemID+1, workflowID, "status", "");
 			temp = "";
 			for(int i=0; i<statusList.size(); i++){
 					temp = temp + statusList.get(i);
 				}
-			System.out.println(temp);
-			if(temp.contains("P"))
+//			System.out.println(temp);
+			if(temp.equals(""))
+				finalStatus = "I";
+			else if(temp.contains("P"))
 				finalStatus = "P";
 			else if(temp.contains("I"))
 				finalStatus = "A";
 			else
-				finalStatus = "F";
-			System.out.println(finalStatus);
+				finalStatus = "C";
+//			System.out.println(finalStatus);
 			Bucket.updateStatus(workflowID, stageID, tempItemID+1, finalStatus);
 		}
+		this.displayList();
 		pageName = "LeaderStatusUpdate";
 		return "updateLeaderList";
 	}
@@ -186,7 +192,7 @@ public class LeaderBucketAction extends ActionSupport{
 			addActionError(getText("Could not fetch data. Contact Network/Sys Admin"));
 			return "displayError";
 		}
-
+		
 	}
 
 	public ArrayList<LeaderBucketAction> find(String tableSuffix) {
@@ -197,7 +203,7 @@ public class LeaderBucketAction extends ActionSupport{
 		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,l.assigned_on) as daysLeft,l.`last_updated` as lastUpdated ";
 		String fromClause = " FROM `item" + tableSuffix + "` i, `workflow"
 				+ tableSuffix + "` w, `leader_bucket" + tableSuffix + "` l ";
-		String whereClause = " WHERE i.current_stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID();
+		String whereClause = " WHERE l.stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID();
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery+fromClause, whereClause);
 			result = dbObject.getResult();
