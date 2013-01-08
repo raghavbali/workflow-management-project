@@ -153,6 +153,11 @@
 				<result name="delegateAuthors">login_publisher.jsp</result>
 		</action>
 		
+		<action name="updateLeaderList" class="action.LeaderBucketAction"
+				method = "updateLeaderList">
+				<result name="updateLeaderList">login_publisher.jsp</result>		
+		</action>
+		
          
          <!-- PUBLISHER BLOCK ENDS  -->
          <!-- *********************************************************** -->

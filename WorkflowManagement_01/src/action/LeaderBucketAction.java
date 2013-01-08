@@ -32,7 +32,7 @@ public class LeaderBucketAction extends ActionSupport{
 	private Map<String, Object> session;
 	private ArrayList<LeaderBucketAction> objBucketView;
 	private ArrayList<UserDetails> usrlist;
-	private List<String> checkboxes;
+	private List<String> checkboxes, statusList;
 	private String pageName;
 
 	public LeaderBucketAction() {
@@ -72,9 +72,10 @@ public class LeaderBucketAction extends ActionSupport{
 	
 	public String delegateList(){
 		session = ActionContext.getContext().getSession();
+//		System.out.println(session.get("tableSuffix"));
 		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
-		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author')");
-		checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "");
+		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author') AND user_id IN (SELECT user_id from stage" + session.get("tableSuffix") + " WHERE stage_id = '" + stageID + "')");
+		checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "user_id" ,"");
 		this.displayList();
 		session.put("itemID", this.getItemID());
 		session.put("stageID", this.getStageID());
@@ -87,7 +88,7 @@ public class LeaderBucketAction extends ActionSupport{
 		int iSize, res = 0;
 		session = ActionContext.getContext().getSession();
 		ArrayList<String> params = new ArrayList<String>();
-		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author')");
+		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author') AND user_id IN (SELECT user_id from stage" + session.get("tableSuffix") + " WHERE stage_id = '" + stageID + "')");
 //		this.displayList();
 		this.objBucketView = (ArrayList<LeaderBucketAction>) session.get("bucketView");
 		for(int i=0; i<objBucketView.size(); i++){
@@ -128,7 +129,7 @@ public class LeaderBucketAction extends ActionSupport{
 			if(res == 0)
             	break;
          }
-        checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "");
+        checkboxes = AuthorBucket.find(stageID, itemID, workflowID, "user_id", "");
         System.out.println("size:" + checkboxes.size());
         if(res == 0)
         	addActionError(getText("Some error, please re-chech the field values."));
@@ -143,6 +144,34 @@ public class LeaderBucketAction extends ActionSupport{
         this.displayList();
     	pageName = "delegateAuthors";
 		return "delegateAuthors";
+	}
+	
+	public String updateLeaderList(){
+		String temp = "", finalStatus = "";
+		session = ActionContext.getContext().getSession();
+		this.displayList();
+		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
+		this.setStageID(objBucketView.get(0).getStageID());
+		int maxItems = this.objBucketView.size();
+		for(int tempItemID=0; tempItemID < maxItems; tempItemID++){
+			System.out.println(stageID + " " + (tempItemID+1) + " " + workflowID);
+			statusList = AuthorBucket.find(stageID, tempItemID+1, workflowID, "status", "");
+			temp = "";
+			for(int i=0; i<statusList.size(); i++){
+					temp = temp + statusList.get(i);
+				}
+			System.out.println(temp);
+			if(temp.contains("P"))
+				finalStatus = "P";
+			else if(temp.contains("I"))
+				finalStatus = "A";
+			else
+				finalStatus = "F";
+			System.out.println(finalStatus);
+			Bucket.updateStatus(workflowID, stageID, tempItemID+1, finalStatus);
+		}
+		pageName = "LeaderStatusUpdate";
+		return "updateLeaderList";
 	}
 
 	public String displayList() {
@@ -320,5 +349,13 @@ public class LeaderBucketAction extends ActionSupport{
 
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
+	}
+
+	public List<String> getStatusList() {
+		return statusList;
+	}
+
+	public void setStatusList(List<String> statusList) {
+		this.statusList = statusList;
 	}
 }
