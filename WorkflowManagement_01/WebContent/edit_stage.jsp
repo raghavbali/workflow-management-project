@@ -9,26 +9,30 @@
 </head>
 <body>
 <%@include file="master.html" %>
+<div id="edit_workflow">
+<table>
 	<h2>Edit Details</h2>
-	<s:actionerror />
-	<s:actionmessage/>
-	WorkflowID:<s:property value="workflowID" />
-		<s:hidden name="workflowID" value="%{workflowID}"/>
+	<tr><td><s:actionerror /></td>
+	<td><s:actionmessage/></td></tr>
+	<tr><td>WorkflowID:</td><td><s:property value="workflowID" /></td></tr>
+	<s:hidden name="workflowID" value="%{workflowID}"/>
 	<s:form action="" method="post">
 
 	<s:iterator value="objListWfDetails" >
-		<s:textfield name="stageName" label="Stage Name"  size="30" />
-		<s:textfield name="stageDescription" label="Stage Description"
-			size="100" />
-		<s:textfield name="stageSLA" label="Stage SLA(in hrs)"
-			size="5" />
-		<s:textfield name="stageSequenceNo" label="Stage Sequence Number"
-			 size="5" />
-		<s:submit name="button" value="Update Stage"
-			action="updateNowStage" align="center" />
-		<s:submit name="button"  value="Back"
-			action="doneStage" align="center" />
-			</s:iterator>
+		<tr><td>Stage Name</td><td><s:textfield name="stageName" label="Stage Name"  size="30" /></td></tr>
+		<tr><td>Stage Description</td><td><s:textfield name="stageDescription" label="Stage Description"
+			size="50" /></td></tr>
+		<tr><td>Stage SLA(in hrs)</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)"
+			size="5" /></td></tr>
+		<tr><td>Stage Sequence</td><td><s:textfield name="stageSequenceNo" label="Stage Sequence Number"
+			 size="5" /></td></tr>
+		<tr><td><s:submit name="button" value="Update Stage"
+			action="updateNowStage" align="center" /></td>
+		<td><s:submit name="button"  value="Back"
+			action="doneStage" align="center" /></td></tr>
+			</s:iterator>	
 	</s:form>
+	</table>
+	</div>
 </body>
 </html>

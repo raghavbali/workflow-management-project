@@ -12,12 +12,12 @@
 <%@include file="master.html" %>
 <br><br><br><br><br><br><br><br>
 	<div id="admin_console">
-	<h2>&nbsp&nbspCreate Workflow</h2>
+	<h2><br>&nbsp&nbspCreate Workflow</h2>
 	<s:actionerror />
 	<s:form  cssClass="create_workflow" action="create_wf.action" method="post">
-		Workflow Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <s:textfield  name="wf_name"  size="50" theme="simple" />
-		<br>Workflow Description:&nbsp<s:textfield name="wf_description" size="50" theme="simple"  />
-		<br>
+		<br>Workflow Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <s:textfield  name="wf_name"  size="50" theme="simple" />
+		<br><br>Workflow Description:&nbsp<s:textfield name="wf_description" size="50" theme="simple"  />
+		<br><br><br>
 		Select a domain: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<s:select  headerKey="1"
 			list="domainList"
 			name="wf_domain"
