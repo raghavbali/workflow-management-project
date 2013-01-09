@@ -9,30 +9,34 @@
 </head>
 <body>
 <%@include file="master.html" %>
-	<h2>Add Item</h2>
+<div id="edit_item">
+<table>
+	<tr><td><h2>Add Item</h2></td></tr>
 	<s:actionerror />
 	<s:actionmessage />
-	Workflow ID :
-	<s:property value="workflowID" />
+	<tr><td>Workflow :</td>
+	<td><s:property value="workflowID" /></td></tr>
 	<s:form action=".action" method="post">
-		<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
+		<tr><td>WorkFlow ID</td><td><s:hidden name="workflowID" id="workflowID" value="%{workflowID}" /></td></tr>
 		<s:hidden name="itemID" id="itemID" value="%{itemID}" />
-		Item ID :<s:property value="itemID" />
+		<tr><td>Item ID :</td><td><s:property value="itemID" /></td></tr>
 		<s:iterator value="itemList" var="itemList" status="stat" id="itemList">
-			<s:textfield name="itemName" id="itemName" label="Item Name"
-				size="50" />
-			<s:textfield name="itemDescription" id="itemDescription"
-				label="Item Description" size="50" />
+			<tr><td>ItemName</td><td><s:textfield name="itemName" id="itemName" label="Item Name"
+				size="50" /></td></tr>
+			<tr><td>Item Description</td><td><s:textfield name="itemDescription" id="itemDescription"
+				label="Item Description" size="50" /></td></tr>
 			Current Stage ID :<s:property value="currentStageID" />
 			<s:hidden name="currentStageID" id="currentStageID" value="%{currentStageID}" />
-			<s:textfield name="remarks" id="remarks" label="Remarks" size="50" />
+			<tr><td>Remarks</td><td><s:textfield name="remarks" id="remarks" label="Remarks" size="50" />
 			<s:textfield name="filePath" id="filePath" label="File Path"
-				size="50" />
+				size="50" /></td></tr>
 		</s:iterator>
-		<s:submit name="button" value="Save" action="editToWorkflowItemConsole"
-			align="left" id="button" />
-		<s:submit name="button" value="Back" action="backToWorkflowItemConsole"
-			align="left" id="button" />
+		<tr><td><s:submit name="button" value="Save" action="editToWorkflowItemConsole"
+			align="left" id="button" /></td>
+		<td><s:submit name="button" value="Back" action="backToWorkflowItemConsole"
+			align="left" id="button" /></td></tr>
 	</s:form>
+	</table>
+	</div>
 </body>
 </html>
