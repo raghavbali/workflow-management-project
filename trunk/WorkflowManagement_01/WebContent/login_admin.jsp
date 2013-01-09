@@ -22,27 +22,33 @@
 <body>
 	<%@include file="master.html" %>
 	    <div id="buttons_menu">
-	<ul>
+	
 	<s:actionmessage />
 	<s:actionerror />
 	<s:if test="%{#session['logged-in']=='true'}">
 		<s:form action="" method="">
-					
+					<br> &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
 			<s:if test="%{#session.tableSuffix=='_00000000000000'}">
 		
-		<li>		<s:submit name="button" value="Create Workflow"
-					action="createWfAdminConsole" align="left" /></li>
+				<s:submit name="button" value="Create Workflow"
+					action="createWfAdminConsole" align="left" />
 			</s:if>
-			<br/>
-			<li>
+			<br/><br>
+			&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
 			<s:submit name="button" value="Edit Workflow"
-				action="editWorkflowAdminConsole" align="left" /></li>
-		<li>	<s:submit name="button" value="Add User"
-				action="createUserAdminConsole" align="left" /></li>
-		<li>	<s:submit name="button" value="Edit User"
-				action="editUserAdminConsole" align="left" /></li>
-		<li>	<s:submit name="button" value="Manual Override"
-				action="manualAdminConsole" align="left" /></li>
+				action="editWorkflowAdminConsole" align="left" />
+				<br><br>
+				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
+			<s:submit name="button" value="Add User"
+				action="createUserAdminConsole" align="left" />
+				<br><br>
+				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
+			<s:submit name="button" value="Edit User"
+				action="editUserAdminConsole" align="left" />
+				<br><br>
+				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
+			<s:submit name="button" value="Manual Override"
+				action="manualAdminConsole" align="left" /><br>
 				
 		</s:form>
 	</s:if>
@@ -50,10 +56,10 @@
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
-	</ul>
+	
 	 </div>
-	 <div style="position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
-	 <h2 style="text-align: center;"><u>About Menu</u></h2><br>
+	 <div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
+	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2><br>
 	 <ul>
 	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
 	 	</li>

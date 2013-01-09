@@ -40,32 +40,33 @@
 </table>
 <h2>Add a role: </h2>
 	<s:form action="final_assign_role.action" method="post">
+	<table>
 		<s:hidden name="p_id"/>
-		<s:hidden name="workflowID" value="%{workflowID}" />
-		<s:hidden name="pageName" value="%{pageName}"/>
+		<tr><td>Workflow ID</td><td><s:hidden name="workflowID" value="%{workflowID}" /></td></tr>
+		<tr><td>PageName</td><td><s:hidden name="pageName" value="%{pageName}"/></td></tr>
 		<s:set name="pageName" value="%{pageName}"/>
 		<s:if test="%{#pageName=='AdminConsole'}">
-		<s:select label="Select Workflow" headerKey="-1"
+		<tr><td>Select Workflow</td><td><s:select label="Select Workflow" headerKey="-1"
 			headerValue="Select Workflow"
 			list="wfList"
-			name="selected_wf"/>
+			name="selected_wf"/></td></tr>
 		</s:if>
 		<s:elseif test="%{#pageName=='EditorConsole'}">
-		<s:select label="Select Workflow" headerKey="-1"
+		<tr><td>Select Workflow</td><td><s:select label="Select Workflow" headerKey="-1"
 			headerValue="Select Workflow"
 			list="wfList"
-			name="selected_wf" />
+			name="selected_wf" /></td></tr>
 		</s:elseif>
-		<s:select label="Select Role" headerKey="-1"
+		<tr><td>Select Role</td><td><s:select label="Select Role" headerKey="-1"
 			headerValue="Select Role"
 			list="roleList"
-			name="selected_role"/>
-		<s:textfield name="username" label="User Name" value="%{AssignRole.username}" size="30" />
-		<s:textfield name="password" label="Password" value="%{AssignRole.username}" size="30" />
+			name="selected_role"/></td></tr>
+		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{AssignRole.username}" size="30" /></td></tr>
+		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{AssignRole.username}" size="30" /></td></tr>
 		<s:actionerror />
 		<s:actionmessage/>
-		<s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" />
-
+		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" /></td></tr>
+</table>
 	</s:form>
 	</div>
 	</div>

@@ -10,27 +10,33 @@
 </head>
 <body>
 <%@include file="master.html" %>
+<div id="edit_workflow">
 	<h2>Edit Workflow</h2>
-	<s:actionerror />
-	<s:actionmessage />
+	<table id="line" align="left">
+	
+	<tr><th><s:actionerror /></th>
+	<th><s:actionmessage /></th>
+	</tr>
 	<s:form action="edit_wf.action" method="post">
-		<s:textfield name="workflowID" label="Workflow ID" value="%{workflowID}" readonly="true"/>
-		<s:textfield name="workflowName" label="Workflow Name"
-			value="%{workflowName}" onfocus="true"/>
-		<s:textfield name="workflowDescription" label="Workflow Description"
-			value="%{workflowDescription}" />
-		<s:select label="Select a domain" headerKey="1"
+		<tr><td></td><td></td><td>Workflow ID</td><td><s:textfield name="workflowID" label="Workflow ID" value="%{workflowID}" readonly="true"/></td></tr>
+		<tr><td></td><td></td><td>Workflow Name</td><td><s:textfield name="workflowName" label="Workflow Name"
+			value="%{workflowName}" onfocus="true"/></td></tr>
+		<tr><td></td><td></td><td>Workflow Description</td><td><s:textfield name="workflowDescription" label="Workflow Description"
+			value="%{workflowDescription}" /></td></tr>
+		<tr><td></td><td></td><td>WorkFlow Domain</td><td><s:select label="Select a domain" headerKey="1"
 			list="domainList"
 			name="workflowDomain"
-			value="%{workflowDomain}" />
-		<s:select label="Freeze" headerKey="-1"
+			value="%{workflowDomain}" /></td></tr>
+		<tr><td></td><td></td><td>Freeze</td><td><s:select label="Freeze" headerKey="-1"
 			headerValue="Select a value"
 			list="freezeList"
 			name="freeze"
-			value="%{freeze}" />
-		<s:submit name="button" value="Save Changes" align="center" method="saveChanges"/>
-		<s:submit name="button" value="Back" method="back" align="left" />
+			value="%{freeze}" /></td></tr>
+		<br><tr><td></td><td><s:submit name="button" value="Save Changes" align="center" method="saveChanges"/></td>
+		<td><s:submit name="button" value="Back" method="back" align="left" /></td></tr>
+		</table>
 	</s:form>
+	</div>
 	</div>
 </body>
 </html>
