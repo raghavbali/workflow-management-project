@@ -41,6 +41,7 @@ public class LoginAction extends ActionSupport {
 					DBService.tableSuffix(this.getWorkflowID()));
 			session.put("workflowID", String.valueOf(this.getWorkflowID()));
 			session.put("userID", result.get(2));
+			session.put("role", result.get(0));
 		} else {
 			addActionError(getText("You are not logged-in"));
 		}

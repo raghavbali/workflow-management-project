@@ -51,6 +51,8 @@
 	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
 		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
 			align="left" />
+		<li><s:submit name="button" value="Generate reports" action="generateReportsEditorConsole"
+			align="left" /></li>
 			
 	</s:form>
 	</s:if>
