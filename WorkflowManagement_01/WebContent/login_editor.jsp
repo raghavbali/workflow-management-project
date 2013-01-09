@@ -32,21 +32,25 @@
 	<s:actionmessage/>
 	<s:actionerror/>
 	<div id="buttons_menu">
-	<ul>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
 	
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
+	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
 			align="left" />
-	<li>	<s:submit name="button" value="Create Item" action="createItemEditorConsole"
-			align="left" /></li>
-		<li><s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
-			align="left" /></li>
-		<li><s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
-			align="left" /></li>
-		<li><s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
-			align="left" /></li>
+	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
+		<s:submit name="button" value="Create Item" action="createItemEditorConsole"
+			align="left" />
+	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
+		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
+			align="left" />
+	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
+		<s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
+			align="left" />
+	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
+		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
+			align="left" />
 			
 	</s:form>
 	</s:if>
@@ -54,8 +58,24 @@
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
 	</s:else>
-	</ul>
 	</div>
+	
+	<div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
+	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2><br>
+	 <ul>
+	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Edit Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Add User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Edit User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 	<li>Manual Override : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
+	 	</li>
+	 </ul>	 
+	 </div>
+	
 	</div>
 </body>
 </html>

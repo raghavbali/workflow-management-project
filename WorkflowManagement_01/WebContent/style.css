@@ -93,10 +93,9 @@ body{
 }
 
 #assign_role{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:20%;width:70%;height:50%;
-	overflow:auto;
 }
 
 #edit_user_basic{
@@ -178,3 +177,7 @@ table, td,th{
 	top:40%;left:20%;width:30%;height:50%;
 }
 
+#edit_item{
+	position: absolute;
+	top:40%;left:20%;width:30%;height:50%;
+}
