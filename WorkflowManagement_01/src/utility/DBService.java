@@ -130,6 +130,27 @@ public class DBService {
 	}
 	
 	
+	public static int generate_stageID(String tableName){
+		Connection conn = null;
+		PreparedStatement query = null;
+		ResultSet result = null;
+		int stage_id = 0;
+		
+		try{
+			conn = new MySqlConnection().getConnection();
+			query = conn.prepareStatement("SELECT MAX(stage_id) as stage_id FROM `"+tableName+"`");
+			result = query.executeQuery();
+			while(result.next()){
+				stage_id = result.getInt("stage_id") + 1;
+			}
+			conn.close();
+		}catch(Exception ex){
+			System.out.println("Exception caught:\n" + ex);
+		}
+		return stage_id;
+	}
+	
+	
 	
 	public static int generate_pid(){
 		Connection conn = null;
