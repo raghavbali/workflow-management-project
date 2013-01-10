@@ -32,7 +32,21 @@
 	<div id="heading">WORKFLOW MANAGEMENT</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#">Home</a></li>
+				<s:if test="%{#session['role']=='admin'}">
+				<li><a href="backToAdminConsole.action">Home</a></li>
+				</s:if>
+				<s:elseif test="%{#session['role']=='author'}">
+				<li><a href="authorAction.action">Home</a>
+					</li>
+				</s:elseif>
+				<s:elseif test="%{#session['role']=='publisher'}">
+					<li><a href="publisherAction.action">Home</a>
+					</li>
+				</s:elseif>
+				<s:elseif test="%{#session['role']=='editor'}">
+					<li><a href="doneEditorConsole.action">Home</a>
+					</li>
+				</s:elseif>
 				<li><a href="#">About US</a></li>
 				<li><a href="logoutAdminConsole.action">Logout</a></li>
 			</ul>

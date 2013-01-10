@@ -8,22 +8,13 @@
 <sx:head />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin page - Add User</title>
-<SCRIPT Language="JavaScript">
-<!--//
-function showAndClearField(frm){
-  if (frm.fname.value == "")
-      alert("Hey! You didn't enter anything!")
-  
-  frm.fname.value = ""
-}
-//-->
-</SCRIPT>
 <link rel="stylesheet" type="text/css" href="style.css">
+<!--<script src="validation.js"></script>  onSubmit="return addUserValidation();"-->
 </head>
-<body>
+<body onload="document.add_user.prefix.focus();">
 
 <%@include file="master.html" %>
-	<s:form action="add_user.action" method="post">
+	<s:form name="add_user" action="add_user.action" method="post"  >
 		<h2 style="text-align: center;">Add User</h2>
 		<table>
 		<tr><th><s:actionerror /></th><th><s:actionmessage/></th></tr>

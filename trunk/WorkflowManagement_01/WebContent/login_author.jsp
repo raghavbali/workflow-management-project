@@ -58,9 +58,17 @@
 						<td><s:property value="status" /></td>
 						<td><s:property value="daysLeft" /></td>
 						<td><s:property value="lastUpdated" /></td>
-						<td><a
+						<td>
+						<s:set name= "statusVal" value="status"/>
+							<s:if test='%{#statusVal!="F" && #statusVal!="B"}'>
+						<a
 							href="authorAction.action?itemID=<s:property value = "itemID" />&status=<s:property value="status"/>&stageID=<s:property value="stageID"/>">Update
-								Item </a></td>
+								Item </a>
+						</s:if>
+							<s:else>
+							Updated
+							</s:else>
+						</td>
 					</tr>
 				</s:iterator>
 			</table>

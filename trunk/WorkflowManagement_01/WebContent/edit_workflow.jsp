@@ -27,11 +27,15 @@
 			list="domainList"
 			name="workflowDomain"
 			value="%{workflowDomain}" /></td></tr>
-		<tr><td></td><td></td><td>Freeze</td><td><s:select label="Freeze" headerKey="-1"
-			headerValue="Select a value"
+			<s:set name= "freezeVal" value="freeze"/>
+		<tr><td></td><td></td><td>Freeze</td><td><s:if test='%{#freezeVal=="N"}'><s:select label="Freeze"
 			list="freezeList"
 			name="freeze"
-			value="%{freeze}" /></td></tr>
+			value="%{freeze}" /><s:submit name="button" value="Delete Workflow" align="center" method="deleteMaster"/>
+		</s:if>
+		<s:else>
+		<s:property value="freeze"/>
+		</s:else></td></tr>
 		<br><tr><td></td><td><s:submit name="button" value="Save Changes" align="center" method="saveChanges"/></td>
 		<td><s:submit name="button" value="Back" method="back" align="left" /></td></tr>
 		</table>
