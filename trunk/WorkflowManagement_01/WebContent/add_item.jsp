@@ -17,21 +17,23 @@
 	<h2>Add Item</h2>
 	<s:actionerror />
 	<s:actionmessage/>
-	Workflow ID :<s:property value="workflowID" />
+	<table>
+	<tr><td>Workflow ID :</td><td><s:property value="workflowID" /></td></tr>
 	<s:form action=".action" method="post">
 		<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
-		<s:textfield name="itemName" id="itemName" label="Item Name" size="50" />
-		<s:textfield name="itemDescription" id="itemDescription" label="Item Description"
-			size="50" />
-		<s:textfield name="remarks" id="remarks" label="Remarks"
-			size="50" />
-		<s:textfield name="filePath" id="filePath" label="File Path"
-			size="50" />
-			<s:submit name="button" value="Add"
-			action="addToWorkflowItemConsole" align="left" id="addToWorkflowItemConsole"/>
-			<s:submit name="button" value="Back"
-			action="doneEditorConsole" align="left" />
+		<tr><td>Item Name</td><td><s:textfield name="itemName" id="itemName" label="Item Name" size="50" /></td></tr>
+		<tr><td>Item Description:</td><td><s:textfield name="itemDescription" id="itemDescription" label="Item Description"
+			size="50" /></td></tr>
+		<tr><td>Remarks</td><td><s:textfield name="remarks" id="remarks" label="Remarks"
+			size="50" /></td></tr>
+		<tr><td>File Path:</td><td><s:textfield name="filePath" id="filePath" label="File Path"
+			size="50" /></td></tr>
+		<tr><td><s:submit name="button" value="Add"
+			action="addToWorkflowItemConsole" align="left" id="addToWorkflowItemConsole"/></td>
+			<td><s:submit name="button" value="Back"
+			action="doneEditorConsole" align="left" /></td></tr>
 	</s:form>
+	</table>
 	</div>
 	</div>
 </body>
