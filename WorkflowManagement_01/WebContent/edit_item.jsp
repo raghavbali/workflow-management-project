@@ -35,6 +35,8 @@
 			align="left" id="button" /></td>
 		<td><s:submit name="button" value="Back" action="backToWorkflowItemConsole"
 			align="left" id="button" /></td></tr>
+		<tr><td><s:submit name="button" value="Delete" action="deleteToWorkflowItemConsole"
+			align="left" id="button" /></td></tr>
 	</s:form>
 	</table>
 	</div>

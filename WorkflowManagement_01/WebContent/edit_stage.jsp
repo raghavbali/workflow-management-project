@@ -24,12 +24,13 @@
 			size="50" /></td></tr>
 		<tr><td>Stage SLA(in hrs)</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)"
 			size="5" /></td></tr>
-		<tr><td>Stage Sequence</td><td><s:textfield name="stageSequenceNo" label="Stage Sequence Number"
-			 size="5" /></td></tr>
 		<tr><td><s:submit name="button" value="Update Stage"
 			action="updateNowStage" align="center" /></td>
 		<td><s:submit name="button"  value="Back"
 			action="doneStage" align="center" /></td></tr>
+		<tr><td><s:submit name="button" value="Delete Stage"
+			action="deleteNowStage" align="center" /></td>
+		</tr>
 			</s:iterator>	
 	</s:form>
 	</table>
