@@ -164,6 +164,16 @@
 				<result name="delegateAuthors">login_publisher.jsp</result>
 		</action>
 		
+		<action name="updateLeaderList" class="action.LeaderBucketAction"
+				method = "updateLeaderList">
+				<result name="updateLeaderList">login_publisher.jsp</result>		
+		</action>
+		
+		 <action name="*Move" method="{1}" class="action.LeadMoveConsole">
+         	<result name="forward">login_publisher.jsp</result>
+   		 	<result name="backward">login_publisher.jsp</result>
+		</action>
+		
          
          <!-- PUBLISHER BLOCK ENDS  -->
          <!-- *********************************************************** -->
