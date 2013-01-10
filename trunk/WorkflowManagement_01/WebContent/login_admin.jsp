@@ -58,8 +58,8 @@
 	</s:else>
 	
 	 </div>
-	 <div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
-	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2><br>
+	 <div id="login_admin_about_menu">
+	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2>
 	 <ul>
 	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
 	 	</li>
