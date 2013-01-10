@@ -68,6 +68,7 @@ public class LeaderBucketAction extends ActionSupport{
 	public String execute(){
 		pageName = "displayList";
 		String str = this.displayList();
+		session.put("leadID", this.userID);
 		session.put("bucketView", this.objBucketView);
 		return str;
 	}
@@ -89,6 +90,7 @@ public class LeaderBucketAction extends ActionSupport{
 	public String delegateAuthors(){
 		int iSize, res = 0;
 		session = ActionContext.getContext().getSession();
+		this.setUserID(Integer.parseInt((session.get("leadID")).toString()));
 		ArrayList<String> params = new ArrayList<String>();
 		usrlist = UserDetails.find("AND w_id='" + workflowID + "' AND role IN ('author') AND user_id IN (SELECT user_id from stage" + session.get("tableSuffix") + " WHERE stage_id = '" + stageID + "')");
 //		this.displayList();
@@ -139,9 +141,9 @@ public class LeaderBucketAction extends ActionSupport{
         {
         	addActionMessage(getText("Assignment successful"));
         	if(checkboxes.size() > 0)
-        		Bucket.updateStatus(workflowID, stageID, itemID, "A");
+        		Bucket.updateStatus(workflowID, this.userID, stageID, itemID, "A");
         	else
-        		Bucket.updateStatus(workflowID, stageID, itemID, "I");
+        		Bucket.updateStatus(workflowID, this.userID, stageID, itemID, "I");
         }
         this.displayList();
     	pageName = "delegateAuthors";
@@ -153,28 +155,37 @@ public class LeaderBucketAction extends ActionSupport{
 		session = ActionContext.getContext().getSession();
 		this.objBucketView = (ArrayList<LeaderBucketAction>) session.get("bucketView");
 		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
-		int maxItems = this.objBucketView.size();
-		if(maxItems > 0)
-			this.setStageID(objBucketView.get(0).getStageID());
-		for(int tempItemID=0; tempItemID < maxItems; tempItemID++){
-//			System.out.println(stageID + " " + (tempItemID+1) + " " + workflowID);
-			statusList = AuthorBucket.find(stageID, tempItemID+1, workflowID, "status", "");
-			temp = "";
-			for(int i=0; i<statusList.size(); i++){
-					temp = temp + statusList.get(i);
-				}
-//			System.out.println(temp);
-			if(temp.equals(""))
-				finalStatus = "I";
-			else if(temp.contains("P"))
-				finalStatus = "P";
-			else if(temp.contains("I"))
-				finalStatus = "A";
-			else
-				finalStatus = "C";
-//			System.out.println(finalStatus);
-			Bucket.updateStatus(workflowID, stageID, tempItemID+1, finalStatus);
-		}
+		this.setUserID(Integer.parseInt((session.get("leadID")).toString()));
+//		if(!(Bucket.checkStatus(workflowID, stageID, itemID).equals("F")) && !(Bucket.checkStatus(workflowID, stageID, itemID).equals("B"))){
+			int maxItems = this.objBucketView.size();
+			if(maxItems > 0)
+				this.setStageID(objBucketView.get(0).getStageID());
+			for(int tempItemID=0; tempItemID < maxItems; tempItemID++){
+//				System.out.println(stageID + " " + (tempItemID+1) + " " + userID + " " + workflowID);
+				this.itemID = this.objBucketView.get(tempItemID).getItemID();
+				if(!this.objBucketView.get(tempItemID).getStatus().equals("F") && !this.objBucketView.get(tempItemID).getStatus().equals("B"))
+				if(!(Bucket.checkStatus(workflowID, this.userID, stageID, this.getItemID()).equals(""))){
+//					System.out.println("here");
+				statusList = AuthorBucket.find(stageID, this.getItemID(), workflowID, "status", "");
+				temp = "";
+				for(int i=0; i<statusList.size(); i++){
+					String st = statusList.get(i);
+					if(!st.equals("F") && !st.equals("B"))
+						temp = temp + st;
+					}
+	//			System.out.println(temp);
+				if(temp.equals(""))
+					finalStatus = "I";
+				else if(temp.contains("P"))
+					finalStatus = "P";
+				else if(temp.contains("I"))
+					finalStatus = "A";
+				else
+					finalStatus = "C";
+	//			System.out.println(finalStatus);
+				Bucket.updateStatus(workflowID, this.userID, stageID, this.getItemID(), finalStatus);
+			}
+			}
 		this.displayList();
 		pageName = "LeaderStatusUpdate";
 		return "updateLeaderList";

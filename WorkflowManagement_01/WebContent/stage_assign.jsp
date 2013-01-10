@@ -70,7 +70,8 @@
 	<table>
 	<s:iterator value = "usrlist">
 	<tr>
-	<td><s:checkbox name="checkboxes" label="%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	<td><s:checkbox name="checkboxes" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	<td><s:label value = "%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]"/></td>
 	</tr>
 		</s:iterator>
 	<tr>

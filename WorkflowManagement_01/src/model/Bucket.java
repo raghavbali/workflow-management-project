@@ -158,7 +158,7 @@ public class Bucket {
 		return objBucketView;
 	}
 	
-	public static void updateStatus(int w_id, int stage_id, int item_id, String status){
+	public static void updateStatus(int w_id, int user_id, int stage_id, int item_id, String status){
 		String tableName="leader_bucket";
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
@@ -180,11 +180,11 @@ public class Bucket {
 			e.printStackTrace();
 		}
 		
-		String updateQuery = "UPDATE " + tableName + " SET status = '" + status + "' WHERE stage_id = '" + stage_id + "' AND item_id = '" + item_id + "'" ;
+		String updateQuery = "UPDATE " + tableName + " SET status = '" + status + "' WHERE user_id = '" + user_id + "' AND stage_id = '" + stage_id + "' AND item_id = '" + item_id + "' AND status NOT IN ('F', 'B')" ;
 		DBService.DDLQueryInDB(updateQuery);
 	}
 	
-	public static String checkStatus(int w_id, int stage_id, int item_id){
+	public static String checkStatus(int w_id, int user_id, int stage_id, int item_id){
 		String tableName="leader_bucket";
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
@@ -206,7 +206,7 @@ public class Bucket {
 			e.printStackTrace();
 		}
 		
-		String query = "SELECT `status` FROM " + tableName + " WHERE stage_id = '" + stage_id + "' AND item_id = '" + item_id + "'";
+		String query = "SELECT `status` FROM " + tableName + " WHERE user_id = '" + user_id + "' AND stage_id = '" + stage_id + "' AND item_id = '" + item_id + "' AND status NOT IN('F', 'B')";
 		String status = "";
 		
 		try {
@@ -219,14 +219,15 @@ public class Bucket {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(status);
+		//System.out.println(status);
+		System.out.println("q" + status + "q");
 		return status;
 	}
 	
 	public String moveItem(int w_id, int stage_id, int item_id, int flag){
 		int oldStageLead = 0, seq_no = 0, stageSLA = 0, insertResult;
 		String query;
-		String tableName="", wftable = "workflow", leadtable = "leader_bucket", itemtable = "item";
+		String tableName="", wftable = "workflow", leadtable = "leader_bucket", itemtable = "item" , generaltable = "general_bucket";
 		ArrayList<String> values = new ArrayList<String>();
 		ResultSet resultTableName = null;
 		String selectQueryTable=null;
@@ -247,6 +248,7 @@ public class Bucket {
 				wftable = wftable + tableName;
 				leadtable = leadtable + tableName;
 				itemtable = itemtable + tableName;
+				generaltable = generaltable + tableName;
 			}
 			dbObject.getConn().close();
 		} catch (Exception e) {
@@ -324,8 +326,20 @@ public class Bucket {
 		insertResult = DBService.insertObjectInDB(query, values);
 		
 		if(insertResult != 0){
-			query = "UPDATE " + leadtable + " SET last_updated = '" + this.getAssignedDate() + "', status = 'F' WHERE user_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
-			DBService.DDLQueryInDB(query);
+			if(flag == 1){
+				query = "UPDATE " + leadtable + " SET last_updated = '" + this.getAssignedDate() + "', status = 'F' WHERE user_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
+				DBService.DDLQueryInDB(query);
+				
+				query = "UPDATE " + generaltable + " SET status = 'F' WHERE stage_lead_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
+				DBService.DDLQueryInDB(query);
+			}
+			else if(flag == -1){
+				query = "UPDATE " + leadtable + " SET last_updated = '" + this.getAssignedDate() + "', status = 'B' WHERE user_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
+				DBService.DDLQueryInDB(query);
+				
+				query = "UPDATE " + generaltable + " SET status = 'B' WHERE stage_lead_id = '" + oldStageLead + "' AND item_id = '" + item_id + "' AND stage_id = '" + stage_id + "'";
+				DBService.DDLQueryInDB(query);
+			}
 			
 			query = "UPDATE " + itemtable + " SET current_stage_id = '" + this.getStageID() + "' WHERE item_id = '" + item_id + "'";
 			DBService.DDLQueryInDB(query);
