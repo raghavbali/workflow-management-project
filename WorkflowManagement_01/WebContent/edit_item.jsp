@@ -14,13 +14,13 @@
 <%@include file="master.html" %>
 <div id="edit_item">
 <table>
-	<tr><td><h2>Add Item</h2></td></tr>
+	Add Item
 	<s:actionerror />
 	<s:actionmessage />
 	<tr><td>Workflow :</td>
 	<td><s:property value="workflowID" /></td></tr>
 	<s:form action=".action" method="post">
-		<tr><td>WorkFlow ID</td><td><s:hidden name="workflowID" id="workflowID" value="%{workflowID}" /></td></tr>
+		<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
 		<s:hidden name="itemID" id="itemID" value="%{itemID}" />
 		<tr><td>Item ID :</td><td><s:property value="itemID" /></td></tr>
 		<s:iterator value="itemList" var="itemList" status="stat" id="itemList">
@@ -34,11 +34,11 @@
 			<s:textfield name="filePath" id="filePath" label="File Path"
 				size="50" /></td></tr>
 		</s:iterator>
-		<tr><td><s:submit name="button" value="Save" action="editToWorkflowItemConsole"
-			align="left" id="button" /></td>
-		<td><s:submit name="button" value="Back" action="backToWorkflowItemConsole"
-			align="left" id="button" /></td></tr>
-		<tr><td><s:submit name="button" value="Delete" action="deleteToWorkflowItemConsole"
+		<tr><td></td><td><s:submit name="button" value="Save" action="editToWorkflowItemConsole"
+			align="left" id="button" />
+		<s:submit name="button" value="Back" action="backToWorkflowItemConsole"
+			align="left" id="button" />
+		<s:submit name="button" value="Delete" action="deleteToWorkflowItemConsole"
 			align="left" id="button" /></td></tr>
 	</s:form>
 	</table>

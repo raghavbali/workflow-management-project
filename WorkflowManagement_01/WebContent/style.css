@@ -115,7 +115,7 @@ top:40%;left:30%;width:60%;height:55%;
 }
 
 #admin_console{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:20%;width:70%;height:50%;
 	border-radius:15px;
@@ -140,7 +140,7 @@ top:40%;left:30%;width:60%;height:55%;
 }
 
 #edit_user_adv{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:20%;width:70%;height:50%;
 }
@@ -158,7 +158,7 @@ top:40%;left:30%;width:60%;height:55%;
 }
 
 #item_list{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:20%;width:70%;height:50%;
 }
@@ -168,7 +168,7 @@ top:40%;left:30%;width:60%;height:55%;
 	top:40%;left:5%;width:90%;height:50%;
 }
 #stage_list{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:5%;width:90%;height:50%;
 }
@@ -185,7 +185,7 @@ top:40%;left:30%;width:60%;height:55%;
 }
 
 #workflow_list{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:5%;width:90%;height:50%;
 }
@@ -199,6 +199,7 @@ table, td,th{
 */
 
 table {
+	border:1px;
 	empty-cells:hide;
 	font-family: verdana,arial,sans-serif;
 	font-size:11px;
@@ -220,6 +221,7 @@ table, td {
 	background:#dcddc0 url('cell-grey.jpg');
 	border-width: 1px;
 	padding: 8px;
+	
 	border-style: solid;
 	border-color: #999999;
 }
@@ -235,6 +237,11 @@ table, td {
 
 #edit_item{
 	position: absolute;
-	top:40%;left:20%;width:30%;height:50%;
+	top:40%;left:30%;width:30%;height:55%;
 }
 
+#reports_menu{
+	position: absolute;
+	top:40%;left:40%;width:50%;height:50%;
+	/*border:thin solid black;*/
+}

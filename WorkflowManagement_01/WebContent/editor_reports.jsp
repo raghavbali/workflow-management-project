@@ -26,21 +26,22 @@
 <%@include file="master.html" %>	
 	<s:actionmessage/>
 	<s:actionerror/>
-	<div id="buttons_menu">
-	<ul>
+	<div id="reports_menu">
 	<s:form action="" method="">
-	<s:text name="%{#session['role']}"/>
+	<!-- <s:text name="%{#session['role']}"/>-->
+	<br><br><br>
+	<table>
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
-	<s:submit name="button" value="SLA Report" action="slaReport"
-			align="left" />
-	<li>	<s:submit name="button" value="Item Status Report" action="itemReport"
-			align="left" /></li>
-		<li><s:submit name="button" value="Resource Allocation Chart" action="resourceReport"
-			align="left" /></li>
-			<li><s:submit name="button" value="Back" action="doneEditorConsole"
-			align="left" /></li>
+	<tr><td><s:submit name="button" value="SLA Report" action="slaReport"
+			align="left" /></td></tr>
+		<tr><td><s:submit name="button" value="Item Status Report" action="itemReport"
+			align="left" /></td></tr>
+		<tr><td><s:submit name="button" value="Resource Allocation Chart" action="resourceReport"
+			align="left" /></td></tr>
+		<tr><td><s:submit name="button" value="Back" action="doneEditorConsole"
+			align="left" /></td></tr>
+		</table>	
 	</s:form>
-	</ul>
 	</div>
 	</div>
 </body>
