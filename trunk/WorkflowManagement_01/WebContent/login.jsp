@@ -10,6 +10,8 @@
  <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
 <title>WFMS: Login</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="slideshow.js" type="text/javascript"></script>
+    <script src="jquery-1.8.3.js" type="text/javascript"></script>
 <script language="JavaScript">
 var x=window.history.length;
 if (window.history[x]!=window.location)
