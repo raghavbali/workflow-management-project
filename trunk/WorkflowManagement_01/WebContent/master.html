@@ -47,6 +47,9 @@
 					<li><a href="doneEditorConsole.action">Home</a>
 					</li>
 				</s:elseif>
+				<s:if test="%{#session['userID']!=''}">
+				<li><a href="backToAdminConsole.action">Edit Profile</a></li>
+				</s:if>
 				<li><a href="#">About US</a></li>
 				<li><a href="logoutAdminConsole.action">Logout</a></li>
 			</ul>
