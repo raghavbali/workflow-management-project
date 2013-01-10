@@ -42,7 +42,7 @@
 					 </td>
 					<td><s:property value="itemDescription" />
 					 </td>
-					<td><s:property value="remarks" />
+					<td><s:text name="remarks.split('<br/>|<\r\n>')"  />
 					 </td>
 					<td><s:property value="filePath" />
 					 </td>
