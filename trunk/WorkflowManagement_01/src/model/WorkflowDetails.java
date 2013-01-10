@@ -121,6 +121,41 @@ public class WorkflowDetails {
 		DBService.DDLQueryInDB(updateQuery);
 	}
 	
+	public String delete(String tableSuffix) {
+		String selectQueryTable = null;
+		String whereClauseTable = null;
+		DBobjects dbObject = null;
+		int alreadyPresent = 0;
+		ResultSet result = null;
+		String deleteSQL = null;
+
+		/* check if stage is already set */
+		selectQueryTable = "SELECT count(*) FROM workflow" + tableSuffix;
+		whereClauseTable = "WHERE stage_lead_id IS NOT NULL AND stage_id="+this.getStageID();
+		try {
+			dbObject = DBService.dbExecuteQuery(selectQueryTable,
+					whereClauseTable);
+			result = dbObject.getResult();
+			while (result.next()) {
+				alreadyPresent = result.getInt(1);
+			}
+			dbObject.getConn().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (alreadyPresent == 1)
+			return "set";
+		else {
+			deleteSQL = "Delete FROM workflow" + tableSuffix + " WHERE stage_id="
+					+ this.getStageID();
+			System.out.println("delete :\n" + deleteSQL);
+			DBService.DDLQueryInDB(deleteSQL);
+			return "deleted";
+		}
+
+	}
+	
 	public int getStageID() {
 		return stageID;
 	}
