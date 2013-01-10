@@ -110,7 +110,8 @@ top:40%;left:30%;width:60%;height:55%;
 #buttons_menu{
 	position:absolute;
 	top:40%;left:1%;border:thin solid black;
-	width:20%; height:55%;	border-radius: 15px;
+	width:20%; min-height:55%;	border-radius: 15px;height:auto;
+	
 }
 
 #admin_console{
@@ -151,7 +152,7 @@ top:40%;left:30%;width:60%;height:55%;
 }
 
 #add_item{
-	border: thin solid black;
+	/*border: thin solid black;*/
 	position: absolute;
 	top:40%;left:20%;width:70%;height:50%;
 }

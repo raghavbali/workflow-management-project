@@ -39,7 +39,7 @@
 	<s:form action="" method="">
 	
 	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
-	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	<br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
 			align="left" />
 	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
@@ -54,8 +54,9 @@
 	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
 		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
 			align="left" />
-		<li><s:submit name="button" value="Generate reports" action="generateReportsEditorConsole"
-			align="left" /></li>
+		<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
+		<s:submit name="button" value="Generate reports" action="generateReportsEditorConsole"
+			align="left" />
 			
 	</s:form>
 	</s:if>
