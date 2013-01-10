@@ -169,9 +169,16 @@ public class AuthorBucketAction extends ActionSupport {
 				+ "` g, `leader_bucket" + tableSuffix + "` l";
 		String whereClause = " WHERE l.user_id=g.stage_lead_id and l.item_id=g.item_id and l.stage_id=g.stage_id and i.item_id=g.item_id and w.stage_id=g.stage_id AND g.user_id="
 				+ this.getUserID();
+		String extraClause1=" and l.status not in ('F','B') ";
+		String extraClause2=" and l.status in ('F','B') and l.status=g.status ";
+		
+		String finalQuery=selectQuery + fromClause+whereClause+extraClause1+" UNION "+selectQuery + fromClause+whereClause+extraClause2;
+		
+		System.out.println("final\n"+finalQuery);
+		
 		try {
-			dbObject = DBService.dbExecuteQuery(selectQuery + fromClause,
-					whereClause);
+			dbObject = DBService.dbExecuteQuery(finalQuery,
+					"");
 			result = dbObject.getResult();
 			while (result.next()) {
 				AuthorBucketAction newItem = new AuthorBucketAction();
