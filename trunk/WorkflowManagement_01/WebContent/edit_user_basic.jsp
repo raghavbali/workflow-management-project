@@ -32,17 +32,17 @@ function showAndClearField(frm){
 			headerValue="Select prefix"
 			list="prefixList"
 			name="prefix" value="%{tmpuser.getPrefix()}"/></td></tr>
-		<tr><td>First Name</td><td><s:textfield name="fname" label="First Name" value="%{tmpuser.getFname()}" size="30" /></td></tr>
-		<tr><td>Last Name</td><td><s:textfield name="lname" label="Last Name" value="%{tmpuser.getLname()}" size="30" /></td></tr>
+		<tr><td>First Name</td><td><s:textfield name="fname" label="First Name" value="%{tmpuser.getFname()}" size="30" required="true"/></td></tr>
+		<tr><td>Last Name</td><td><s:textfield name="lname" label="Last Name" value="%{tmpuser.getLname()}" size="30" required="true"/></td></tr>
 		<tr><td>Sex</td><td><s:select label="Select sex" headerKey="-1"
 			headerValue="Select sex"
 			list="sexList"
 			name="sex" value="%{tmpuser.getSex()}" /></td>
-		<tr><td>DOB</td><td><s:textfield name="dob" label="DoB(yyyy-mm-dd)" size="30" value="%{tmpuser.getDob()}" /></td></tr>
-		<tr><td>Address</td><td><s:textfield name="address" label="Address" size="100" value="%{tmpuser.getAddress()}"/></td></tr>
-		<tr><td>Country</td><td><s:textfield name="country" label="Country" size="30" value="%{tmpuser.getCountry()}"/></td></tr>
-		<tr><td>Phone no.</td><td><s:textfield name="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}"/></td></tr>
-		<tr><td>Email ID</td><td><s:textfield name="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}"/></td></tr>
+		<tr><td>DOB</td><td><s:textfield name="dob" label="DoB(yyyy-mm-dd)" size="30" value="%{tmpuser.getDob()}" required="true"/></td></tr>
+		<tr><td>Address</td><td><s:textfield name="address" label="Address" size="100" value="%{tmpuser.getAddress()}" required="true"/></td></tr>
+		<tr><td>Country</td><td><s:textfield name="country" label="Country" size="30" value="%{tmpuser.getCountry()}" required="true"/></td></tr>
+		<tr><td>Phone no.</td><td><s:textfield name="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}" required="true"/></td></tr>
+		<tr><td>Email ID</td><td><s:textfield name="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}" required="true"/></td></tr>
 		<tr><td><s:submit name = "button1" value = "Edit" align="center" /></td>
 		<td><s:submit name = "button1" value = "Back" align="center" /></td>
 		</tr>

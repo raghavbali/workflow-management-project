@@ -21,23 +21,24 @@
 	<th><s:actionmessage /></th>
 	</tr>
 	<s:form action="edit_wf.action" method="post">
-		<tr><td></td><td></td><td>Workflow ID</td><td><s:textfield name="workflowID" label="Workflow ID" value="%{workflowID}" readonly="true"/></td></tr>
+		<tr><td></td><td></td><td>Workflow ID</td><td><s:textfield name="workflowID" label="Workflow ID" value="%{workflowID}" readonly="true" required="true"/></td></tr>
 		<tr><td></td><td></td><td>Workflow Name</td><td><s:textfield name="workflowName" label="Workflow Name"
-			value="%{workflowName}" onfocus="true"/></td></tr>
+			value="%{workflowName}" onfocus="true" required="true"/></td></tr>
 		<tr><td></td><td></td><td>Workflow Description</td><td><s:textfield name="workflowDescription" label="Workflow Description"
-			value="%{workflowDescription}" /></td></tr>
-		<tr><td></td><td></td><td>WorkFlow Domain</td><td><s:select label="Select a domain" headerKey="1"
+			value="%{workflowDescription}" required="true"/></td></tr>
+		<tr><td></td><td></td><td>WorkFlow Domain</td><td><s:select label="Select a domain" 
 			list="domainList"
 			name="workflowDomain"
-			value="%{workflowDomain}" /></td></tr>
+			value="%{workflowDomain}" required="true" /></td></tr>
 			<s:set name= "freezeVal" value="freeze"/>
 		<tr><td></td><td></td><td>Freeze</td><td><s:if test='%{#freezeVal=="N"}'><s:select label="Freeze"
 			list="freezeList"
 			name="freeze"
-			value="%{freeze}" /><s:submit name="button" value="Delete Workflow" align="center" method="deleteMaster"/>
+			value="%{freeze}" required="true"/><s:submit name="button" value="Delete Workflow" align="center" method="deleteMaster"/>
 		</s:if>
 		<s:else>
 		<s:property value="freeze"/>
+		<s:hidden name="freeze" value="%{freeze}"/>
 		</s:else></td></tr>
 		<br><tr><td></td><td><s:submit name="button" value="Save Changes" align="center" method="saveChanges"/></td>
 		<td><s:submit name="button" value="Back" method="back" align="left" /></td></tr>
