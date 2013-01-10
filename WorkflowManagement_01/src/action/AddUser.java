@@ -28,7 +28,7 @@ public class AddUser extends ActionSupport {
 			
 //			ArrayList<String> temp = DBService.fetchResults(DBService.dbExecuteQuery("SELECT MAX(p_id) as p_id FROM `personal_information`"), 1);
 //			p_id = String.valueOf((Integer.parseInt(temp.get(0)) + 1));
-
+			this.setDob(this.getDob().substring(0, 9));
 			p_id = String.valueOf(DBService.generate_pid());
 			User tempusr = new User(p_id, prefix, fname, lname, sex, dob, address, country, phone, email);
 			String insertQuery = "INSERT INTO `personal_information`(`p_id`, `prefix`, `first_name`, `last_name`, `gender`, `dob`, `address`, `country`, `phone_no`, `email`) VALUES (?,?,?,?,?,?,?,?,?,?)";

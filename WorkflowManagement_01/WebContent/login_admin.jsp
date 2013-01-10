@@ -50,8 +50,7 @@
 				action="editUserAdminConsole" align="left" />
 				<br><br>
 				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
-			<s:submit name="button" value="Manual Override"
-				action="manualAdminConsole" align="left" /><br>
+
 				
 		</s:form>
 	</s:if>

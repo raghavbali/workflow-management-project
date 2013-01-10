@@ -33,20 +33,17 @@ function showAndClearField(frm){
 		<s:hidden name ="active_flag" value="%{tmpuser.getActive_flag()}"/>
 		<s:hidden name="pageName" value="%{pageName}"/>
 		<s:hidden name="workflowID" />
-		<tr><td>Select Workflow</td><td><s:select label="Select Workflow" headerKey="-1"
-			headerValue="Select Workflow"
+		<tr><td>Select Workflow</td><td><s:select label="Select Workflow" 
 			list="wfList"
-			name="w_id" value="%{tmpuser.getW_id()}"/></td></tr>
-		<tr><td>Select Role</td><td><s:select label="Select Role" headerKey="-1"
-			headerValue="Select Role"
+			name="w_id" value="%{tmpuser.getW_id()}" required="true"/></td></tr>
+		<tr><td>Select Role</td><td><s:select label="Select Role" 
 			list="roleList"
-			name="role" value="%{tmpuser.getRole()}"/></td></tr>
-		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{tmpuser.getUsername()}" size="30" /></td></tr>
-		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{tmpuser.getPassword()}" size="30" /></td></tr>
-		<tr><td>Select active state</td><td><s:select label="Is active?" headerKey="-1"
-			headerValue="Select active state"
+			name="role" value="%{tmpuser.getRole()}" required="true"/></td></tr>
+		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{tmpuser.getUsername()}" size="30" required="true"/></td></tr>
+		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{tmpuser.getPassword()}" size="30" required="true"/></td></tr>
+		<tr><td>Select active state</td><td><s:select label="Is active?" 
 			list="actstateList"
-			name="selected_actstate" value="%{tmpuser.getActive_flag()}"/></td></tr>
+			name="selected_actstate" value="%{tmpuser.getActive_flag()}" required="true"/></td></tr>
 		<s:actionerror />
 		<s:actionmessage/>
 		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Edit role" align="center" /></td></tr>

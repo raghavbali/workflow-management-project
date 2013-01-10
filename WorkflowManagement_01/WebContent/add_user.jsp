@@ -11,31 +11,29 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
-
-<!--<script src="validation.js"></script>  onSubmit="return addUserValidation();"-->
+<script src="validation.js"></script>  
 </head>
 <body onload="document.add_user.prefix.focus();">
 
 	<%@include file="master.html"%>
-	<s:form name="add_user" action="add_user.action" method="post">
+	<s:form name="add_user" action="add_user.action" method="post" onSubmit="return checkform(buttonIndex);">
 		<h2 style="text-align: center;">Add User</h2>
 		<table>
 			<tr>
-				<th><s:actionerror />
+				<th><s:actionerror /><div id="mandatory" style="color:red"></div>
 				</th>
 				<th><s:actionmessage />
 				</th>
 			</tr>
 			<tr>
 				<td>Prefix</td>
-				<td align="left"><s:select label="Select prefix" headerKey="-1"
-						headerValue="Select prefix" list="prefixList" name="prefix"
-						value="%{AddUser.prefix}" /></td>
+				<td align="left"><s:select label="Select prefix" list="prefixList" name="prefix"
+						id="prefix" value="%{AddUser.prefix}" required="true"/></td>
 			</tr>
 			<tr>
 				<td>First Name</td>
 				<td align="left"><s:textfield name="fname" label="First Name"
-						value="%{AddUser.fname}" size="30" />
+						value="%{AddUser.fname}" size="30" id="fname" required="true"/>
 				</td>
 			</tr>
 			<tr>
@@ -80,9 +78,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td><button type="submit" value="Create" name="buttonName">Create</button>
+				<td><input type="submit" value="Create" name="buttonName" id="buttonName" onclick="buttonIndex=1;"/>
 				</td>
-				<td><button type="submit" value="Back" name="buttonName">Back</button>
+				<td><input type="submit" value="Back" name="buttonName" id="buttonName" onclick="buttonIndex=2;"/>
 				</td>
 			</tr>
 		</table>
