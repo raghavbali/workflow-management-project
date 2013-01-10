@@ -6,7 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WFMS: Select Workflow</title>
+<script src="slideshow.js" type="text/javascript"></script>
+<script src="jquery-1.8.3.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
 <%@include file="master.html" %>

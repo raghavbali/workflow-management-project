@@ -9,6 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin page - Add User</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="slideshow.js" type="text/javascript"></script>
+<script src="jquery-1.8.3.js" type="text/javascript"></script>
+
 <!--<script src="validation.js"></script>  onSubmit="return addUserValidation();"-->
 </head>
 <body onload="document.add_user.prefix.focus();">
