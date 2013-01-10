@@ -26,11 +26,13 @@
 <body>
 <%@include file="master.html" %>
 	
-	<s:actionmessage />
-	<s:actionerror />
 	<s:if test="%{#session['logged-in']=='true'}">
 		<s:form action="" method="">
 		<div id="login_author">
+		<table>
+	<s:actionmessage />
+	<s:actionerror />
+	</table>
 			<table>
 				<tr>
 					<th><h3>Sno</h3></th>
