@@ -25,18 +25,13 @@
 </head>
 <body>
 <%@include file="master.html" %>
-	<div id="menu">
-	<ul>	
-		<li><a href="#">Home</a></li>
-		<li><a href="#">About US</a></li>
-		<li><a href="logoutAdminConsole.action">Logout</a></li>
-	</ul>
+	
 	<s:actionmessage />
 	<s:actionerror />
 	<s:if test="%{#session['logged-in']=='true'}">
 		<s:form action="" method="">
-			<a href="logoutAdminConsole.action">Logout</a>
-			<table border="1">
+		<div id="login_author">
+			<table>
 				<tr>
 					<th><h3>Sno</h3></th>
 					<th><h3>Item ID</h3></th>
@@ -87,7 +82,7 @@
 			<s:hidden id="userID" name="userID"/>
 			<s:hidden id="stageID" name="stageID"/>
 			<s:submit name="update_author_item" method="updateItem" value="Update" align="left"/>
-			</s:if>
+			</s:if></div>
 		</s:form>
 	</s:if>
 	<s:else>
