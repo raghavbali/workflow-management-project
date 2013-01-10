@@ -89,6 +89,31 @@ public class DBService {
 		}
 		return result;
 	}
+	
+	public static int addUserRole(String insertQuery,ArrayList<String> params){
+		// TODO assignRole.java mein se see if user name already fiven or not!
+		int result;
+		Connection conn=null;
+		PreparedStatement pst = null;
+		int i=1;
+
+		try {
+			conn= new MySqlConnection().getConnection();
+			pst=conn.prepareStatement(insertQuery);
+			
+			for (String string : params) {
+				pst.setString(i, string);
+				i++;
+			}
+			
+			result = pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result =0;
+		}
+		return result;
+	}
 
 	
 	public static int DDLQueryInDB(String sqlQuery){

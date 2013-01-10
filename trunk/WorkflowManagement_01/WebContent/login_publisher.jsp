@@ -94,10 +94,10 @@
 					<td><a
 						href="authorsList.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Delegate </a></td>
 					<td><a
-						href="forwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Move to Next Stage </a>
+						href="forwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>&status=<s:property value="status"/>">Move to Next Stage </a>
 					</td>
 					<td><a
-						href="backwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>">Move to Previous Stage </a>
+						href="backwardMove.action?stageID=<s:property value="stageID"/>&itemID=<s:property value="itemID"/>&status=<s:property value="status"/>">Move to Previous Stage </a>
 					</td>
 				</tr>
 			</s:iterator>
@@ -119,11 +119,12 @@
 	<table>
 	<s:iterator value = "usrlist">
 	<tr>
-	<td><s:checkbox name="checkboxes" label="%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	<td><s:checkbox name="checkboxes" fieldValue="%{getUser_role().getUser_id()}" value="%{getUser_role().getUser_id() in checkboxes}" /></td>
+	<td><s:label value = "%{getUser().getFname()} %{getUser().getLname()} [%{getUser_role().getUser_id()}]"/></td>
 	</tr>
 		</s:iterator>
 	<tr>
-		<s:submit name = "commandButton" id="mysubmit" value="Delegate" align="center" />
+	<td><s:submit name = "commandButton" id="mysubmit" value="Delegate" align="center" /></td>
 	</tr>
 	</table>
 

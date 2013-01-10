@@ -25,8 +25,8 @@ function showAndClearField(frm){
 <body>
 <%@include file="master.html" %>
 <div id="edit_user_adv">
-<table>
 <h2>Edit User Advanced</h2>
+<table>
 	<s:form action="update_user_adv.action" method="post">
 		<s:hidden name="user_id"/>
 		<s:hidden name="p_id" value="%{tmpuser.getP_id()}"/>

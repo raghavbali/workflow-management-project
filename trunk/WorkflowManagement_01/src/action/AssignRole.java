@@ -72,8 +72,7 @@ public class AssignRole extends ActionSupport {
 		user_id = String.valueOf(DBService.generate_userid());
 		active_flag = String.valueOf(1);
 		w_id = String.valueOf(getW_idfromDB(selected_wf));
-		UserRole tmpusr = new UserRole(user_id, username, password, p_id, w_id,
-				selected_role, active_flag);
+		UserRole tmpusr = new UserRole(user_id, username, password, p_id, w_id, selected_role, active_flag);
 		String insertQuery = "INSERT INTO `login_credentials`(`user_id`, `username`, `password`, `p_id`, `w_id`, `role`, `active_flag`) VALUES (?,?,?,?,?,?,?)";
 		ArrayList<String> values = new ArrayList<String>();
 		values.add(tmpusr.getUser_id());

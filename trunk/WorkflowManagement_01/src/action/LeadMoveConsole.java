@@ -11,14 +11,19 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LeadMoveConsole extends ActionSupport{
 
 	private int stageID, workflowID, itemID;
+	String status;
 	private ArrayList<LeaderBucketAction> objBucketView;
 	Map<String, Object> session;
+	LeaderBucketAction tempobj;
 	
 
 	public String forward(){
+		tempobj = new LeaderBucketAction();
+		tempobj.displayList();
+		this.objBucketView = tempobj.getObjBucketView();
 		session = ActionContext.getContext().getSession();
 		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
-		if(!(Bucket.checkStatus(workflowID, stageID, itemID).equals("C")))
+		if(!status.equals("C"))
 			addActionError(getText("Attention: Status should be 'C' in order to forward the item!"));
 		else{
 	//		System.out.println(workflowID + " " + stageID + " " + itemID);
@@ -29,17 +34,19 @@ public class LeadMoveConsole extends ActionSupport{
 				addActionMessage(getText("Item forwarded successfully"));
 		}
 //		this.objBucketView = new LeaderBucketAction().find(String.valueOf(session.get("tableSuffix")).toString());
-		LeaderBucketAction tempobj = new LeaderBucketAction();
 		tempobj.displayList();
 		this.objBucketView = tempobj.getObjBucketView();
 		return "forward";
 	}
 	
 	public String backward(){
+		tempobj = new LeaderBucketAction();
+		tempobj.displayList();
+		this.objBucketView = tempobj.getObjBucketView();
 		session = ActionContext.getContext().getSession();
 		this.setWorkflowID(Integer.parseInt((session.get("workflowID")).toString()));
-		if(!(Bucket.checkStatus(workflowID, stageID, itemID).equals("P")))
-			addActionError(getText("Attention: Status should be 'P' in order to forward the item!"));
+		if(!status.equals("P"))
+			addActionError(getText("Attention: Status should be 'P' in order to send back the item!"));
 		else{
 	//		System.out.println(workflowID + " " + stageID + " " + itemID);
 			String str = new Bucket().moveItem(workflowID, stageID, itemID, -1);
@@ -49,7 +56,7 @@ public class LeadMoveConsole extends ActionSupport{
 				addActionMessage(getText("Item moved back successfully"));
 		}
 //		this.objBucketView = new LeaderBucketAction().find(String.valueOf(session.get("tableSuffix")).toString());
-		LeaderBucketAction tempobj = new LeaderBucketAction();
+		
 		tempobj.displayList();
 		this.objBucketView = tempobj.getObjBucketView();
 		return "backward";
@@ -85,5 +92,13 @@ public class LeadMoveConsole extends ActionSupport{
 
 	public void setObjBucketView(ArrayList<LeaderBucketAction> objBucketView) {
 		this.objBucketView = objBucketView;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
