@@ -7,22 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="style.css">
-<link href="js-image-slider.css" rel="stylesheet" type="text/css" />
-<script src="js-image-slider.js" type="text/javascript"></script>
-<link href="generic.css" rel="stylesheet" type="text/css" />
+<script src="slideshow.js" type="text/javascript"></script>
+    <script src="jquery-1.8.3.js" type="text/javascript"></script>
 </head>
 <body>
-	<div id="box">
-		<div id="sliderFrame">
-			<div id="ribbon"></div>
-			<div id="slider">
-				<img src="images/image-slider-2.jpg" /> <img
-					src="images/image-slider-3.jpg" /> <img
-					src="images/image-slider-4.jpg" /> <img
-					src="images/image-slider-5.jpg" />
-			</div>
-
-		</div>
+	<!--  <div id="box">-->
+		
 
 		<div id="heading">WORKFLOW MANAGEMENT</div>
 		<div id="menu">
