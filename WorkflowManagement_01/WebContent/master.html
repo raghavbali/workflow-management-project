@@ -37,19 +37,16 @@
 				<li><a href="editUserProfile.action">Edit Profile</a></li>
 				</s:if>
 				<s:elseif test="%{#session['role']=='author'}">
-				<li><a href="authorAction.action">Home</a>
+				<li><a href="authorAction.action">Home</a></li>
 				<li><a href="editUserProfile.action">Edit Profile</a></li>
-					</li>
 				</s:elseif>
 				<s:elseif test="%{#session['role']=='publisher'}">
-					<li><a href="publisherAction.action">Home</a>
+					<li><a href="publisherAction.action">Home</a></li>
 					<li><a href="editUserProfile.action">Edit Profile</a></li>
-					</li>
 				</s:elseif>
 				<s:elseif test="%{#session['role']=='editor'}">
-					<li><a href="doneEditorConsole.action">Home</a>
+					<li><a href="doneEditorConsole.action">Home</a></li>
 					<li><a href="editUserProfile.action">Edit Profile</a></li>
-					</li>
 				</s:elseif>
 				
 				<li><a href="#">About US</a></li>
