@@ -20,7 +20,7 @@
 		<h2 style="text-align: center;">Add User</h2>
 		<table>
 			<tr>
-				<th><s:actionerror /><div id="mandatory" style="color:red"></div>
+				<th><s:actionerror /><div id="loginmandatory" style="color:red"></div>
 				</th>
 				<th><s:actionmessage />
 				</th>
@@ -33,52 +33,52 @@
 			<tr>
 				<td>First Name</td>
 				<td align="left"><s:textfield name="fname" label="First Name"
-						value="%{AddUser.fname}" size="30" id="fname" required="true"/>
+						value="%{AddUser.fname}" size="30" placeholder="First Name" id="fname" required="true"/>
 				</td>
 			</tr>
 			<tr>
 				<td>Last Name</td>
-				<td><s:textfield name="lname" label="Last Name"
+				<td><s:textfield name="lname" id="lname" placeholder="Last Name" label="Last Name"
 						value="%{AddUser.lname}" size="30" />
 				</td>
 			</tr>
 			<tr>
 				<td>Select Sex</td>
-				<td align="left"><s:select label="Select sex" headerKey="-1"
-						headerValue="Select sex" list="sexList" name="sex"
+				<td align="left"><s:select label="Select sex" 
+						 list="sexList" name="sex"
 						value="%{AddUser.sex}" />
 				</td>
 			</tr>
 			<tr><td>Date of Birth</td>
-				<td><sx:datetimepicker name="dob" 
+				<td><sx:datetimepicker name="dob" id="dob" 
 						displayFormat="yyyy-MM-dd" value="%{AddUser.dob}" /></td>
 			</tr>
 			<tr>
 				<td>Address</td>
-				<td><s:textfield name="address" label="Address" size="100"
+				<td><s:textfield name="address" id="address" placeholder="address" label="Address" size="100"
 						value="%{AddUser.address}" />
 				</td>
 			</tr>
 			<tr>
 				<td>Country</td>
-				<td><s:textfield name="country" label="Country" size="30"
+				<td><s:textfield name="country" id="country" placeholder="country" label="Country" size="30"
 						value="%{AddUser.country}" />
 				</td>
 			</tr>
 			<tr>
 				<td>Phone No</td>
-				<td><s:textfield name="phone" label="Phone no." size="30"
+				<td><s:textfield name="phone" id="phone" placeholder="phone"  label="Phone no." size="30"
 						value="%{AddUser.phone}" />
 				</td>
 			</tr>
 			<tr>
 				<td>Email ID</td>
-				<td><s:textfield name="email" label="Email ID" size="30"
+				<td><s:textfield name="email" id="email" placeholder="email" label="Email ID" size="30"
 						value="%{AddUser.email}" />
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Create" name="buttonName" id="buttonName" onclick="buttonIndex=1;"/>
+				<td><input type="submit" value="Create" name="buttonName"  id="buttonName" onclick="buttonIndex=1;"/>
 				</td>
 				<td><input type="submit" value="Back" name="buttonName" id="buttonName" onclick="buttonIndex=2;"/>
 				</td>
