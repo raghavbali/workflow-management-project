@@ -114,8 +114,10 @@ top:48%;left:30%;width:60%;height:41%;
 
 #buttons_menu{
 	position:absolute;
-	top:40%;left:5%;/*border:thin solid black;*/
-	width:20%; min-height:55%;	border-radius: 15px;height:auto;
+	top:40%;left:5%;
+	/*border:thin solid black;*/
+	width:20%; min-height:55%;	
+	height:auto;
 	
 }
 

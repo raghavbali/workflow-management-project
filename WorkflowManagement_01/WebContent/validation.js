@@ -129,12 +129,39 @@ return false;
 function checkform(i){
 	  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	  if(i==1){
-			if(document.getElementById("wf_name").value==""){
+			if(document.getElementById("fname").value==""){
 		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
 		        return false;
 		    }
 
-		    if(document.getElementById("wf_description").value==""){
+		    if(document.getElementById("lname").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
+		    
+		    if (reg.test(document.getElementById("email").value) == false) 
+		    {
+		    	document.getElementById("email").value="";
+		        return false;
+		    }
+		    
+		    /*if(document.getElementById("DOB").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }*/
+		    if(document.getElementById("address").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
+		    if(document.getElementById("phone").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
+		    if(document.getElementById("email").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
+		    if(document.getElementById("country").value==""){
 		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
 		        return false;
 		    }
