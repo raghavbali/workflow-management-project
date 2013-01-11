@@ -110,4 +110,42 @@ public class UserRole {
 		this.active_flag = active_flag;
 	} 
 	
+	public static String get(String colname, String userID){
+		String value = "";
+		ResultSet result;
+		String query = "SELECT " + colname + " FROM login_credentials ";
+		String where = "WHERE user_id = '" + userID + "'";
+		DBobjects dbObject;	
+		try{
+			dbObject = DBService.dbExecuteQuery(query,where);
+			result=dbObject.getResult();
+		while(result.next()){
+			value = result.getString(colname);
+		}
+		dbObject.getConn().close();
+		}catch(Exception ex){
+			System.out.println("Exception caught: " + ex);
+		}
+		return value;
+	}
+	
+	public static String getEditorByWid(String colname, String wID){
+		String value = "";
+		ResultSet result;
+		String query = "SELECT " + colname + " FROM login_credentials ";
+		String where = "WHERE p_id = '" + wID + "' AND role IN ('editor')";
+		DBobjects dbObject;	
+		try{
+			dbObject = DBService.dbExecuteQuery(query,where);
+			result=dbObject.getResult();
+		while(result.next()){
+			value = result.getString(colname);
+		}
+		dbObject.getConn().close();
+		}catch(Exception ex){
+			System.out.println("Exception caught: " + ex);
+		}
+		return value;
+	}
+	
 }

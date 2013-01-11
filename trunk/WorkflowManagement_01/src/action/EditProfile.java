@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import model.User;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import utility.CaesarCypher;
 import utility.DBService;
 import utility.DBobjects;
 
@@ -19,6 +19,7 @@ public class EditProfile extends ActionSupport{
 	private EditProfile tmpuser;
 	Map<String, Object> session;
 	private String pageName, oldPass, newPass, reNewPass;
+	
 	
 	public EditProfile(){
 		sexList = new ArrayList<String>();
@@ -78,24 +79,30 @@ public class EditProfile extends ActionSupport{
 		session = ActionContext.getContext().getSession();
 		this.setUser_id(session.get("userID").toString());
 		this.setTmpuser(this.find(" AND user_id = '" + this.getUser_id() + "'"));
-		if(!this.oldPass.equals(tmpuser.getPassword())){
+		String encrypt_oldpass = CaesarCypher.encrypt(oldPass);
+		if(!encrypt_oldpass.equals(tmpuser.getPassword())){
 			addActionError(getText("Incorrect old password"));
+//			System.out.println("iop");
 			return "error";
 		}
 		else if(!this.newPass.equals(this.reNewPass)){
 			addActionError(getText("New password in both fields don't match."));
+//			System.out.println("newdm");
 			return "error";
 		}
 		else{
-			String updateQuery = "UPDATE login_credentials SET password = '" + this.getNewPass() + "' WHERE user_id = '" + this.tmpuser.getUser_id() + "'";
+			String pass_encrypt = CaesarCypher.encrypt(this.getNewPass());			
+			String updateQuery = "UPDATE login_credentials SET password = '" + pass_encrypt + "' WHERE user_id = '" + this.tmpuser.getUser_id() + "'";
 			int res = DBService.DDLQueryInDB(updateQuery);
 			this.setTmpuser(this.find(" AND user_id = '" + this.tmpuser.getUser_id() + "'"));
 			if(res == 0){
 				addActionError(getText("Some error, please re-chech the field values."));
+//				System.out.println("some error");
 				return "error";
 			}
 			else{
 				addActionMessage(getText("Success"));
+//				System.out.println("suc");
 				return "success";
 			}
 		}

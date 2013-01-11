@@ -45,10 +45,9 @@ public class AddUser extends ActionSupport {
 			values.add(tempusr.getEmail());
 			
 			int result = DBService.insertObjectInDB(insertQuery, values);
-	//		cleardata();
 			
 			if (result == 0){
-				addActionError(getText("Some error, please re-chech the field values."));
+				addActionError(getText("Some error, please re-check the field values."));
 				return "error";
 			}
 			else{
@@ -160,20 +159,4 @@ public class AddUser extends ActionSupport {
 	public void setPrefixList(ArrayList<String> prefixList) {
 		this.prefixList = prefixList;
 	}
-
-
-	
-	/*private void cleardata(){
-		this.prefix.equals("");
-		this.fname.equals("");
-		this.lname.equals("");
-		this.sex.equals("");
-		this.dob.equals("");
-		this.address.equals("");
-		this.country.equals("");
-		this.phone.equals("");
-		this.email.equals("");
-	}*/
-	
-	
 }

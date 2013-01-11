@@ -6,6 +6,7 @@ import java.util.Map;
 
 import model.UserRole;
 
+import utility.CaesarCypher;
 import utility.DBService;
 import utility.DBobjects;
 
@@ -100,9 +101,10 @@ public class EditUserAdv extends ActionSupport {
 	
 	public String update(){
 		tmpuser = new UserRole(user_id, username, password, p_id, String.valueOf(getW_idfromDB(w_id)), role, active_flag);
+		String encrypt_pass = CaesarCypher.encrypt(tmpuser.getPassword());
 		String updateQuery = "UPDATE login_credentials SET user_id = '" + tmpuser.getUser_id() +
 															"', username = '" + tmpuser.getUsername() + 
-															"', password = '" + tmpuser.getPassword() +
+															"', password = '" + encrypt_pass +
 															"', p_id = '" + tmpuser.getP_id() + 
 															"', w_id = '" + tmpuser.getW_id() +
 															"', role = '" + tmpuser.getRole() +

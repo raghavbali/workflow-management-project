@@ -7,7 +7,9 @@ import java.util.Map;
 
 import model.AuthorBucket;
 import model.Bucket;
+import model.User;
 import model.UserDetails;
+import model.UserRole;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,6 +36,7 @@ public class LeaderBucketAction extends ActionSupport{
 	private ArrayList<UserDetails> usrlist;
 	private List<String> checkboxes, statusList;
 	private String pageName;
+	private Emailer sendMail;
 
 	public LeaderBucketAction() {
 
@@ -187,6 +190,26 @@ public class LeaderBucketAction extends ActionSupport{
 			}
 			}
 		this.displayList();
+		maxItems = this.objBucketView.size();
+		if(maxItems > 0){
+			for(int i=0; i<maxItems; i++){
+				if(this.getObjBucketView().get(i).getDaysLeft() <= 0){
+					String wID = UserRole.get("w_id", String.valueOf(this.userID));
+					String pID = UserRole.get("p_id", String.valueOf(this.userID));
+					String fname = User.get("first_name", pID);
+					String lname = User.get("last_name", pID);
+					String editor_pid = UserRole.getEditorByWid("p_id", wID);
+					String to = User.get("email", editor_pid);
+					String from = "flux.wfms@gmail.com";
+					String password = "flux123456";
+					String subject = "Deadline not met!";
+					String body = "Hello editor,\n" + fname + " " + lname + " with user_id: " + this.userID + " and p_id: " + pID + " has missed the deadline on item_id: " + objBucketView.get(i).getItemID() + ". Kindly take note of it.\n\n Regards,\nFLUX Admin";
+					sendMail = new Emailer(from, password, to, subject, body);
+					sendMail.execute();
+				}
+			}
+		}
+		
 		pageName = "LeaderStatusUpdate";
 		return "updateLeaderList";
 	}

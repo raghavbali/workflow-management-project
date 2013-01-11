@@ -216,5 +216,14 @@
             <result name="displaySuccess">login_author.jsp</result>
             <result name="displayError">login_author.jsp</result>
         </action>
+   		<!--AUTHOR BLOCK ENDS -->
+   		
+   		<action name="emailer" 
+         class="action.Emailer" method="execute">
+         <result name="success">emailer.jsp</result>
+         <result name="error">emailer.jsp</result>
+      </action>
+   		
+        
     </package>
 </struts>
