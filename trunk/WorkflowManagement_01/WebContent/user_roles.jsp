@@ -65,7 +65,7 @@
 			list="roleList"
 			name="selected_role"/></td></tr>
 		<tr><td>User Name</td><td><s:textfield name="username" id="username" placeholder="username" label="User Name" value="%{AssignRole.username}" size="30" /></td></tr>
-		<tr><td>Password</td><td><s:textfield name="password" id="password" placeholder="password" label="Password" value="%{AssignRole.username}" size="30" /></td></tr>
+<!-- 	<tr><td>Password</td><td><s:textfield name="password" id="password" placeholder="password" label="Password" value="%{AssignRole.username}" size="30" /></td></tr>	-->
 		<s:actionerror />
 		<s:actionmessage/>
 		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" onclick="buttonIndex=1" /></td>
