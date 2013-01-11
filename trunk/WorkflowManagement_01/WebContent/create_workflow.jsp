@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
-
+<script src="validation.js" type="text/javascript"></script>
 </head>
 <body>
 <%@include file="master.html" %>
@@ -17,19 +17,23 @@
 	<div id="admin_console">
 	<h2><br>&nbsp&nbspCreate Workflow</h2>
 	<s:actionerror />
-	<s:form  cssClass="create_workflow" action="create_wf.action" method="post">
-		<br>Workflow Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <s:textfield  name="wf_name"  size="50" theme="simple" />
-		<br><br>Workflow Description:&nbsp<s:textfield name="wf_description" size="50" theme="simple"  />
-		<br><br><br>
-		Select a domain: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<s:select  headerKey="1"
+	<table>
+	<s:form  cssClass="create_workflow" onSubmit="return create_workflow(buttonIndex);" action="create_wf.action" method="post">
+		<tr><td>Workflow Name:</td><td><s:textfield  name="wf_name" id="wf_name" size="50" theme="simple" /></td></tr>
+		<tr><td>Workflow Description:</td><td><s:textfield name="wf_description" id="wf_description" size="50" theme="simple"  /></td></tr>		
+		<tr><td>Select a domain: </td><td><s:select  headerKey="1"
 			list="domainList"
 			name="wf_domain"
-			value="%{workflowDomain}" theme="simple" />
-			<br><br><s:submit name="wf_create" method="execute" value="Save"
-			align="left" theme="simple" />			
-		<s:submit name="button" value="Back"
+			value="%{workflowDomain}" theme="simple" /></td></tr>
+			<tr><td><s:submit name="wf_create" method="execute" value="Save"
+			align="left" theme="simple" onclick="buttonIndex=1" /></td>			
+		    <td><s:submit name="button" value="Back" onclick="buttonIndex=2;"
 				action="backToAdminConsole" align="center" theme="simple" />
+				&nbsp &nbsp &nbsp <div id="loginmandatory" style="color:red;"></div>
+				</td>				
+				</tr>
 	</s:form>
+	</table>
 	</div>
 	</div>
 </body>

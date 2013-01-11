@@ -188,3 +188,130 @@ function checklogin(){
     else 
         return true;
 }
+
+function login_check(){
+    if(document.getElementById("username").value==""){
+        document.getElementById("loginmandatory").innerHTML="*All fields mandatory";
+        return false;}
+    else if(document.getElementById("password").value==""){
+        document.getElementById("loginmandatory").innerHTML="*All fields mandatory";
+        return false;}
+    else 
+        return true;
+}
+
+function login_check(){
+    if(document.getElementById("username").value==""){
+        document.getElementById("loginmandatory").innerHTML="*All fields mandatory";
+        return false;}
+    else if(document.getElementById("password").value==""){
+        document.getElementById("loginmandatory").innerHTML="*All fields mandatory";
+        return false;}
+    else 
+        return true;
+}
+
+function create_workflow(i) {
+	if(i==1){
+		if(document.getElementById("wf_name").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+
+	    if(document.getElementById("wf_description").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function edit_workflow(i) {
+	if(i==1){
+		if(document.getElementById("workflowName").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("workflowDescription").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+
+	}
+}
+
+function edit_stage(i) {
+	if(i==1){
+		if(document.getElementById("stageName").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("stageDescription").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("stageSLA").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+
+	}
+}
+
+function edit_user_basic(i) {
+	if(i==1){
+		if(document.getElementById("fname").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("lname").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("dob").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("address").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("country").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("phone").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("email").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function user_roles(i) {
+	if(i==1){
+		if(document.getElementById("username").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("passwordname").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function edit_user_adv(i) {
+	if(i==1){
+		if(document.getElementById("username").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	    if(document.getElementById("password").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}

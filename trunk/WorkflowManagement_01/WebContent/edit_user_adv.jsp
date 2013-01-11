@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
-
+<script src="validation.js"></script>
 <SCRIPT Language="JavaScript">
 <!--//
 function showAndClearField(frm){
@@ -27,7 +27,7 @@ function showAndClearField(frm){
 <div id="edit_user_adv">
 <h2>Edit User Advanced</h2>
 <table>
-	<s:form action="update_user_adv.action" method="post">
+	<s:form action="update_user_adv.action" method="post" onSubmit="return edit_user_adv(buttonIndex);">
 		<s:hidden name="user_id"/>
 		<s:hidden name="p_id" value="%{tmpuser.getP_id()}"/>
 		<s:hidden name ="active_flag" value="%{tmpuser.getActive_flag()}"/>
@@ -39,14 +39,16 @@ function showAndClearField(frm){
 		<tr><td>Select Role</td><td><s:select label="Select Role" 
 			list="roleList"
 			name="role" value="%{tmpuser.getRole()}" required="true"/></td></tr>
-		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{tmpuser.getUsername()}" size="30" required="true"/></td></tr>
-		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{tmpuser.getPassword()}" size="30" required="true"/></td></tr>
+		<tr><td>User Name</td><td><s:textfield name="username" placeholder="username" id="username" label="User Name" value="%{tmpuser.getUsername()}" size="30" required="true"/></td></tr>
+		<tr><td>Password</td><td><s:textfield name="password" placeholder="password" id="password" label="Password" value="%{tmpuser.getPassword()}" size="30" required="true"/></td></tr>
 		<tr><td>Select active state</td><td><s:select label="Is active?" 
 			list="actstateList"
 			name="selected_actstate" value="%{tmpuser.getActive_flag()}" required="true"/></td></tr>
 		<s:actionerror />
 		<s:actionmessage/>
-		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Edit role" align="center" /></td></tr>
+		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Edit role" align="center" onclick="buttonIndex=1" /></td>
+		<td><div id="loginmandatory" style="color:red"></div>
+		</tr>
 	</s:form>
 	</table>
 	</div>
