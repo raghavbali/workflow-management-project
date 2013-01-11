@@ -13,8 +13,8 @@ public class WorkflowDBService {
 		Connection conn = null;
 		PreparedStatement pst = null;
 		String insertQuery = "INSERT INTO `" + workflow_table + "`"
-				+ " ( `stage_name`, `stage_description`, `stage_sla`,"
-				+ " `stage_seqno`, `w_id`) VALUES (?," + "?,?,?,?)";
+				+ " ( `stage_id`,`stage_name`, `stage_description`, `stage_sla`,"
+				+ " `stage_seqno`, `w_id`) VALUES (?,?,?,?,?,?)";
 		int i = 1;
 
 		try {
@@ -22,10 +22,10 @@ public class WorkflowDBService {
 			pst = conn.prepareStatement(insertQuery);
 
 			for (String string : params) {
-				if (i < 3)
+				//if (i < 3)
 					pst.setString(i, string);
-				else
-					pst.setInt(i, Integer.parseInt(string));
+				//else
+				//	pst.setInt(i, Integer.parseInt(string));
 				i++;
 			}
 
@@ -107,15 +107,16 @@ public class WorkflowDBService {
 
 		String leaderCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ lead_bucket
-				+ "` (  `user_id` int(5) NOT NULL, "
+				+ "` (  `sno` int(5) NOT NULL AUTO_INCREMENT," +
+				"  `user_id` int(5) NOT NULL, "
 				+ " `item_id` int(5) NOT NULL,  "
 				+ "`stage_id` int(5) NOT NULL, "
 				+ " `assigned_on` date NOT NULL,  "
 				+ "`delivery_date` date NOT NULL, "
-				+ " `status` enum('I','C','P','A') "
-				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned', `last_updated` date NOT NULL, "
-				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  "
-				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
+				+ " `status` enum('I','C','P','A','F','B') "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned,Forward,Backward', `last_updated` date NOT NULL, "
+				+ "PRIMARY KEY (`sno`,`user_id`,`item_id`,`stage_id`),  KEY `stage_id` (`stage_id`),  "
+				+ "KEY `item_id` (`item_id`),KEY `user_id` (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
 		String leaderConstraintsQuery = "ALTER TABLE `"
 				+ lead_bucket
@@ -134,16 +135,17 @@ public class WorkflowDBService {
 
 		String generalCreateTableQuery = "CREATE TABLE IF NOT EXISTS `"
 				+ general_bucket
-				+ "` (  `user_id` int(5) NOT NULL, "
+				+ "` ( `sno` int(5) NOT NULL AUTO_INCREMENT," +
+				" `user_id` int(5) NOT NULL, "
 				+ " `item_id` int(5) NOT NULL,  "
 				+ "`stage_id` int(5) NOT NULL, "
 				+ " `assigned_on` date NOT NULL,  "
 				+ "`delivery_date` date NOT NULL, "
-				+ " `status` enum('I','C','P','A') "
-				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned', `last_updated` date NOT NULL, "
+				+ " `status` enum('I','C','P','A','F','B') "
+				+ "COLLATE utf8_bin NOT NULL COMMENT 'Incomplete,Complete,Partial,Assigned,Forward,Backward', `last_updated` date NOT NULL, "
 				+"`stage_lead_id` int(5) NOT NULL, "
-				+ "PRIMARY KEY (`user_id`,`item_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`), "
-				+ "KEY `item_id` (`item_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
+				+ "PRIMARY KEY (`sno`,`user_id`,`item_id`,`stage_id`),  KEY `stage_id` (`stage_id`),  KEY `stage_lead_id` (`stage_lead_id`), "
+				+ "KEY `item_id` (`item_id`),KEY `user_id` (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin";
 
 		String generalConstraintsQuery = "ALTER TABLE `"
 				+ general_bucket
