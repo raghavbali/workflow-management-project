@@ -24,11 +24,13 @@ function showAndClearField(frm){
 <div id="edit_user_profile">
 <h2>Edit User Profile</h2>
 <table>
-	<s:form action="update_user_profile.action" method="post">
+	<s:form method="post">
 		<s:hidden name="user_id"/>
 		<s:hidden name="p_id" value="%{tmpuser.getP_id()}"/>
 		<s:hidden name ="active_flag" value="%{tmpuser.getActive_flag()}"/>
 		<s:hidden name="workflowID" />
+		<s:hidden name="pageName" value="%{pageName}"/>
+		<s:set name="pageName" value="%{pageName}"/>
 		<tr><td>Select prefix</td><td><s:select label="Select prefix" headerKey="-1"
 			headerValue="Select prefix"
 			list="prefixList"
@@ -44,18 +46,42 @@ function showAndClearField(frm){
 		<tr><td>Country</td><td><s:textfield name="country" label="Country" size="30" value="%{tmpuser.getCountry()}"/></td></tr>
 		<tr><td>Phone no.</td><td><s:textfield name="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}"/></td></tr>
 		<tr><td>Email ID</td><td><s:textfield name="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}"/></td></tr>
-
-		<tr><td>Role</td><td><s:textfield name="role" label="User Name" value="%{tmpuser.getRole()}" size="30" /></td></tr>
-		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{tmpuser.getUsername()}" size="30" /></td></tr>
-		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{tmpuser.getPassword()}" size="30" /></td></tr>
-		<tr><td><s:submit name = "button1" value = "Edit" align="center" /></td>
-		<td><s:submit name = "button1" value = "Back" align="center" /></td>
+		
+		<tr><td>Role</td><td><s:label value="%{tmpuser.getRole()}"/></td></tr>
+		<tr><td>User Name</td><td><s:label value="%{tmpuser.getUsername()}"/></td></tr>
+		
+		<tr><td>Password</td><td><a href="changePass.action?pageName=<s:property value="pageName"/>">Reset Password?</a>
+		<tr><td><s:submit name = "button1" value = "Edit" align="center" action="editUserProfileBasic"/></td>
+		<s:if test="%{#session['role']=='admin'}">
+			<td><s:submit name = "button1" value = "Back" align="center" action="backToAdminConsole"/></td>
+		</s:if>
+		<s:if test="%{#session['role']=='author'}">
+			<td><s:submit name = "button1" value = "Back" align="center" action="authorAction"/></td>
+		</s:if>
+		<s:if test="%{#session['role']=='publisher'}">
+			<td><s:submit name = "button1" value = "Back" align="center" action="publisherAction"/></td>
+		</s:if>
+		<s:if test="%{#session['role']=='editor'}">
+			<td><s:submit name = "button1" value = "Back" align="center" action="doneEditorConsole"/></td>
+		</s:if>		
 		</tr>
 		
 		<s:actionerror />
 		<s:actionmessage/>
 	</s:form>
 	</table>
+	
+	<s:if test="%{#pageName=='changePass'}">
+	<s:form method="post">
+	<table>
+	<tr><td>Old password: </td><td><s:password name = "oldPass" size = "30"/></td></tr>
+	<tr><td>New password: </td><td><s:password name = "newPass" size = "30"/></td></tr>
+	<tr><td>New password (Enter again): </td><td><s:password name = "reNewPass" size = "30"/></td></tr>
+	<tr><td><s:submit name = "button1" value = "Change" align="center" action="editUserProfileAdv"/></td>
+	<td><s:submit name = "button1" value = "Cancel" align="center" action="editUserProfile"/></td>
+	</table>
+	</s:form>
+	</s:if>
 	</div>
 	</div>
 </body>
