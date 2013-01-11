@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
-
+<script src="validation.js"></script>
 </head>
 <body>
 <%@include file="master.html" %>
@@ -42,7 +42,7 @@
 	</s:iterator>
 </table>
 <h2>Add a role: </h2>
-	<s:form action="final_assign_role.action" method="post">
+	<s:form action="final_assign_role.action" method="post" onSubmit="return user_roles(buttonIndex);">
 	<table>
 		<s:hidden name="p_id"/>
 		<tr><td>Workflow ID</td><td><s:hidden name="workflowID" value="%{workflowID}" /></td></tr>
@@ -64,11 +64,13 @@
 			headerValue="Select Role"
 			list="roleList"
 			name="selected_role"/></td></tr>
-		<tr><td>User Name</td><td><s:textfield name="username" label="User Name" value="%{AssignRole.username}" size="30" /></td></tr>
-		<tr><td>Password</td><td><s:textfield name="password" label="Password" value="%{AssignRole.username}" size="30" /></td></tr>
+		<tr><td>User Name</td><td><s:textfield name="username" id="username" placeholder="username" label="User Name" value="%{AssignRole.username}" size="30" /></td></tr>
+		<tr><td>Password</td><td><s:textfield name="password" id="password" placeholder="password" label="Password" value="%{AssignRole.username}" size="30" /></td></tr>
 		<s:actionerror />
 		<s:actionmessage/>
-		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" /></td></tr>
+		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" onclick="buttonIndex=1" /></td>
+		<td><div id="loginmandatory" style="color:red"></div></td>
+		</tr>
 </table>
 	</s:form>
 	</div>

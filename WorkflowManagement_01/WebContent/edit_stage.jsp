@@ -9,6 +9,7 @@
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="validation.js"></script>
 </head>
 <body>
 <%@include file="master.html" %>
@@ -19,20 +20,23 @@
 	<td><s:actionmessage/></td></tr>
 	<tr><td>WorkflowID:</td><td><s:property value="workflowID" /></td></tr>
 	<s:hidden name="workflowID" value="%{workflowID}"/>
-	<s:form action="" method="post">
+	<s:form action="" method="post" onSubmit="return edit_stage(buttonIndex);">
 
 	<s:iterator value="objListWfDetails" >
-		<tr><td>Stage Name</td><td><s:textfield name="stageName" label="Stage Name"  size="30" /></td></tr>
-		<tr><td>Stage Description</td><td><s:textfield name="stageDescription" label="Stage Description"
+		<tr><td>Stage Name</td><td><s:textfield name="stageName" label="Stage Name" id="stageName"  size="30" /></td></tr>
+		<tr><td>Stage Description</td><td><s:textfield name="stageDescription" label="Stage Description" id="stageDescription"
 			size="50" /></td></tr>
-		<tr><td>Stage SLA(in hrs)</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)"
+		<tr><td>Stage SLA(in hrs)</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)" id="stageSLA"
 			size="5" /></td></tr>
 		<tr><td><s:submit name="button" value="Update Stage"
-			action="updateNowStage" align="center" /></td>
-		<td><s:submit name="button"  value="Back"
-			action="doneStage" align="center" /></td></tr>
-		<tr><td><s:submit name="button" value="Delete Stage"
-			action="deleteNowStage" align="center" /></td>
+			action="updateNowStage" align="center" onclick="buttonIndex=1;"	 /></td>
+		<td>
+		<s:submit name="button" value="Delete Stage"
+			action="deleteNowStage" align="center" onclick="buttonIndex=1;"/>
+		<s:submit name="button"  value="Back"
+			action="doneStage" align="center" onclick="buttonIndex=2;" />
+			<div id="loginmandatory" style="color:red"></div>
+			</td>			
 		</tr>
 			</s:iterator>	
 	</s:form>

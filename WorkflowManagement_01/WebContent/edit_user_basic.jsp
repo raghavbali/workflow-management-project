@@ -20,31 +20,33 @@ function showAndClearField(frm){
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="validation.js"></script>
 </head>
 <body>
 <%@include file="master.html" %>
 <div id="edit_user_basic">
 <table>
 <h2>Edit User Basic</h2>
-	<s:form action="update_user_basic.action" method="post">
+	<s:form action="update_user_basic.action" method="post" onSubmit="return edit_user_basic(buttonIndex);">
 		<s:hidden name="p_id"/>
+		<tr><th><div id="loginmandatory" style="color:red"></div></th></tr>
 		<tr><td>Select prefix</td><td><s:select label="Select prefix" headerKey="-1"
 			headerValue="Select prefix"
 			list="prefixList"
 			name="prefix" value="%{tmpuser.getPrefix()}"/></td></tr>
-		<tr><td>First Name</td><td><s:textfield name="fname" label="First Name" value="%{tmpuser.getFname()}" size="30" required="true"/></td></tr>
-		<tr><td>Last Name</td><td><s:textfield name="lname" label="Last Name" value="%{tmpuser.getLname()}" size="30" required="true"/></td></tr>
+		<tr><td>First Name</td><td><s:textfield name="fname" id="fname" label="First Name" value="%{tmpuser.getFname()}" size="30" required="true"/></td></tr>
+		<tr><td>Last Name</td><td><s:textfield name="lname" id="lname" label="Last Name" value="%{tmpuser.getLname()}" size="30" required="true"/></td></tr>
 		<tr><td>Sex</td><td><s:select label="Select sex" headerKey="-1"
 			headerValue="Select sex"
 			list="sexList"
 			name="sex" value="%{tmpuser.getSex()}" /></td>
-		<tr><td>DOB</td><td><s:textfield name="dob" label="DoB(yyyy-mm-dd)" size="30" value="%{tmpuser.getDob()}" required="true"/></td></tr>
-		<tr><td>Address</td><td><s:textfield name="address" label="Address" size="100" value="%{tmpuser.getAddress()}" required="true"/></td></tr>
-		<tr><td>Country</td><td><s:textfield name="country" label="Country" size="30" value="%{tmpuser.getCountry()}" required="true"/></td></tr>
-		<tr><td>Phone no.</td><td><s:textfield name="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}" required="true"/></td></tr>
-		<tr><td>Email ID</td><td><s:textfield name="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}" required="true"/></td></tr>
-		<tr><td><s:submit name = "button1" value = "Edit" align="center" /></td>
-		<td><s:submit name = "button1" value = "Back" align="center" /></td>
+		<tr><td>DOB</td><td><s:textfield name="dob" id="dob" label="DoB(yyyy-mm-dd)" size="30" value="%{tmpuser.getDob()}" required="true"/></td></tr>
+		<tr><td>Address</td><td><s:textfield name="address" id="address" label="Address" size="60" value="%{tmpuser.getAddress()}" required="true"/></td></tr>
+		<tr><td>Country</td><td><s:textfield name="country" id="country" label="Country" size="30" value="%{tmpuser.getCountry()}" required="true"/></td></tr>
+		<tr><td>Phone no.</td><td><s:textfield name="phone" id="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}" required="true"/></td></tr>
+		<tr><td>Email ID</td><td><s:textfield name="email" id="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}" required="true"/></td></tr>
+		<tr><td><s:submit name = "button1" value = "Edit" align="center" onclick="buttonIndex=1" /></td>
+		<td><s:submit name = "button1" value = "Back" align="center" onclick="buttonIndex=2" /></td>
 		</tr>
 		
 		<s:actionerror />

@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
+<script src="validation.js"></script>
 <script language="JavaScript">
 var x=window.history.length;
 if (window.history[x]!=window.location)
@@ -24,12 +25,13 @@ if (window.history[x]!=window.location)
 <%@include file="master.html" %>
 <div id="loginjsp_login">
 <s:actionerror />
-<s:form action="login.action" method = "post">
-	<br><br>&nbsp&nbspUsername:<s:textfield placeholder="username" name = "username" label="Username" size = "20" value="admin1" />
-	<br><br>&nbsp&nbspPassword:<s:password name = "password" label="Password" size="20" value="pass1"/>
+<s:form action="login.action" method = "post" onSubmit="return login_check();">
+	<br><br>&nbsp&nbspUsername:<s:textfield placeholder="username" name = "username" id="username" label="Username" size = "20" value="admin1" />
+	<br><br>&nbsp&nbspPassword:<s:password placeholder="password" name = "password" label="Password" id="password" size="20" value="pass1"/>	
 	<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	<s:submit name = "button1" method = "execute" value = "Login" align="center" />
+	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
+	<s:submit name = "button1" id="buton1" method = "execute" value = "Login" align="center" />
+	&nbsp &nbsp &nbsp &nbsp &nbsp<div id="loginmandatory" style="color:red"></div>
 </s:form>
 </div>
 
