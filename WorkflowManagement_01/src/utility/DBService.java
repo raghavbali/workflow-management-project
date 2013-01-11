@@ -14,9 +14,11 @@ public class DBService {
 		Connection conn = null;
 		PreparedStatement query = null;
 		ResultSet result = null;
+		String encrypt_pass;
 		//String returnString = "login_fail";
 		ArrayList<String> returnString=new ArrayList<String>();
-		
+		encrypt_pass = CaesarCypher.encrypt(password);
+		System.out.println(encrypt_pass);
 		try{
 			conn = new MySqlConnection().getConnection();
 			query = conn.prepareStatement("select password, role, w_id,user_id from login_credentials where username = ? and active_flag = 1");
@@ -25,7 +27,7 @@ public class DBService {
 
 			while(result.next()){
 
-				if(password.equals(result.getString("password"))){
+				if(encrypt_pass.equals(result.getString("password"))){
 					//returnString = result.getString("role");
 					returnString.add(result.getString("role"));
 					returnString.add(String.valueOf(result.getInt("w_id")));
@@ -91,27 +93,43 @@ public class DBService {
 	}
 	
 	public static int addUserRole(String insertQuery,ArrayList<String> params){
-		// TODO assignRole.java mein se see if user name already fiven or not!
 		int result;
 		Connection conn=null;
 		PreparedStatement pst = null;
-		int i=1;
-
-		try {
-			conn= new MySqlConnection().getConnection();
-			pst=conn.prepareStatement(insertQuery);
-			
-			for (String string : params) {
-				pst.setString(i, string);
-				i++;
-			}
-			
-			result = pst.executeUpdate();
-			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			result =0;
+		ResultSet result1;
+		int i=1, count = -1;
+		String query = "SELECT count(*) as 'count' FROM login_credentials WHERE username = '" + params.get(1) + "'";
+//		System.out.println(query);
+		DBobjects dbObject;	
+		try{
+			dbObject = DBService.dbExecuteQuery(query,"");
+			result1=dbObject.getResult();
+		while(result1.next()){
+			count = result1.getInt("count");
 		}
+		dbObject.getConn().close();
+		}catch(Exception ex){
+			System.out.println("Exception caught: " + ex);
+		}
+		if (count == 0){
+			try {
+				conn= new MySqlConnection().getConnection();
+				pst=conn.prepareStatement(insertQuery);
+				
+				for (String string : params) {
+					pst.setString(i, string);
+					i++;
+				}
+				
+				result = pst.executeUpdate();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				result =0;
+			}
+		}
+		else
+			result = 0;
 		return result;
 	}
 

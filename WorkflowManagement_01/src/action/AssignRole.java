@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 
+import utility.CaesarCypher;
 import utility.DBService;
 import utility.DBobjects;
 
+import model.User;
 import model.UserRole;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -22,6 +24,9 @@ public class AssignRole extends ActionSupport {
 	private String pageName, workflowName;
 	private int workflowID;
 	Map<String, Object> session;
+	private Emailer sendMail;
+	private String defaultPass = "thanks123";
+	String encrypt_defaultPass = CaesarCypher.encrypt(defaultPass); 
 
 	public AssignRole() {
 		
@@ -88,13 +93,13 @@ public class AssignRole extends ActionSupport {
 		ArrayList<String> values = new ArrayList<String>();
 		values.add(tmpusr.getUser_id());
 		values.add(tmpusr.getUsername());
-		values.add(tmpusr.getPassword());
+		values.add(encrypt_defaultPass);
 		values.add(tmpusr.getP_id());
 		values.add(tmpusr.getW_id());
 		values.add(tmpusr.getRole());
 		values.add(tmpusr.getActive_flag());
 
-		int result = DBService.insertObjectInDB(insertQuery, values);
+		int result = DBService.addUserRole(insertQuery, values);
 		usrlist = DBService.getUserRoleList(p_id);
 		if(pageName.equals("EditorConsole"))
 			workflowName = getWfNamefromDB(String.valueOf(workflowID));
@@ -104,7 +109,27 @@ public class AssignRole extends ActionSupport {
 			addActionError(getText("Some error, please re-chech the field values."));
 			return "error";
 		} else {
-			addActionMessage(getText("User Role added successfully."));
+			try{
+			String fname = User.get("first_name", tmpusr.getP_id());
+			String lname = User.get("last_name", tmpusr.getP_id());
+			String to = User.get("email", tmpusr.getP_id());
+			String from = "flux.wfms@gmail.com";
+			String password = "flux123456";
+			String subject = "Welcome aboard!";
+			String body = "Hello " + fname + " " + lname + ",\nYou have been registered at WFMS. Here are your credentials:\n\nUser name: " + tmpusr.getUsername() + "\nPassword: " + defaultPass + "\n\nPlease change your password after your first log in.\n\nRegards,\nTeam FLUX";
+			sendMail = new Emailer(from, password, to, subject, body);
+			String ret = sendMail.execute();
+			if(ret.equals("success"))
+				addActionMessage(getText("User Role added successfully. Email sent to the user."));
+			else{
+				addActionMessage(getText("User Role added successfully."));
+				addActionError(getText("Email NOT sent to the user. Check your network connection."));
+			}
+			}catch(Exception ex){
+				System.out.println("Exception caught" + ex);
+				addActionMessage(getText("User Role added successfully."));
+				addActionError(getText("Email NOT sent to the user. Check your network connection."));
+			}
 			return "addrole_continue";
 		}
 	}
