@@ -93,7 +93,6 @@ top:48%;left:30%;width:60%;height:41%;
 	width:100%;min-height:110%;height:auto;
 	z-index:-1;
 	background-image: url('background-image.png') ;
-	background-size:cover;
 }
 
 #slideshow { 
@@ -186,7 +185,7 @@ top:48%;left:30%;width:60%;height:41%;
 }
 
 #flux_help{
-	border: thin solid black; 
+	/*border: thin solid black; 
 	position: absolute;
 	top:40%;left:5%;width:90%;height:auto;
 	min-height: 50%;
@@ -272,10 +271,3 @@ table, td {
 	color:red;
 }
 
-input/*[type="submit"]*/
-{
-    border: 1px /*solid #808080;*/
-    padding:0px;
-    /*background-color:#C0C0C0;*/
-    width:12em;
-}
