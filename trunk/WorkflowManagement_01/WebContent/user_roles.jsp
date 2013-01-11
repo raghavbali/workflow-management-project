@@ -69,15 +69,14 @@
 		<s:actionerror />
 		<s:actionmessage/>
 		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" onclick="buttonIndex=1" /></td>
-		<td><div id="loginmandatory" style="color:red"></div></td>
-		</tr>
-		<td>
+		<td><div id="loginmandatory" style="color:red"></div>
 		<s:if test="%{#session['role']=='admin'}">
 		<s:submit name = "button1" value = "Back" align="center" action="editUserAdminConsole"/>
 		</s:if>
 		<s:elseif test="%{#session['role']=='editor'}">
 		<s:submit name = "button1" value = "Back" align="center" action="assignRoleEditorConsole"/>
 		</s:elseif>
+		<div id="loginmandatory" style="color:red"></div>
 		</td>
 		</tr>
 		
