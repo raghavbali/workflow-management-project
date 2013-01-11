@@ -65,7 +65,7 @@ public class Bucket {
 			e.printStackTrace();
 		}
 
-		if (alreadyPresent == 1)
+		if (alreadyPresent > 0)
 			return "presentAlready";
 		else {
 
