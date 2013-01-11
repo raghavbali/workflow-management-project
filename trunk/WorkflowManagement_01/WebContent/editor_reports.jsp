@@ -24,9 +24,10 @@
 </head>
 <body>
 <%@include file="master.html" %>	
-	<s:actionmessage/>
-	<s:actionerror/>
+
 	<div id="reports_menu">
+		<s:actionmessage/>
+	<s:actionerror/>
 	<s:form action="" method="">
 	<!-- <s:text name="%{#session['role']}"/>-->
 	<br><br><br>

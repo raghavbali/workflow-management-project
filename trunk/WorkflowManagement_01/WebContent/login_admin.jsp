@@ -23,58 +23,82 @@
 
 </head>
 <body>
-	<%@include file="master.html" %>
-	    <div id="buttons_menu">
-	
-	<s:actionmessage />
-	<s:actionerror />
-	<s:if test="%{#session['logged-in']=='true'}">
-		<s:form action="" method="">
-					<br> &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
-			<s:if test="%{#session.tableSuffix=='_00000000000000'}">
-		
-				<s:submit name="button" value="Create Workflow"
-					action="createWfAdminConsole" align="left" />
-			</s:if>
-			<br/><br>
-			&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
-			<s:submit name="button" value="Edit Workflow"
-				action="editWorkflowAdminConsole" align="left" />
-				<br><br>
-				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
-			<s:submit name="button" value="Add User"
-				action="createUserAdminConsole" align="left" />
-				<br><br>
-				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
-			<s:submit name="button" value="Edit User"
-				action="editUserAdminConsole" align="left" />
-				<br><br>
-				&nbsp &nbsp &nbsp&nbsp&nbsp &nbsp
+	<%@include file="master.html"%>
+	<div id="buttons_menu">
+		<s:actionmessage />
+		<s:actionerror />
+		<s:if test="%{#session['logged-in']=='true'}">
+			<s:form action="" method="">
+<table>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:if test="%{#session.tableSuffix=='_00000000000000'}">
 
-				
-		</s:form>
-	</s:if>
-	<s:else>
+								<s:submit name="button" value="Create Workflow"
+									action="createWfAdminConsole" align="left" />
+							</s:if>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Edit Workflow"
+								action="editWorkflowAdminConsole" align="left" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Add User"
+								action="createUserAdminConsole" align="left" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Edit User"
+								action="editUserAdminConsole" align="left" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+			</s:form>
+		</s:if>
+		<s:else>
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
-	</s:else>
-	
-	 </div>
-	 <div id="login_admin_about_menu">
-	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2>
-	 <ul>
-	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Edit Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Add User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Edit User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Manual Override : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 </ul>	 
-	 </div>
-	</div>	
+		</s:else>
+
+	</div>
+	<div id="login_admin_about_menu">
+	<img src="images/adminConsole.jpg" alt="adminConsole.jsp"  />
+	</div>
+	</div>
 </body>
 </html>
