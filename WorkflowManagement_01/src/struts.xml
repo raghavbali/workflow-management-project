@@ -42,7 +42,7 @@
         <!-- Action for editing a workflow -->
         <action name="edit_wf" class="action.EditWfAction">
 		    <result name="displayform">edit_workflow.jsp</result> 
-   		 <result name="success">workflow_list.jsp</result>
+   		 <result name="success">edit_workflow.jsp</result>
    		 <result name="error">edit_workflow.jsp</result>
 		</action>
 		<!-- Action for opening pages : stage_list,add_stage and edit_stage -->
