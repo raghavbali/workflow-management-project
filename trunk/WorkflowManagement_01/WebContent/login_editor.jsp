@@ -41,10 +41,7 @@
 		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
 			align="left" />
 	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
-		<s:submit name="button" value="Assign Role" action="assignRoleEditorConsole"
-			align="left" />
-	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
-		<s:submit name="button" value="Edit Profile" action="editProfileEditorConsole"
+		<s:submit name="button" value="Configue User" action="assignRoleEditorConsole"
 			align="left" />
 		<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
 		<s:submit name="button" value="Generate reports" action="generateReportsEditorConsole"
