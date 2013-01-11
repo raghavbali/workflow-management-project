@@ -23,42 +23,89 @@
 
 </head>
 <body>
-<%@include file="master.html" %>
+	<%@include file="master.html"%>
 	<div id="buttons_menu">
-		<s:actionmessage/>
-	<s:actionerror/>
-	<s:if test="%{#session['logged-in']=='true'}">
-	<s:form action="" method="">
-	
-	<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
-	<br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	<s:submit name="button" value="Stage Assignment" action="assignStageEditorConsole"
-			align="left" />
-	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
-		<s:submit name="button" value="Create Item" action="createItemEditorConsole"
-			align="left" />
-	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
-		<s:submit name="button" value="Edit Item" action="editItemsEditorConsole"
-			align="left" />
-	<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		
-		<s:submit name="button" value="Configue User" action="assignRoleEditorConsole"
-			align="left" />
-		<br><br><br>&nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
-		<s:submit name="button" value="Generate reports" action="generateReportsEditorConsole"
-			align="left" />
-			
-	</s:form>
-	</s:if>
-	<s:else>
+		<s:actionmessage />
+		<s:actionerror />
+		<s:if test="%{#session['logged-in']=='true'}">
+			<s:form action="" method="">
+				<s:hidden name="workflowID" id="workflowID" value="%{workflowID}" />
+
+				<table>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Stage Assignment"
+								action="assignStageEditorConsole" align="left" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Create Item"
+								action="createItemEditorConsole" align="left" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Edit Item"
+								action="editItemsEditorConsole" align="left" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Configue User"
+								action="assignRoleEditorConsole" align="left" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><s:submit name="button" value="Generate reports"
+								action="generateReportsEditorConsole" align="left" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+			</s:form>
+		</s:if>
+		<s:else>
     	Trespassers will be shot. Survivors will be shot again!!!
     	<a href="login.jsp">Login</a>
-	</s:else>
+		</s:else>
 	</div>
-	
-	<div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">	 
-	
+
+	<div id="editorConsole">
+	<img src="images/editorConsole.jpg" alt="editorConsole.jsp"  />
 	</div>
-	
+
 	</div>
 </body>
 </html>
