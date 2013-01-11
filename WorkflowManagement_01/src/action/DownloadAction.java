@@ -54,7 +54,7 @@ public class DownloadAction /* extends ActionSupport */{
 
 			HSSFSheet sheet1 = workBook.getSheetAt(0);
 
-			String selectQuery = "SELECT l.stage_id as stage_id,w.stage_name as stage_name,count(l.user_id) as stage_count,DATEDIFF(delivery_date,assigned_on) as dt "
+			String selectQuery = "SELECT l.stage_id as stage_id,w.stage_name as stage_name,count(l.user_id) as stage_count,DATEDIFF(delivery_date,SYSDATE()) as dt "
 					+ " FROM leader_bucket"
 					+ tableSuffix
 					+ " l,workflow"
