@@ -163,7 +163,7 @@ public class AuthorBucketAction extends ActionSupport {
 		ArrayList<AuthorBucketAction> bucketView = new ArrayList<AuthorBucketAction>();
 		DBobjects dbObject = null;
 
-		String selectQuery = "SELECT  g.`user_id` as user_id, g.`item_id` as item_id, i.`item_name` as item_name, g.`stage_id` as stage_id, w.`stage_name` as stage_name, g.`assigned_on` as assigned_on, g.`delivery_date` as delivery_date, g.`status` as status,DATEDIFF(g.delivery_date,g.assigned_on) as daysLeft,g.`stage_lead_id` as stage_lead_id, i.`remarks` as remarks,g.`last_updated` as last_updated ";
+		String selectQuery = "SELECT  g.`user_id` as user_id, g.`item_id` as item_id, i.`item_name` as item_name, g.`stage_id` as stage_id, w.`stage_name` as stage_name, g.`assigned_on` as assigned_on, g.`delivery_date` as delivery_date, g.`status` as status,DATEDIFF(g.delivery_date,SYSDATE()) as daysLeft,g.`stage_lead_id` as stage_lead_id, i.`remarks` as remarks,g.`last_updated` as last_updated ";
 		String fromClause = " FROM `item" + tableSuffix + "` i, `workflow"
 				+ tableSuffix + "` w, `general_bucket" + tableSuffix
 				+ "` g, `leader_bucket" + tableSuffix + "` l";

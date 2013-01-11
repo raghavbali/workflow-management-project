@@ -193,7 +193,7 @@ public class LeaderBucketAction extends ActionSupport{
 		maxItems = this.objBucketView.size();
 		if(maxItems > 0){
 			for(int i=0; i<maxItems; i++){
-				if(this.getObjBucketView().get(i).getDaysLeft() <= 0){
+				if((this.getObjBucketView().get(i).getDaysLeft() <= 0)&&(!this.getObjBucketView().get(i).getStatus().equalsIgnoreCase("F"))&&(!this.getObjBucketView().get(i).getStatus().equalsIgnoreCase("B"))){
 					String wID = UserRole.get("w_id", String.valueOf(this.userID));
 					String pID = UserRole.get("p_id", String.valueOf(this.userID));
 					String fname = User.get("first_name", pID);
@@ -205,7 +205,8 @@ public class LeaderBucketAction extends ActionSupport{
 					String subject = "Deadline not met!";
 					String body = "Hello editor,\n" + fname + " " + lname + " with user_id: " + this.userID + " and p_id: " + pID + " has missed the deadline on item_id: " + objBucketView.get(i).getItemID() + ". Kindly take note of it.\n\n Regards,\nFLUX Admin";
 					sendMail = new Emailer(from, password, to, subject, body);
-					sendMail.execute();
+					//sendMail.execute();
+					System.out.println(sendMail.execute());
 				}
 			}
 		}
@@ -234,7 +235,7 @@ public class LeaderBucketAction extends ActionSupport{
 		ArrayList<LeaderBucketAction> bucketView = new ArrayList<LeaderBucketAction>();
 		DBobjects dbObject = null;
 
-		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,l.assigned_on) as daysLeft,l.`last_updated` as lastUpdated ";
+		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,SYSDATE()) as daysLeft,l.`last_updated` as lastUpdated ";
 		String fromClause = " FROM `item" + tableSuffix + "` i, `workflow"
 				+ tableSuffix + "` w, `leader_bucket" + tableSuffix + "` l ";
 		String whereClause = " WHERE l.stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID()+" ORDER BY l.sno";
