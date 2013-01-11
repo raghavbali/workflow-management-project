@@ -214,7 +214,7 @@ public class LeaderBucketAction extends ActionSupport{
 		String selectQuery = "SELECT w.`stage_lead_id` as user_id, i.`item_id` as item_id, i.`item_name` as item_name, i.`current_stage_id` as stage_id, w.`stage_name` as stage_name, l.`assigned_on` as assigned_on, l.`delivery_date` as delivery_date, l.`status` as status,DATEDIFF(l.delivery_date,l.assigned_on) as daysLeft,l.`last_updated` as lastUpdated ";
 		String fromClause = " FROM `item" + tableSuffix + "` i, `workflow"
 				+ tableSuffix + "` w, `leader_bucket" + tableSuffix + "` l ";
-		String whereClause = " WHERE l.stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID();
+		String whereClause = " WHERE l.stage_id=w.stage_id AND i.item_id=l.item_id AND w.stage_lead_id=l.user_id AND l.user_id="+this.getUserID()+" ORDER BY l.sno";
 		try {
 			dbObject = DBService.dbExecuteQuery(selectQuery+fromClause, whereClause);
 			result = dbObject.getResult();
