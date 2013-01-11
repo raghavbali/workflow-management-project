@@ -86,7 +86,7 @@ public class DBService {
 			result = pst.executeUpdate();
 			conn.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			result =0;
 		}
 		return result;

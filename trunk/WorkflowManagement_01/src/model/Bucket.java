@@ -100,8 +100,11 @@ public class Bucket {
 				}
 				dbObject.getConn().close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
+			
+			if(this.getUserID()==0)
+				return "error";
 
 			/* set to and from dates */
 			this.setAssignedDate(ft.format(dNow).toString());
@@ -266,7 +269,7 @@ public class Bucket {
 			}
 			dbObject.getConn().close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		if(updateSeqNo(seq_no, flag, wftable).equals("error"))
@@ -301,8 +304,10 @@ public class Bucket {
 			}
 			dbObject.getConn().close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
+		if(this.getUserID()==0)
+			return "error";
 		
 		/* set to and from dates */
 		this.setAssignedDate(ft.format(dNow).toString());
@@ -369,7 +374,7 @@ public class Bucket {
 				}
 				dbObject.getConn().close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 			if(n == tempSeqNo)
