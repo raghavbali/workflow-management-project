@@ -26,8 +26,8 @@ if (window.history[x]!=window.location)
 <div id="loginjsp_login">
 <s:actionerror />
 <s:form action="login.action" method = "post" onSubmit="return login_check();">
-	<br><br>&nbsp&nbspUsername:<s:textfield placeholder="username" name = "username" id="username" label="Username" size = "20" value="admin1" />
-	<br><br>&nbsp&nbspPassword:<s:password placeholder="password" name = "password" label="Password" id="password" size="20" value="pass1"/>	
+	<br><br>&nbsp&nbspUsername:<s:textfield placeholder="username" name = "username" id="username" label="Username" size = "20" />
+	<br><br>&nbsp&nbspPassword:<s:password placeholder="password" name = "password" label="Password" id="password" size="20" />	
 	<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
 	<s:submit name = "button1" id="buton1" method = "execute" value = "Login" align="center" />
