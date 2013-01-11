@@ -21,13 +21,13 @@
 <script src="slideshow.js" type="text/javascript"></script>
 <script src="jquery-1.8.3.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
-
+<script src="validation.js"></script>
 </head>
 <body>
 <%@include file="master.html" %>
 	
 	<s:if test="%{#session['logged-in']=='true'}">
-		<s:form action="" method="">
+		<s:form action="" method="" onSubmit="return login_author(buttonIndex);">
 		<div id="login_author">
 		<table>
 	<s:actionmessage />
@@ -74,7 +74,7 @@
 			</table>
 			<s:if test="%{remarks !=null}">
 						Remarks: <s:text name="remarks.split('<br/>|<\r\n>')"  /><br/>
-						<s:textarea name="remarksNew" id="remarksNew" value=""/>
+						<s:textarea name="remarksNew" id="remarksNew" placeholder="remarksNew" value=""/>
 						<s:select label="Status" 
 						list="statusOptions"
 						name="status"
@@ -83,7 +83,8 @@
 			<s:hidden id="itemID" name="itemID"/>
 			<s:hidden id="userID" name="userID"/>
 			<s:hidden id="stageID" name="stageID"/>
-			<s:submit name="update_author_item" method="updateItem" value="Update" align="left"/>
+			<s:submit name="update_author_item" method="updateItem" value="Update" align="left" onclick="buttonIndex=1"/>
+			<div id="loginmandatory" style="color:red"></div>
 			</s:if></div>
 		</s:form>
 	</s:if>
