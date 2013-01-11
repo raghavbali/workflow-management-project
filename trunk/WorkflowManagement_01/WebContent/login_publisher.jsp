@@ -26,13 +26,6 @@
 </head>
 <body>
 <%@include file="master.html" %>
-	<div id="menu">
-	<ul>	
-		<li><a href="#">Home</a></li>
-		<li><a href="#">About US</a></li>
-		<li><a href="logoutAdminConsole.action">Logout</a></li>
-	</ul>
-	</div>
 	<div id="login_publisher">
 	<s:actionmessage/>
 	<s:actionerror/>

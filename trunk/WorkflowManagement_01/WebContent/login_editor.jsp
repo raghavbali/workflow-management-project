@@ -24,17 +24,9 @@
 </head>
 <body>
 <%@include file="master.html" %>
-<div id="menu">
-	<ul>	
-		<li><a href="#">Home</a></li>
-		<li><a href="#">About US</a></li>
-		<li><a href="logoutAdminConsole.action">Logout</a></li>
-	</ul>
-</div>
-	
-	<s:actionmessage/>
-	<s:actionerror/>
 	<div id="buttons_menu">
+		<s:actionmessage/>
+	<s:actionerror/>
 	<s:if test="%{#session['logged-in']=='true'}">
 	<s:form action="" method="">
 	
@@ -66,21 +58,9 @@
 	</s:else>
 	</div>
 	
-	<div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">
-	 <h2 style="text-align: center;"><br>&nbsp &nbsp About Menu</h2><br>
-	 <ul>
-	 	<li>Create Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Edit Workflow : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Add User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Edit User : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 	<li>Manual Override : Content to be written by Mr Raghav hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hjh
-	 	</li>
-	 </ul>	 
-	 </div>
+	<div style="border-radius:15px;position: absolute;border: thin solid black; top:40%;left:30%;width:60%;height:55%;">	 
+	
+	</div>
 	
 	</div>
 </body>
