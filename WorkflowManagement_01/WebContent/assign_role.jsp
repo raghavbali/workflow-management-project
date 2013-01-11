@@ -23,6 +23,8 @@
 	    <th><h3>Prefix</h3></th>
 	    <th><h3>First Name</h3></th>
 	    <th><h3>Last Name</h3></th>
+	    <th><h3>Edit Profile</h3></th>
+	    <th><h3>Assign Role</h3></th>
 	</tr>
 	<s:iterator value = "usrlist">
 	<tr>
@@ -44,6 +46,7 @@
 	<td>
 	<h2 align="right"><a href="admin" id="mysubmit">Logout</a></h2>
 	</td>		-->
+	<td></td><td></td><td></td><td></td><td></td>
 	</tr>
 	</table>
 	</div>

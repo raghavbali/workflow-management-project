@@ -31,12 +31,13 @@ if (window.history[x]!=window.location)
 	<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	
 	<s:submit name = "button1" id="buton1" method = "execute" value = "Login" align="center" />
-	&nbsp &nbsp &nbsp &nbsp &nbsp<div id="loginmandatory" style="color:red"></div>
+	&nbsp; &nbsp &nbsp &nbsp &nbsp<div id="loginmandatory" style="color:red"></div>
 </s:form>
 </div>
 
-<div id="loginjsp_aboutus" style="text-align: justify;	"><h4 style="text-align: center;"><u>ABOUT THE SITE</u></h4><br><span style="color:rgb(50,0,250)">Workflow management is supposed to track the whereabouts about project that how it is done and many other things. Remaining has to be written by Raghav This project was started sinec 
-yesterday. We had everything in the class. Please do not read whatever i wrote above
+<div id="loginjsp_aboutus" style="text-align: justify;	"><h4 style="text-align: center;"><u>Namaskar</u></h4><br><span style="color:rgb(50,0,250)">Welcome to <b><i>FLUX</i></b>.<br/>
+We are a team of dedicated professionals to provide your team with state of the art yet simple and fluid Workflow Management System.<br/><br/>
+<b><i>FLUX</i></b> is not simply yet another off the shelf Workflow Management System. Its designed inside out with Team focus at its core.<br/><b><i>FLUX</i></b> is here to help you achieve MORE.<br/>Make us part of your success and get <b><i>FLUX</i>ed!</b>
 </span></div>
 </body>
 </html>
