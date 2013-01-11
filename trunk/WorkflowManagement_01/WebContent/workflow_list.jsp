@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script>
@@ -29,7 +30,7 @@ function submitForm(workflowID){
 	<s:actionerror />
 	<s:actionmessage />
 	<s:form action="stage_mod.action" method="post" name="workflowMod" >
-		<table  >
+	<table  >
 			<tr>
 				<th><h4>Workflow ID </h4>
 				</th>
