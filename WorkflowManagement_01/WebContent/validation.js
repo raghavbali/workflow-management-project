@@ -315,3 +315,90 @@ function edit_user_adv(i) {
 	    }
 	}
 }
+
+function login_author(i) {
+	if(i==1){
+		if(document.getElementById("remarksNew").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function add_item(i) {
+	if(i==1){
+		if(document.getElementById("itemName").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("itemDescription").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("remarks").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("filePath").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function add_stage(i) {
+	if(i==1){
+		if(document.getElementById("stageName").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("stageDescription").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("stageSLA").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+}
+
+function edit_item(i) {
+	if(i==1){
+		if(document.getElementById("itemName").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("itemDescription").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	if(i==1){
+		if(document.getElementById("remarks").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+	
+	if(i==1){
+		if(document.getElementById("filePath").value==""){
+	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+	        return false;
+	    }
+	}
+
+	
+}
