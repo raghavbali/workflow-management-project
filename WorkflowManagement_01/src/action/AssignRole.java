@@ -2,12 +2,14 @@ package action;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
 import utility.DBService;
 import utility.DBobjects;
 
 import model.UserRole;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AssignRole extends ActionSupport {
@@ -19,6 +21,7 @@ public class AssignRole extends ActionSupport {
 	ResultSet result;
 	private String pageName, workflowName;
 	private int workflowID;
+	Map<String, Object> session;
 
 	public AssignRole() {
 		
@@ -26,13 +29,22 @@ public class AssignRole extends ActionSupport {
 	
 	public void populateLists()
 	{
+		session = ActionContext.getContext().getSession();
 		wfList = new ArrayList<String>();
 		roleList = new ArrayList<String>();
+		this.setWorkflowID(Integer.parseInt(session.get("workflowID").toString()));
 		String wfquery;
-		if(pageName.equals("AdminConsole"))
-			wfquery = "SELECT workflow_name FROM workflow_master";
+		if(pageName.equals("AdminConsole")){
+			if(session.get("tableSuffix").toString().equals("_00000000000000")){
+				wfquery = "SELECT workflow_name FROM workflow_master WHERE table_suffix <> '_00000000000000'";
+				roleList.add("admin");
+			}
+			else
+				wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
+		}
 		else
 			wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
+//		System.out.println(wfquery);
 		DBobjects dbObject = null;
 		// String wfwhere = "WHERE freeze = 'N'";
 
@@ -49,7 +61,6 @@ public class AssignRole extends ActionSupport {
 //		System.out.println(pageName);
 		if(pageName.equals("AdminConsole"))
 		{
-			roleList.add("admin");
 			roleList.add("editor");
 		}
 		roleList.add("publisher");
@@ -58,7 +69,7 @@ public class AssignRole extends ActionSupport {
 
 
 	public String execute() {
-		// System.out.println(p_id);
+//		System.out.println(workflowID);
 		if(pageName.equals("EditorConsole"))
 			workflowName = getWfNamefromDB(String.valueOf(workflowID));
 		populateLists();

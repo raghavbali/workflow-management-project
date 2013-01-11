@@ -134,6 +134,7 @@ public class EditorConsole extends ActionSupport {
 		else{
 			addActionError(getText("No users found."));
 		}
+//		System.out.println(workflowID);
 		return "assignRole";
 	}
 	

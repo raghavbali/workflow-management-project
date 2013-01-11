@@ -14,6 +14,7 @@ import model.User;
 public class EditUserBasic extends ActionSupport {
 	private String p_id, prefix, fname, lname, sex, dob, address, country, phone, email;
 	private ArrayList<String> sexList, prefixList;
+	private int workflowID;
 	User tmpuser = new User();
 	
 	public EditUserBasic() {
@@ -180,5 +181,13 @@ public class EditUserBasic extends ActionSupport {
 
 	public void setTmpuser(User tmpuser) {
 		this.tmpuser = tmpuser;
+	}
+
+	public int getWorkflowID() {
+		return workflowID;
+	}
+
+	public void setWorkflowID(int workflowID) {
+		this.workflowID = workflowID;
 	}
 }

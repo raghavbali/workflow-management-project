@@ -14,9 +14,10 @@
 <body>
 <%@include file="master.html" %>
 <div id="assign_role">
-<h2>Assign Role</h2>
+<h3>Assign Role</h3>
+<s:form>
 <s:hidden name="pageName" value="%{pageName}"/>
-<s:hidden name="workflowID" />
+<s:hidden name="workflowID" value="%{workflowID}" />
 	<table>
 	<tr>
 	    <th><h3>P_ID</h3></th>
@@ -32,23 +33,23 @@
 		<td><s:property value="prefix"/></td>
 		<td><s:property value="fname"/></td>
 		<td><s:property value="lname"/></td>
-		<td><a href="edit_user_basic?p_id=<s:property value="p_id"/>">Edit</a></td>
+		<td><a href="edit_user_basic?p_id=<s:property value="p_id"/>&workflowID=<s:property value="workflowID"/>">Edit</a></td>
 		<td><a href="continue_role_assign?p_id=<s:property value="p_id"/>&pageName=<s:property value="pageName"/>&workflowID=<s:property value="workflowID"/>">User roles</a></td>
-<!-- 	<td><h3><img src="./images/<s:property value="image_url"/>" alt="image text"/> </h3></td>
-		<td><h3> <a href="modify_book?book_id=<s:property value="Id"/>">Modify</a></h3> </td>
-		<td><h3> <a href="buy_book?book_id=<s:property value="Id"/>">Buy</a></h3> </td>			-->
+
 	</tr>
 	</s:iterator>
 	<tr><td>
-<!-- <h2 align="left"><a href="back_from_assignrole" id="mysubmit">Button1</a></h2> -->
+	<s:if test="%{#session['role']=='admin'}">
+	<s:submit name = "button1" value = "Back" align="center" action="backToAdminConsole"/>
+	</s:if>
+	<s:elseif test="%{#session['role']=='editor'}">
+	<s:submit name = "button1" value = "Back" align="center" action="doneEditorConsole"/>
+	</s:elseif>
 	</td>
-<!-- <td></td><td></td><td></td><td></td><td></td><td></td>
-	<td>
-	<h2 align="right"><a href="admin" id="mysubmit">Logout</a></h2>
-	</td>		-->
 	<td></td><td></td><td></td><td></td><td></td>
 	</tr>
 	</table>
+	</s:form>
 	</div>
 	</div>
 </body>
