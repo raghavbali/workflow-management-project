@@ -127,55 +127,18 @@ return false;
 
 
 function checkform(i){
+	  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	  if(i==1){
+			if(document.getElementById("wf_name").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
 
-	if(i==1){
-	if(document.getElementById("prefix").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-
-    if(document.getElementById("fname").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("lname").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("email").value=="" && ValidateEmail(document.getElementById("email").value) ){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields/Enter valid Email";
-        return false;
-    }
-    else if(document.getElementById("sex").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("dob").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("date").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("address").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("country").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    else if(document.getElementById("phone").value==""){
-        document.getElementById("mandatory").innerHTML="*You must fill in all fields";
-        return false;
-    }
-    
-    else 
-        return true;  
-	}
-	else
-		return true;
+		    if(document.getElementById("wf_description").value==""){
+		        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
+		        return false;
+		    }
+		}
 }
 
 function checklogin(){
@@ -326,6 +289,7 @@ function login_author(i) {
 }
 
 function add_item(i) {
+	
 	if(i==1){
 		if(document.getElementById("itemName").value==""){
 	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
@@ -398,7 +362,18 @@ function edit_item(i) {
 	        document.getElementById("loginmandatory").innerHTML="*You must fill in all fields";
 	        return false;
 	    }
-	}
+	}	
+}
 
-	
+function validateEmail(emailField){
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    if (reg.test(emailField.value) == false) 
+    {
+        alert('Invalid Email Address');
+        return false;
+    }
+
+    return true;
+
 }
