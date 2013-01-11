@@ -24,10 +24,8 @@
 		<tr><td>Stage Name:</td><td><s:textfield name="stageName" label="Stage Name" size="30" /></td></tr>
 		<tr><td>Stage Description:</td><td><s:textfield name="stageDescription" label="Stage Description"
 			size="50" /></td></tr>
-		<tr><td>Stage SLA(in Hrs):</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)"
+		<tr><td>Stage SLA(in Days):</td><td><s:textfield name="stageSLA" label="Stage SLA(in hrs)"
 			size="5" /></td></tr>
-		<tr><td>Stage Sequence No:</td><td><s:textfield name="stageSequenceNo" label="Stage Sequence Number"
-			 size="5" /><td></tr>
 		<tr><td><s:submit name="button" value="Add Stage"
 			action="addNowStage" align="center" /></td>
 		<td><s:submit name="button"  value="Back"
