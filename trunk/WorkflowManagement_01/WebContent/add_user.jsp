@@ -50,7 +50,7 @@
 				</td>
 			</tr>
 			<tr><td>Date of Birth</td>
-				<td><sx:datetimepicker name="dob" id="dob" 
+				<td><sx:datetimepicker name="dob" id="dob" required="true" 
 						displayFormat="yyyy-MM-dd" value="%{AddUser.dob}" /></td>
 			</tr>
 			<tr>
