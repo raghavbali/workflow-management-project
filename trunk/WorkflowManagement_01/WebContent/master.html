@@ -34,22 +34,24 @@
 			<ul>
 				<s:if test="%{#session['role']=='admin'}">
 				<li><a href="backToAdminConsole.action">Home</a></li>
+				<li><a href="editUserProfile.action">Edit Profile</a></li>
 				</s:if>
 				<s:elseif test="%{#session['role']=='author'}">
 				<li><a href="authorAction.action">Home</a>
+				<li><a href="editUserProfile.action">Edit Profile</a></li>
 					</li>
 				</s:elseif>
 				<s:elseif test="%{#session['role']=='publisher'}">
 					<li><a href="publisherAction.action">Home</a>
+					<li><a href="editUserProfile.action">Edit Profile</a></li>
 					</li>
 				</s:elseif>
 				<s:elseif test="%{#session['role']=='editor'}">
 					<li><a href="doneEditorConsole.action">Home</a>
+					<li><a href="editUserProfile.action">Edit Profile</a></li>
 					</li>
 				</s:elseif>
-				<s:if test="%{#session['userID']!=''}">
-				<li><a href="backToAdminConsole.action">Edit Profile</a></li>
-				</s:if>
+				
 				<li><a href="#">About US</a></li>
 				<li><a href="logoutAdminConsole.action">Logout</a></li>
 			</ul>

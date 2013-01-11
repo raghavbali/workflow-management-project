@@ -29,6 +29,7 @@ function showAndClearField(frm){
 <h2>Edit User Basic</h2>
 	<s:form action="update_user_basic.action" method="post" onSubmit="return edit_user_basic(buttonIndex);">
 		<s:hidden name="p_id"/>
+		<s:hidden name="workflowID" value="%{workflowID}" />
 		<tr><th><div id="loginmandatory" style="color:red"></div></th></tr>
 		<tr><td>Select prefix</td><td><s:select label="Select prefix" headerKey="-1"
 			headerValue="Select prefix"
@@ -46,7 +47,14 @@ function showAndClearField(frm){
 		<tr><td>Phone no.</td><td><s:textfield name="phone" id="phone" label="Phone no." size="30" value="%{tmpuser.getPhone()}" required="true"/></td></tr>
 		<tr><td>Email ID</td><td><s:textfield name="email" id="email" label="Email ID" size="30" value="%{tmpuser.getEmail()}" required="true"/></td></tr>
 		<tr><td><s:submit name = "button1" value = "Edit" align="center" onclick="buttonIndex=1" /></td>
-		<td><s:submit name = "button1" value = "Back" align="center" onclick="buttonIndex=2" /></td>
+		<td>
+		<s:if test="%{#session['role']=='admin'}">
+		<s:submit name = "button1" value = "Back" align="center" action="editUserAdminConsole" onclick="buttonIndex=2" />
+		</s:if>
+		<s:elseif test="%{#session['role']=='editor'}">
+		<s:submit name = "button1" value = "Back" align="center" action="assignRoleEditorConsole" onclick="buttonIndex=2" />
+		</s:elseif>
+		</td>
 		</tr>
 		
 		<s:actionerror />

@@ -16,6 +16,7 @@
 <%@include file="master.html" %>
 	<div id="assign_role">
 <h3> Available stages: </h3>
+<s:form>
 <s:actionerror />
 <s:hidden name="workflowID" value="%{workflowID}"/>
 <s:hidden name="pageName" value="%{pageName}"/>
@@ -42,7 +43,12 @@
 		<td><a href="assign_users?stageID=<s:property value="stageID"/>&workflowID=<s:property value="workflowID"/>">Assign Users</a></td>
 	</tr>
 	</s:iterator>
-</table>
+		<tr><td>
+	<s:submit name = "button1" value = "Back" align="center" action="doneEditorConsole"/>
+	</td></tr>
+	</table>
+	</s:form>
+
 <s:if test="%{#pageName=='assignUsers'}">
 <br>
 <h3>Assign Stage ${stageID}: </h3>
@@ -56,7 +62,7 @@
 		<td><s:radio name = "selectedPublisher" list="usrlist2" label="publishers" value = "selectedPublisher"  /> </td>
 	</tr>
 	<tr>
-		<s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" />
+		<td><s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" /></td>
 	</tr>
 	</table>
 	<s:actionerror />
@@ -75,13 +81,14 @@
 	</tr>
 		</s:iterator>
 	<tr>
-		<s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" />
+		<td><s:submit name = "commandButton" id="mysubmit" value="Assign" align="center" /></td>
 	</tr>
 	</table>
 
 	</s:form>
 
 </s:if>
+
 </div>
 </div>
 </body>

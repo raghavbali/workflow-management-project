@@ -2,12 +2,14 @@ package action;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
 import model.UserRole;
 
 import utility.DBService;
 import utility.DBobjects;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class EditUserAdv extends ActionSupport {
@@ -18,6 +20,7 @@ public class EditUserAdv extends ActionSupport {
 	private String pageName, workflowName;
 	private int workflowID;
 	UserRole tmpuser = new UserRole();
+	Map<String, Object> session;
 	
 	public EditUserAdv(){
 		
@@ -25,13 +28,21 @@ public class EditUserAdv extends ActionSupport {
 	
 	public void populateLists()
 	{
+		session = ActionContext.getContext().getSession();
 		wfList = new ArrayList<String>();
 		roleList = new ArrayList<String>();
+		this.setWorkflowID(Integer.parseInt(session.get("workflowID").toString()));
 		actstateList = new ArrayList<String>();
 		String wfquery;
 		DBobjects dbObject;
-		if(pageName.equals("AdminConsole"))
-			wfquery = "SELECT workflow_name FROM workflow_master";
+		if(pageName.equals("AdminConsole")){
+			if(session.get("tableSuffix").toString().equals("_00000000000000")){
+				wfquery = "SELECT workflow_name FROM workflow_master WHERE table_suffix <> '_00000000000000'";
+				roleList.add("admin");
+			}
+			else
+				wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
+		}
 		else
 			wfquery = "SELECT workflow_name FROM workflow_master WHERE w_id='" + this.workflowID + "'";
 		// String wfwhere = "WHERE freeze = 'N'";
@@ -49,7 +60,6 @@ public class EditUserAdv extends ActionSupport {
 //		System.out.println(pageName);
 		if(pageName.equals("AdminConsole"))
 		{
-			roleList.add("admin");
 			roleList.add("editor");
 		}
 		roleList.add("publisher");

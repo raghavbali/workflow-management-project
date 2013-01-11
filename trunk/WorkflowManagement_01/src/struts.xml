@@ -21,6 +21,21 @@
             <result name="error">login.jsp</result>
         </action>
         
+        <action name = "editUserProfile" class = "action.EditProfile">
+    		<result name="success">EditProfile.jsp</result>
+        </action>
+         <action name = "editUserProfileBasic" class = "action.EditProfile" method="editBasicProfile">
+    		<result name="success">EditProfile.jsp</result>
+    		<result name="error">EditProfile.jsp</result>
+        </action>
+        <action name="changePass" class = "action.EditProfile" method = "showPassCtrl">
+        	<result name="success">EditProfile.jsp</result>
+        </action>
+        <action name = "editUserProfileAdv" class = "action.EditProfile" method="editAdvProfile">
+    		<result name="success">EditProfile.jsp</result>
+    		<result name="error">EditProfile.jsp</result>
+        </action>
+        
         <!-- ADMIN BLOCK STARTS  -->
         
         <!-- Action for Admin's welcome screen -->

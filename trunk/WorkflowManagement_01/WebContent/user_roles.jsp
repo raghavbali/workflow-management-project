@@ -41,12 +41,12 @@
 	</tr>
 	</s:iterator>
 </table>
-<h2>Add a role: </h2>
+<h3>Add a role: </h3>
 	<s:form action="final_assign_role.action" method="post" onSubmit="return user_roles(buttonIndex);">
 	<table>
 		<s:hidden name="p_id"/>
-		<tr><td>Workflow ID</td><td><s:hidden name="workflowID" value="%{workflowID}" /></td></tr>
-		<tr><td>PageName</td><td><s:hidden name="pageName" value="%{pageName}"/></td></tr>
+		<s:hidden name="workflowID" value="%{workflowID}" />
+		<s:hidden name="pageName" value="%{pageName}"/>
 		<s:set name="pageName" value="%{pageName}"/>
 		<s:if test="%{#pageName=='AdminConsole'}">
 		<tr><td>Select Workflow</td><td><s:select label="Select Workflow" headerKey="-1"
@@ -71,7 +71,17 @@
 		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Add role" align="center" onclick="buttonIndex=1" /></td>
 		<td><div id="loginmandatory" style="color:red"></div></td>
 		</tr>
-</table>
+		<td>
+		<s:if test="%{#session['role']=='admin'}">
+		<s:submit name = "button1" value = "Back" align="center" action="editUserAdminConsole"/>
+		</s:if>
+		<s:elseif test="%{#session['role']=='editor'}">
+		<s:submit name = "button1" value = "Back" align="center" action="assignRoleEditorConsole"/>
+		</s:elseif>
+		</td>
+		</tr>
+		
+	</table>
 	</s:form>
 	</div>
 	</div>

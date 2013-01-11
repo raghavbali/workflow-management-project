@@ -49,6 +49,15 @@ function showAndClearField(frm){
 		<tr><td><s:submit name = "commandButton" id="mysubmit" value="Edit role" align="center" onclick="buttonIndex=1" /></td>
 		<td><div id="loginmandatory" style="color:red"></div>
 		</tr>
+		<td>
+		<s:if test="%{#session['role']=='admin'}">
+		<s:submit name = "button1" value = "Back" align="center" action="editUserAdminConsole"/>
+		</s:if>
+		<s:elseif test="%{#session['role']=='editor'}">
+		<s:submit name = "button1" value = "Back" align="center" action="assignRoleEditorConsole"/>
+		</s:elseif>
+		</td>
+		</tr>
 	</s:form>
 	</table>
 	</div>
