@@ -109,11 +109,6 @@ function checkform(i) {
 			return false;
 		}
 
-		if (reg.test(document.getElementById("email").value) == false) {
-			document.getElementById("email").value = "";
-			return false;
-		}
-
 		/*
 		 * if(document.getElementById("DOB").value==""){
 		 * document.getElementById("loginmandatory").innerHTML="*You must fill
@@ -123,16 +118,37 @@ function checkform(i) {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
+		
+		
+		
 		if (document.getElementById("phone").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
+
+		if (isNaN(document.getElementById("phone").value)) {
+			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
+			document.getElementById("phone").value="";
+			return false;
+		}
+		
+		if ((document.getElementById("phone").value).length > 10) {
+			document.getElementById("loginmandatory").innerHTML = "*Phone Number must be less than 10 characters";
+			return false;
+		}
+
+		if (document.getElementById("country").value == "") {
+			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
+			return false;
+		}
+
 		if (document.getElementById("email").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
-		if (document.getElementById("country").value == "") {
-			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
+
+		if (reg.test(document.getElementById("email").value) == false) {
+			document.getElementById("email").value = "";
 			return false;
 		}
 	}
@@ -400,29 +416,40 @@ function edit_user_profile(i) {
 		if (document.getElementById("lname").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
-		}		
+		}
 
 		if (document.getElementById("address").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
-		
+
 		if (document.getElementById("phone").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
 		
+		if (isNaN(document.getElementById("phone").value)) {
+			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
+			document.getElementById("phone").value="";
+			return false;
+		}
+		
+		if ((document.getElementById("phone").value).length > 10) {
+			document.getElementById("loginmandatory").innerHTML = "*Phone Number must be less than 10 characters";
+			return false;
+		}
+
 		if (document.getElementById("email").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
 		}
-		
+
 		if (reg.test(document.getElementById("email").value) == false) {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			document.getElementById("email").value = "";
 			return false;
 		}
-		
+
 		if (document.getElementById("country").value == "") {
 			document.getElementById("loginmandatory").innerHTML = "*You must fill in all fields";
 			return false;
